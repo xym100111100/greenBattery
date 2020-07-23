@@ -5,6 +5,21 @@ const UsernameKey = 'UsernameKey'
 
 const UserRoleKey = 'UserRoleKey'
 
+const UserInfoKey = "UserInfoKey"
+
+
+export function getUserInfo() {
+  
+  return wx.getStorageSync(UserInfoKey)
+}
+
+export function setUserInfo(UserInfo) {
+  return  wx.setStorageSync(UserInfoKey, UserInfo)
+}
+
+export function removeUserInfo() {
+  return wx.removeStorageSync(UserInfoKey)
+}
 
 
 export function getToken() {

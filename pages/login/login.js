@@ -1,4 +1,5 @@
 var API = require('../../utils/api.js')
+import {setToken,setUserInfo,getUserInfo} from"../../utils/auth"
 
 var app = getApp();
 
@@ -123,7 +124,12 @@ Page({
             })
             API.request('/login/sign',{phone:this.data.phone,code:this.data.code},'get',(res)=>{
                 wx.hideLoading()
-                console.log(res)
+              //  console.log(res)
+                if(res.code === 0){
+                    console.log(JSON.parse(getUserInfo()))
+                    // 设置用户信息
+                 //   setUserInfo(JSON.stringify(res.data.info))  
+                }
             })
         }else{
             app.alert("手机号错误", "请输入正确的手机号，11位数字。")
