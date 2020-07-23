@@ -1,0 +1,17 @@
+<view class="page">
+    <view class="bd">
+        <view class="title">请对方人员扫码确认</view>
+        <view class="border">
+            <canvas canvasId="myQrcode" class="canvas"></canvas>
+        </view>
+        <view class="time">
+            <block wx:if="{{status==1}}"> 对方已扫码 </block>
+            <block wx:elif="{{status==2}}"> 对方已确认 </block>
+            <block wx:else>
+                <block wx:if="{{second>0}}">有效期剩余： <text class="second">{{second}}</text> 秒</block>
+                <text class="expires" wx:else>二维码已过期</text>
+            </block>
+        </view>
+    </view>
+    <view class="copy-right">{{copyright}}</view>
+</view>

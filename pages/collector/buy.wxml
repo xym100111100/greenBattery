@@ -1,0 +1,41 @@
+<view class="page">
+    <view class="hd-pad">tips：选择危废，填写质量，蓄电池还需填写额外信息，生成二维码，产废单位人员扫码确认</view>
+    <mp-cells extClass="my-cells">
+        <mp-cell>
+            <view slot="title">选择危废</view>
+            <radio-group bindchange="click_trash" class="radio-trash">
+                <radio checked="{{item.check}}" class="radio" value="{{item.id}}" wx:if="{{item.checked}}" wx:for="{{trash}}" wx:key="index">
+                    <text>{{item.name}}</text>
+                </radio>
+            </radio-group>
+        </mp-cell>
+        <mp-cell>
+            <view slot="title">填写质量</view>
+            <input adjustPosition="{{true}}" bindinput="input_weight" class="weui-input number" cursorSpacing="150" placeholder="最多三位小数" placeholderClass="place-holder" type="digit"></input>
+            <view slot="footer">千克 - KG</view>
+        </mp-cell>
+        <block wx:if="{{tid==1}}">
+            <mp-cell>
+                <view slot="title">破损类别</view>
+                <radio-group bindchange="click_type" class="radio-type">
+                    <radio checked="{{type==1}}" class="radio" value="1">
+                        <text>Ⅰ类</text>
+                    </radio>
+                    <radio checked="{{type==2}}" class="radio" value="2">
+                        <text>Ⅱ类</text>
+                    </radio>
+                </radio-group>
+            </mp-cell>
+            <mp-cell>
+                <view slot="title">填写数量</view>
+                <input adjustPosition="{{true}}" bindinput="input_amount" class="weui-input number" cursorSpacing="150" placeholder="填写整数" placeholderClass="place-holder" type="number"></input>
+                <view slot="footer">只</view>
+            </mp-cell>
+        </block>
+    </mp-cells>
+    <button bindtap="click_done" class="btn" disabled="{{btn_done}}" hoverClass="button-hover" loading="{{loading}}" type="primary">
+        <mp-icon class="icon" color="white" icon="qr-code" size="22"></mp-icon>
+        <text>生成二维码</text>
+    </button>
+    <view class="copy-right">{{copyright}}</view>
+</view>

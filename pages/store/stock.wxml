@@ -1,0 +1,52 @@
+<view class="page">
+    <view bindtap="click_trash" class="card" data-idx="{{index}}" wx:if="{{item.checked}}" wx:for="{{trash}}" wx:key="index">
+        <view catchtap="click_out" class="card-hd" data-idx="{{index}}">
+            <text class="grow">{{item.name}}</text>
+            <button plain class="btn-log" hoverClass="button-hover" size="mini" type="primary">
+                <mp-icon color="rgb(9,187,7)" icon="share" size="{{15}}"></mp-icon>
+                <text> 出库</text>
+            </button>
+        </view>
+        <view class="card-bd flex-line more-padding">
+            <view class="row-bd">
+                <view class="title">库存</view>
+                <view class="row">
+                    <view class="number small">{{item.w_keep/1000}}</view>
+                    <view class="unit">KG</view>
+                </view>
+                <view class="row" wx:if="{{item.id==1}}">
+                    <view class="number huge">{{item.a_keep}}</view>
+                    <view class="unit">只</view>
+                </view>
+            </view>
+            <view class="row-bd symbol">=</view>
+            <view class="row-bd">
+                <view class="title">入库</view>
+                <view class="row">
+                    <view class="number small">{{item.w_increase/1000}}</view>
+                    <view class="unit">KG</view>
+                </view>
+                <view class="row" wx:if="{{item.id==1}}">
+                    <view class="number huge">{{item.a_increase}}</view>
+                    <view class="unit">只</view>
+                </view>
+            </view>
+            <view class="row-bd symbol minus">-</view>
+            <view class="row-bd">
+                <view class="title">出库</view>
+                <view class="row">
+                    <view class="number small">{{item.w_reduce/1000}}</view>
+                    <view class="unit">KG</view>
+                </view>
+                <view class="row" wx:if="{{item.id==1}}">
+                    <view class="number huge">{{item.a_reduce}}</view>
+                    <view class="unit">只</view>
+                </view>
+            </view>
+            <view class="row-ft">
+                <mp-icon color="gray" icon="arrow" size="16" type="field"></mp-icon>
+            </view>
+        </view>
+    </view>
+    <view class="copy-right">{{copyright}}</view>
+</view>

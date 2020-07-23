@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "mp-loading": "/weui/loading/loading"
+    },
+    "navigationStyle": "custom"
+}

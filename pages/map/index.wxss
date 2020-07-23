@@ -1,0 +1,25 @@
+map {
+    flex: 1 1 auto;
+    width: 100%;
+    position: relative;
+}
+
+.cover-view {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 20rpx;
+    background: rgba(0,0,0,0.5);
+}
+
+.address {
+    padding-bottom: 20rpx;
+    text-align: center;
+    color: #fff;
+}
+
+.btn-done {
+    width: 100%!important;
+    margin: 0 20rpx;
+}

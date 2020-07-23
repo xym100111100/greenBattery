@@ -1,0 +1,48 @@
+.weui-cells__group {
+    background: #ededed;
+    margin: 0;
+    padding: 0;
+}
+
+.weui-cells__title {
+    margin: 10rpx 0;
+}
+
+.weui-cell__hd {
+    width: 150rpx;
+    color: #999;
+}
+
+.number {
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+    font-size: 16pt;
+    color: #333;
+    text-shadow: 1rpx 1rpx #ccc;
+}
+
+.place-holder {
+    font-size: 12pt;
+    color: #999;
+    font-weight: normal;
+    text-shadow: none;
+}
+
+.radio+.radio {
+    margin-left: 40rpx;
+}
+
+.weui-input {
+    padding: 0 10rpx;
+}
+
+.btn-log {
+    font-size: 10pt!important;
+    font-weight: normal;
+}
+
+.btn {
+    flex: 0 0 auto;
+    width: 95%!important;
+    margin: 20rpx auto;
+}

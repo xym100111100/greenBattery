@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "mp-icon": "/weui/icon/icon"
+    },
+    "navigationStyle": "custom"
+}

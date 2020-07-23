@@ -1,0 +1,98 @@
+.scroll-view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    flex-shrink: 0;
+}
+
+.page__hd {
+    padding-bottom: 20rpx;
+}
+
+.binded-cells .weui-cell__hd {
+    width: 60rpx;
+}
+
+.weui-cell {
+    padding: 16rpx!important;
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.busis .weui-cell__hd {
+    flex-shrink: 0;
+    padding: 0 10rpx;
+    color: #09bb07;
+    display: flex;
+    align-items: center;
+}
+
+.busis .weui-cell__bd {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.busis .weui-cell__ft {
+    flex-shrink: 0;
+    padding: 16rpx;
+    display: flex;
+    align-items: center;
+}
+
+.weui-cells__group {
+    background: #ededed;
+    margin: 0;
+    padding: 0;
+}
+
+.weui-cells__title {
+    margin: 10rpx 0;
+}
+
+.weui-cell__hd {
+    width: 160rpx;
+    white-space: nowrap;
+}
+
+.edit-cells .weui-cell__bd {
+    overflow-x: hidden;
+}
+
+.weui-input {
+    padding: 16rpx 10rpx;
+}
+
+.two-btn-bar .weui-cell__hd,.one-btn-bar .weui-cell__hd {
+    width: 0;
+}
+
+.two-btn-bar .weui-cell__bd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-cells .weui-cell__hd {
+    color: #888;
+}
+
+.btn-mini {
+    flex: 1 1 auto;
+    font-weight: normal;
+}
+
+.btn-mini+.btn-mini {
+    margin-left: 20rpx;
+}
+
+.btn {
+    flex: 0 0 auto;
+    width: 100%!important;
+}

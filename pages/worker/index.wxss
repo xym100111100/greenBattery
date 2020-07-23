@@ -1,0 +1,27 @@
+.intro {
+    padding: 60rpx 30rpx;
+    background: #f6f6f6;
+    font-size: 12pt;
+    color: #666;
+    box-shadow: 0 0 10rpx rgba(0,0,0,0.2);
+}
+
+.my-cells .weui-cell__hd {
+    width: 20%;
+    color: #999;
+}
+
+.number {
+    font-family: 'arial';
+    color: #666;
+    font-weight: bold;
+}
+
+.my-cells .weui-cell__ft {
+    width: 20%;
+}
+
+.my-cells .ft {
+    text-align: center;
+    font-size: 10pt;
+}

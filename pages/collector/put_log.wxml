@@ -1,0 +1,45 @@
+<view class="page">
+    <view class="tabs">
+        <view catchtap="click_tab" class="tab {{activeTab==0?'active':''}}" data-idx="0">
+            <text>等待处理</text>
+        </view>
+        <view catchtap="click_tab" class="tab {{activeTab==1?'active':''}}" data-idx="1">
+            <text>入库成功</text>
+        </view>
+        <view catchtap="click_tab" class="tab {{activeTab==-1?'active':''}}" data-idx="-1">
+            <text>入库失败</text>
+        </view>
+    </view>
+    <view class="hd-pad row left">
+        <view class="date-hd">时段</view>
+        <picker bindchange="dateChange" data-idx="1" end="{{today}}" mode="date" value="{{date1}}">
+            <view class="date">{{date1}}</view>
+        </picker>
+        <view class="date-split">至</view>
+        <picker bindchange="dateChange" data-idx="2" end="{{today}}" mode="date" value="{{date2}}">
+            <view class="date">{{date2}}</view>
+        </picker>
+        <button catchtap="click_query" class="btn-query" hoverClass="button-hover" size="mini" type="primary">
+            <icon color="#fff" size="16" type="search"></icon>查询</button>
+    </view>
+    <view class="tab-content">
+        <scroll-view bindscrolltolower="touch_bottom" bindscrolltoupper="touch_top" enableBackToTop="true" enableFlex="{{true}}" scrollY="true">
+            <mp-cells extClass="cells" wx:if="{{list.length>0}}">
+                <mp-cell bindtap="click_row" data-idx="{{index}}" link="true" wx:for="{{list}}" wx:key="index">
+                    <view class="user" slot="title">{{item.nick?item.nick:item.phone}}</view>
+                    <view class="trash">{{item.trash_name}}</view>
+                    <view class="row">
+                        <view class="number">{{item.weight/1000}}</view>
+                        <view class="unit">千克</view>
+                        <block wx:if="{{item.tid==1}}">
+                            <view class="number">{{item.amount}}</view>
+                            <view class="unit">只</view>
+                        </block>
+                        <view class="time">{{item.time}}</view>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+            <view class="empty-bd" wx:else> 暂时没有数据 </view>
+        </scroll-view>
+    </view>
+</view>

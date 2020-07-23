@@ -1,0 +1,8 @@
+<view class="page">
+    <map bindcontroltap="controltap" bindtap="click_map" enableScroll="true" enableZoom="true" id="map" latitude="{{lat}}" longitude="{{lng}}" markers="{{marker}}" scale="14" showLocation="true">
+        <cover-view class="cover-view">
+            <cover-view class="address">{{address}}</cover-view>
+            <button bindtap="click_done" class="btn-done" disabled="{{btn_deny}}" hoverClass="button-hover" type="primary">确定选择</button>
+        </cover-view>
+    </map>
+</view>

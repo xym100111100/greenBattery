@@ -1,0 +1,46 @@
+.my-cells .weui-cell {
+    padding-right: 0;
+    white-space: nowrap;
+}
+
+.my-cells .weui-cell__hd {
+    width: 15%;
+}
+
+.number {
+    font-family: 'arial';
+    color: #666;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+.name {
+    color: #666;
+    font-weight: bold;
+}
+
+.checkbox {
+    font-size: 12pt;
+    color: #999;
+}
+
+radio+radio {
+    margin-left: 20rpx;
+}
+
+.my-cells .weui-cell__ft {
+    width: 0;
+}
+
+.my-cells .ft {
+    text-align: center;
+    font-size: 10pt;
+}
+
+.btn_mini {
+    flex: 1 1 auto;
+}
+
+.btn_mini+.btn_mini {
+    margin-left: 20rpx;
+}

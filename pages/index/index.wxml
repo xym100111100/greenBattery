@@ -1,0 +1,117 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="card fixed">
+        <view class="card-hd">当前激活单位</view>
+        <mp-cells extClass="my-cells-1">
+            <mp-cell bindtap="click_busi" hover="true" link="true">
+                <view class="title-icon" slot="icon">
+                    <mp-icon color="{{icon_color}}" icon="location" size="22"></mp-icon>
+                </view>
+                <view>{{busi_name}}</view>
+            </mp-cell>
+            <block wx:if="{{power=='1'}}">
+                <mp-cell bindtap="click_worker" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <mp-icon color="{{icon_color}}" icon="group-detail" size="22"></mp-icon>
+                    </view>
+                    <view class="name">人员管理</view>
+                    <mp-badge content="{{worker_request}}" wx:if="{{worker_request>0}}"></mp-badge>
+                </mp-cell>
+                <mp-cell bindtap="click_trash" hover="true" link="true" wx:if="{{busi_role==1}}">
+                    <view class="title-icon" slot="icon">
+                        <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
+                    </view>
+                    <view class="name">产废种类选择</view>
+                    <mp-badge wx:if="{{trash_badge}}"></mp-badge>
+                </mp-cell>
+                <mp-cell bindtap="click_trash" hover="true" link="true" wx:elif="{{busi_role==2}}">
+                    <view class="title-icon" slot="icon">
+                        <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
+                    </view>
+                    <view class="name">收集危废种类选择</view>
+                    <mp-badge wx:if="{{trash_badge}}"></mp-badge>
+                </mp-cell>
+                <mp-cell bindtap="click_trash" hover="true" link="true" wx:elif="{{busi_role==3}}">
+                    <view class="title-icon" slot="icon">
+                        <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
+                    </view>
+                    <view class="name">经营危废种类选择</view>
+                    <mp-badge wx:if="{{trash_badge}}"></mp-badge>
+                </mp-cell>
+            </block>
+            <mp-cell bindtap="click_me" hover="true" link="true">
+                <view class="title-icon" slot="icon">
+                    <mp-icon color="{{icon_color}}" icon="lock" size="22"></mp-icon>
+                </view>
+                <view class="name">我的账号</view>
+                <mp-badge wx:if="{{nick==''}}"></mp-badge>
+            </mp-cell>
+        </mp-cells>
+    </view>
+    <view class="card float">
+        <view class="card-hd">业务菜单</view>
+        <view class="card-bd" wx:if="{{busi_pass<1}}">单位管理员审核通过后显示</view>
+        <mp-cells class="scroll" extClass="my-cells-2" wx:else>
+            <mp-cell bindtap="click_report" hover="true" link="true">
+                <view class="title-icon" slot="icon">
+                    <text class="title-icon iconfont icon-xiangji"></text>
+                </view>
+                <view>违法举报</view>
+            </mp-cell>
+            <block wx:if="{{busi_role==1}}">
+                <mp-cell bindtap="click_maker_log" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-kucun"></text>
+                    </view>
+                    <view>产废台账</view>
+                </mp-cell>
+                <mp-cell bindtap="click_maker_scan" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-chuku"></text>
+                    </view>
+                    <view>危废转出扫码确认</view>
+                </mp-cell>
+            </block>
+            <block wx:if="{{(busi_role==2||busi_role==3)&&(power=='1'||power=='2')}}">
+                <mp-cell bindtap="click_buy" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-huishou1"></text>
+                    </view>
+                    <view>外勤：收集危废</view>
+                </mp-cell>
+                <mp-cell bindtap="click_put_store" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-ruku1"></text>
+                    </view>
+                    <view>外勤：在途危废入库</view>
+                </mp-cell>
+                <mp-cell bindtap="click_put_log" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-rukujilu"></text>
+                    </view>
+                    <view>外勤：入库记录</view>
+                </mp-cell>
+            </block>
+            <block wx:if="{{(busi_role==2||busi_role==3)&&(power=='1'||power=='3')}}">
+                <mp-cell bindtap="click_accept_store" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-dianzicheng1"></text>
+                    </view>
+                    <view>库管：接收外勤入库</view>
+                </mp-cell>
+                <mp-cell bindtap="click_accept_collector" hover="true" link="true" wx:if="{{busi_role==3}}">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-deliver"></text>
+                    </view>
+                    <view>库管：接收收集点移交</view>
+                </mp-cell>
+                <mp-cell bindtap="click_stock" hover="true" link="true">
+                    <view class="title-icon" slot="icon">
+                        <text class="title-icon iconfont icon-kucun1"></text>
+                    </view>
+                    <view>库管：库存情况</view>
+                </mp-cell>
+            </block>
+        </mp-cells>
+    </view>
+    <view class="copy-right">{{copyright}}</view>
+</view>

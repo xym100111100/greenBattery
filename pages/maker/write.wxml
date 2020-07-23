@@ -1,0 +1,51 @@
+<view class="page">
+    <view class="card">
+        <view class="card-hd">{{name}}</view>
+        <mp-cells extClass="my-cells">
+            <mp-cell>
+                <view slot="title">记录日期</view>
+                <picker bindchange="dateChange" end="{{date}}" mode="date" value="{{date}}">
+                    <view class="number">{{date}}</view>
+                </picker>
+                <button plain bindtap="click_log" class="btn-log" hoverClass="button-hover" size="mini" slot="footer" type="primary">
+                    <icon color="rgb(9,187,7)" size="16" type="search"></icon>历史记录</button>
+            </mp-cell>
+            <mp-cell>
+                <view slot="title">记录动作</view>
+                <radio-group bindchange="actionChange" class="radio-group">
+                    <radio checked="{{true}}" class="radio" value="1">
+                        <text>产生</text>
+                    </radio>
+                    <radio checked="{{false}}" class="radio" value="2" wx:if="{{id==2}}">
+                        <text>自行利用</text>
+                    </radio>
+                </radio-group>
+            </mp-cell>
+            <mp-cell>
+                <view slot="title">计数质量</view>
+                <input bindinput="input_weight" class="weui-input number" placeholder="最多三位小数" placeholderClass="place-holder" type="digit"></input>
+                <view slot="footer">千克（KG）</view>
+            </mp-cell>
+            <block wx:if="{{id==1}}">
+                <mp-cell>
+                    <view slot="title">破损类别</view>
+                    <radio-group bindchange="typeChange" class="radio-group">
+                        <radio checked="{{true}}" class="radio" value="1">
+                            <text>Ⅰ类</text>
+                        </radio>
+                        <radio checked="{{false}}" class="radio" value="2">
+                            <text>Ⅱ类</text>
+                        </radio>
+                    </radio-group>
+                </mp-cell>
+                <mp-cell>
+                    <view slot="title">计数数量</view>
+                    <input bindinput="input_amount" class="weui-input number" placeholder="填写整数" placeholderClass="place-holder" type="number"></input>
+                    <view slot="footer">只</view>
+                </mp-cell>
+            </block>
+        </mp-cells>
+        <button bindtap="click_done" class="btn" disabled="{{btn_done}}" hoverClass="button-hover" loading="{{loading}}" type="primary">记一笔</button>
+    </view>
+    <view class="copy-right">{{copyright}}</view>
+</view>

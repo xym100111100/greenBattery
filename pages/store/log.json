@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "mp-cell": "/weui/cell/cell",
+        "mp-cells": "/weui/cells/cells"
+    }
+}

@@ -1,0 +1,44 @@
+<view class="page">
+    <view class="hd-pad">
+    tips：请核对转出危废信息，无误后确认，完成转出。
+  </view>
+    <mp-cells extClass="my-cells">
+        <mp-cell>
+            <view slot="title">收集单位</view>
+            <view>{{busi_name}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view slot="title">收集人员</view>
+            <view>{{nick!=''?nick:phone}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view slot="title">转出危废</view>
+            <view>{{trash_name}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view slot="title">转出质量</view>
+            <view class="row">
+                <text class="number">{{weight/1000}}</text>
+                <text class="unit">千克-KG</text>
+            </view>
+        </mp-cell>
+        <block wx:if="{{tid==1}}">
+            <mp-cell>
+                <view slot="title">破损类别</view>
+                <view>{{type==1?'Ⅰ类':'Ⅱ类'}}</view>
+            </mp-cell>
+            <mp-cell>
+                <view slot="title">转出数量</view>
+                <view class="row">
+                    <text class="number">{{amount}}</text>
+                    <text class="unit">只</text>
+                </view>
+            </mp-cell>
+        </block>
+    </mp-cells>
+    <button bindtap="click_done" class="btn" disabled="{{btn_done}}" hoverClass="button-hover" loading="{{loading}}" type="primary">
+        <mp-icon class="icon" color="white" icon="done2" size="22"></mp-icon>
+        <text>确认转出</text>
+    </button>
+    <view class="copy-right">{{copyright}}</view>
+</view>

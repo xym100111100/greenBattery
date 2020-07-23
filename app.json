@@ -1,0 +1,41 @@
+{
+  "pages": [
+ 
+    "pages/index/index",
+    "pages/login/main",
+    "pages/index/report",
+    "pages/index/me",
+    "pages/login/login",
+    "pages/login/type",
+    "pages/busi/bind",
+    "pages/busi/edit",
+    "pages/map/index",
+    "pages/qrcode/qrcode",
+    "pages/qrcode/camera",
+    "pages/worker/index",
+    "pages/worker/edit",
+    "pages/index/trash",
+    "pages/maker/index",
+    "pages/maker/write",
+    "pages/maker/log",
+    "pages/collector/buy",
+    "pages/collector/maker_confirm",
+    "pages/collector/put_store",
+    "pages/collector/put_log",
+    "pages/collector/put_log_detail",
+    "pages/collector/store",
+    "pages/collector/store_accept",
+    "pages/collector/store_detail",
+    "pages/store/stock",
+    "pages/store/in",
+    "pages/store/in_detail",
+    "pages/store/out",
+    "pages/store/log"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#23bd70",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

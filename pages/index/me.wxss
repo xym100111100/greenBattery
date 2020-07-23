@@ -1,0 +1,35 @@
+.bd-pad {
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+.weui-cell__hd {
+    padding-right: 20rpx;
+    font-size: 12pt;
+    color: #999;
+}
+
+.weui-cell__bd {
+    font-weight: bold;
+    color: #777;
+}
+
+.number {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14pt;
+}
+
+.input-placeholder {
+    font-weight: normal;
+}
+
+.btn {
+    font-size: 11pt!important;
+    padding: 6rpx 40rpx!important;
+    font-weight: normal;
+}
+
+button[type='warn'] {
+    color: #fff!important;
+    background-color: #e64340!important;
+}

@@ -1,0 +1,88 @@
+<view class="page">
+    <view class="hd-pad">tips：好像没有什么要提示的</view>
+    <mp-cells extClass="my-cells">
+        <mp-cell>
+            <view slot="title">出库危废</view>
+            <text class="trash-name">{{name}}</text>
+        </mp-cell>
+        <block wx:if="{{id==1&&show_transit}}">
+            <mp-cell>
+                <view slot="title">出库目标</view>
+                <radio-group bindchange="click_target" class="radio-trash">
+                    <view>
+                        <radio checked="{{target_type==1}}" class="radio" value="1">
+                            <text>电池转运中心</text>
+                            <text class="memo">（需对方在本系统接收）</text>
+                        </radio>
+                    </view>
+                    <view>
+                        <radio checked="{{target_type==2}}" class="radio" value="2">
+                            <text>处置单位</text>
+                            <text class="memo">（需拍摄交接文件完成流程）</text>
+                        </radio>
+                    </view>
+                </radio-group>
+            </mp-cell>
+            <mp-cell wx:if="{{target_type==1}}">
+                <view slot="title">接收单位</view>
+                <radio-group bindchange="click_receiver" class="radio-trash">
+                    <view wx:for="{{receivers}}" wx:key="index">
+                        <radio checked="{{item.id==receiver}}" class="radio" value="{{item.id}}">
+                            <text>{{item.name}}</text>
+                        </radio>
+                    </view>
+                </radio-group>
+            </mp-cell>
+        </block>
+        <mp-cell>
+            <view slot="title">出库质量</view>
+            <input adjustPosition="true" bindblur="input_weight" class="weui-input number" cursorSpacing="200" placeholder="最多三位小数" placeholderClass="place-holder" type="digit" value="{{weight}}"></input>
+            <view slot="footer">千克 - KG</view>
+        </mp-cell>
+        <block wx:if="{{id==1}}">
+            <mp-cell>
+                <view slot="title">破损类别</view>
+                <radio-group bindchange="click_type" class="radio-type">
+                    <radio checked="{{type==1}}" class="radio" value="1">
+                        <text>Ⅰ类</text>
+                    </radio>
+                    <radio checked="{{type==2}}" class="radio" value="2">
+                        <text>Ⅱ类</text>
+                    </radio>
+                </radio-group>
+            </mp-cell>
+            <mp-cell>
+                <view slot="title">出库数量</view>
+                <input adjustPosition="true" bindblur="input_amount" class="weui-input number" cursorSpacing="200" placeholder="填写整数" placeholderClass="place-holder" type="number" value="{{amount}}"></input>
+                <view slot="footer">只</view>
+            </mp-cell>
+        </block>
+        <mp-cell wx:if="{{target_type==2}}">
+            <view slot="title">凭证照片</view>
+            <view class="photo-bar">
+                <view bindtap="click_photo" class="photo-border" data-idx="{{index}}" wx:for="{{photo}}" wx:key="index">
+                    <image class="photo" mode="{{heightFix}}" src="{{item.tempImagePath}}"></image>
+                </view>
+                <mp-icon bindtap="click_camera" color="gray" icon="camera" size="32" style="margin-left:20rpx;" type="field" wx:if="{{show_camera}}"></mp-icon>
+            </view>
+        </mp-cell>
+    </mp-cells>
+    <button bindtap="click_done" class="btn" hoverClass="button-hover" loading="{{loading}}" type="primary">
+        <text class="iconfont icon-chukujilu"></text>
+        <text>确定出库</text>
+    </button>
+    <view class="copy-right">{{copyright}}</view>
+</view>
+<view bindtap="click_close" class="mask" wx:if="{{preview}}">
+    <image class="big-photo" mode="{{aspectFit}}" src="{{current_photo}}"></image>
+    <view class="btn-bar">
+        <view catchtap="click_close" class="btn-box">
+            <image class="btn1" src="/images/close2.png"></image>
+            <view>返回</view>
+        </view>
+        <view catchtap="click_del" class="btn-box">
+            <image class="btn2" src="/images/del.png"></image>
+            <view>删除</view>
+        </view>
+    </view>
+</view>

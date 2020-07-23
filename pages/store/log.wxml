@@ -1,0 +1,30 @@
+<view class="page">
+    <view class="hd-pad row left">
+        <view class="date-hd">时段</view>
+        <picker bindchange="dateChange" data-idx="1" end="{{today}}" mode="date" value="{{date1}}">
+            <view class="date">{{date1}}</view>
+        </picker>
+        <view class="date-split">至</view>
+        <picker bindchange="dateChange" data-idx="2" end="{{today}}" mode="date" value="{{date2}}">
+            <view class="date">{{date2}}</view>
+        </picker>
+        <button catchtap="click_query" class="btn-log" hoverClass="button-hover" size="mini" type="primary">
+            <icon color="#fff" size="16" type="search"></icon>查询</button>
+    </view>
+    <scroll-view bindscrolltolower="touch_bottom" bindscrolltoupper="touch_top" enableBackToTop="true" enableFlex="{{true}}" scrollY="true">
+        <mp-cells extClass="my-cells">
+            <mp-cell wx:for="{{list}}" wx:key="index">
+                <view class="action {{item.out?'red':'green'}}" slot="title">{{item.out?'出库':'入库'}}</view>
+                <view class="row">
+                    <view class="number kg {{item.out?'red':'green'}}">{{item.weight/1000}}</view>
+                    <view class="unit">KG</view>
+                    <block wx:if="{{tid==1}}">
+                        <view class="number small">{{item.amount}}</view>
+                        <view class="unit">只</view>
+                    </block>
+                </view>
+                <view slot="footer">{{item.inputtime}}</view>
+            </mp-cell>
+        </mp-cells>
+    </scroll-view>
+</view>

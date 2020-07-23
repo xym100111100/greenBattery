@@ -1,0 +1,176 @@
+.tabs {
+    flex-shrink: 0;
+    padding: 2rpx 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(to bottom,#fff,rgba(100,211,117,0.1));
+}
+
+.tab {
+    width: 50%;
+    padding: 10rpx 0;
+    color: #666;
+    font-size: 12pt;
+    text-align: center;
+}
+
+.tab text {
+    padding: 4rpx 0;
+}
+
+.active text {
+    font-weight: bold;
+    color: #333;
+    border-bottom: solid 6rpx rgb(35,189,112);
+}
+
+.tab-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow-y: scroll;
+}
+
+.tab-content .row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.trash {
+    font-size: 11pt;
+}
+
+.busi_name {
+    font-size: 10pt;
+    color: #aaa;
+}
+
+.action {
+    font-size: 10pt;
+    color: #aaa;
+}
+
+.unit {
+    font-size: 9pt;
+    color: #aaa;
+    padding: 0 10rpx;
+}
+
+.time {
+    padding-right: 30rpx;
+    font-size: 10pt;
+    font-family: Arial,Helvetica,sans-serif;
+    color: #aaa;
+}
+
+.cells .weui-cell__bd {
+    font-size: 12pt;
+    color: #666;
+}
+
+.date-hd {
+    color: #777;
+    font-size: 11pt;
+    white-space: nowrap;
+    flex: 1 1 auto;
+}
+
+.date {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11pt;
+    padding: 0 20rpx;
+    white-space: nowrap;
+}
+
+.date-split {
+    color: #777;
+    font-size: 12pt;
+}
+
+.btn-query {
+    font-size: 10pt!important;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.left {
+    justify-content: flex-start;
+}
+
+.mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background: rgba(0,0,0,0.5);
+}
+
+.card {
+    position: absolute;
+    left: 2%;
+    top: -300px;
+    right: 2%;
+    box-shadow: 0 0 20rpx rgba(0,0,0,0.6);
+}
+
+.card .row {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 10rpx;
+}
+
+.mask .label {
+    flex: 0 0 auto;
+    color: #333;
+    padding-right: 20rpx;
+}
+
+.input-number {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+    color: rgb(124,32,32);
+    border-bottom: solid 1px #eee;
+}
+
+.input-placeholder {
+    font-size: 12pt;
+    font-weight: normal;
+}
+
+.input-number,.radio-group {
+    flex-grow: 1;
+}
+
+.radio+.radio {
+    margin-left: 40rpx;
+}
+
+.mask .unit {
+    flex: 0 0 auto;
+    color: #333;
+    padding-left: 6rpx;
+}
+
+.min {
+    font-weight: normal!important;
+}
+
+.btn {
+    flex-grow: 1;
+}
+
+.btn+.btn {
+    margin-left: 40rpx;
+}
+
+button[type=warn] {
+    color: #fff!important;
+    background-color: #e64340!important;
+}

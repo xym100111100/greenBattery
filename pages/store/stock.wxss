@@ -1,0 +1,70 @@
+.grow {
+    flex: 1 1 auto;
+    white-space: nowrap;
+    overflow-x: hidden;
+    margin-right: 20rpx;
+}
+
+.btn-log {
+    font-size: 10pt!important;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.more-padding {
+    padding: 40rpx 20rpx;
+}
+
+.row-bd {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.row-ft {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.title {
+    font-size: 10pt;
+    color: #999;
+}
+
+.number {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 14pt;
+    color: #555;
+    text-shadow: 1rpx 1rpx #ccc;
+}
+
+.unit {
+    color: #aaa;
+    font-size: 9pt;
+    padding-left: 6rpx;
+}
+
+.huge {
+    font-size: 48rpx;
+    color: rgb(151,49,49);
+}
+
+.small {
+    font-size: 12pt;
+}
+
+.symbol {
+    font-size: 52rpx;
+    font-weight: bold;
+    color: rgb(106,141,10);
+}
+
+.minus {
+    font-size: 72rpx;
+}

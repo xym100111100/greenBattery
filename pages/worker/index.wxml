@@ -1,0 +1,16 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="hd-pad">tips：每行一个人员，点击人员进行各种操作。</view>
+    <scroll-view scrollY="true" style="flex-grow:1">
+        <mp-cells extClass="my-cells">
+            <mp-cell bindtap="click_worker" data-idx="{{index}}" hover="true" link="true" wx:for="{{list}}" wx:key="index">
+                <view class="name" slot="title">
+                    <text>{{item.nick}}</text>
+                </view>
+                <view class="number">{{item.phone}}</view>
+                <view class="ft" slot="footer">{{item.ft}} <mp-badge wx:if="{{item.pass==0}}"></mp-badge>
+                </view>
+            </mp-cell>
+        </mp-cells>
+    </scroll-view>
+    <view class="copy-right">{{copyright}}</view>
+</view>

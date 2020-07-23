@@ -1,0 +1,36 @@
+.checkbox .weui-cell__hd {
+    width: 60rpx;
+}
+
+.checkbox .name {
+    color: #666;
+}
+
+.checkbox .weui-cell__ft {
+    width: 0;
+}
+
+.warehouse .weui-cell__hd {
+    width: 0;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.row .label {
+    color: #666;
+    padding-right: 20rpx;
+    white-space: nowrap;
+}
+
+.row input {
+    flex-grow: 1;
+}
+
+.btn1 {
+    flex: 0 0 auto;
+    width: 95%!important;
+    margin: 20rpx auto;
+}

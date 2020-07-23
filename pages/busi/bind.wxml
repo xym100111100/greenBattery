@@ -1,0 +1,46 @@
+<view class="page">
+    <view class="card" style="flex-grow:1">
+        <view class="tabs">
+            <view catchtap="click_tab" class="tab {{activeTab==0?'active':''}}" data-idx="0">
+                <text>通过搜索绑定</text>
+            </view>
+            <view catchtap="click_tab" class="tab {{activeTab==1?'active':''}}" data-idx="1">
+                <text>通过创建绑定</text>
+            </view>
+        </view>
+        <view class="tab-content" wx:if="{{activeTab==0}}">
+            <mp-searchbar bindselectresult="selectResult" class="mp-searchbar" extClass="search-bar" placeholder="名称关键字，2字以上（含）" search="{{search}}" throttle="300"></mp-searchbar>
+            <button bindtap="click_search_done" class="btn" disabled="{{btn_done}}" hoverClass="button-hover" loading="{{loading}}" type="primary">绑定选中单位</button>
+        </view>
+        <view class="tab-content create" wx:else>
+            <view class="hd-pad">请填写以下各项</view>
+            <mp-cells>
+                <mp-cell title="单位全称">
+                    <input class="weui-input" value="{{name}}" placeholder="请输入单位全称" type="text"></input>
+                </mp-cell>
+                <mp-cell title="单位角色">
+                    <picker bindchange="roleChange" range="{{roles}}" rangeKey="text" value="{{role_idx}}">
+                        <view class="picker">{{roles[role_idx].text}}</view>
+                        <view class="intro">{{roles[role_idx].intro}}</view>
+                    </picker>
+                </mp-cell>
+                <mp-cell title="您的姓名">
+                    <input class="weui-input" value="{{contact}}" placeholder="请输入姓名" type="text"></input>
+                </mp-cell>
+                <mp-cell title="手机号">
+                    <input class="weui-input number" value="{{phone}}" placeholder="请输入手机号" placeholderClass="placeholder" type="number"></input>
+                </mp-cell>
+                <mp-cell title="单位地址">
+                    <input class="weui-input" disabled="true" value="{{address}}" placeholder="请获取地理位置"></input>
+                </mp-cell>
+                <mp-cell extClass="two-btn-bar">
+                    <button plain bindtap="map_choose" class="btn_location" disabled="{{btn_choose_on_map}}" hoverClass="button-hover" size="mini" type="primary">地图选点</button>
+                    <button plain bindtap="get_address" class="btn_location" disabled="{{btn_getaddress}}" hoverClass="button-hover" size="mini" type="primary">我的位置(刚好在单位)</button>
+                </mp-cell>
+            </mp-cells>
+            <view class="hd-pad">请在获取地理位置授权中选择“允许”</view>
+            <view style="flex-grow:1"></view>
+            <button bindtap="click_create_done" class="btn1" hoverClass="button-hover" loading="{{loading}}" type="primary">创建并绑定</button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,12 @@
+<camera binderror="camera_error" class="camera" devicePosition="back" flash="off">
+    <cover-view class="btn-bar">
+        <cover-view catchtap="click_back" class="btn-box">
+            <cover-image class="btn" src="/images/close2.png"></cover-image>
+            <cover-view>返回</cover-view>
+        </cover-view>
+        <cover-view catchtap="click_shoot" class="btn-box">
+            <cover-image class="btn" src="/images/camera.png"></cover-image>
+            <cover-view>拍照</cover-view>
+        </cover-view>
+    </cover-view>
+</camera>

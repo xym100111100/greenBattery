@@ -1,0 +1,16 @@
+<view class="page">
+    <image class="bg" mode="scaleToFill" src="/images/main.jpg"></image>
+    <view class="mask">
+        <image class="logo" mode="aspectFill" src="/images/main-logo-big.png"></image>
+        <view class="text">
+            <view>
+        为加强废铅蓄电池环境风险管理，督促指导产废企业及个体经营户落实污染防治主体责任，全面摸排废铅蓄电池来源、产量、流向等情况，掌握全市废铅蓄电池底数，建立完整的市内信息台账，促进我市“产废明晰、回收有序、利用合法、监管有力”的长效机制，规划本系统。
+      </view>
+            <view class="notice">
+        使用系统需要获取您微信绑定手机号，请知悉。
+      </view>
+        </view>
+        <button plain bindtap="login" class="btn" loading="{{loadidng}}" type="primary">开始使用</button>
+        <view class="copy-right">{{copyright}}</view>
+    </view>
+</view>

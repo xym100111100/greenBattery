@@ -1,0 +1,23 @@
+<view class="page">
+    <view class="hd-pad">对个人账号进行各种设置</view>
+    <view class="bd-pad">
+        <mp-cells extClass="my-cells">
+            <mp-cell>
+                <view slot="title">登录账户</view>
+                <view class="number">{{phone}}</view>
+                <button bindtap="click_logout" class="btn" hoverClass="button-hover" size="mini" slot="footer" type="warn">退出登录</button>
+            </mp-cell>
+            <mp-cell>
+                <view slot="title">我的姓名</view>
+                <input class="weui-input" value="{{nick}}" placeholder="请填写真实姓名"></input>
+                <button bindtap="click_name" class="btn" hoverClass="button-hover" size="mini" slot="footer" type="primary">保存姓名</button>
+            </mp-cell>
+            <mp-cell>
+                <view slot="title">账户类型</view>
+                <view>{{type}}</view>
+                <button bindtap="click_type" class="btn" hoverClass="button-hover" size="mini" slot="footer" type="warn">重新选择</button>
+            </mp-cell>
+        </mp-cells>
+    </view>
+    <view class="copy-right">{{copyright}}</view>
+</view>

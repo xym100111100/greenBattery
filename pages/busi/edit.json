@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "usingComponents": {
+        "mp-cells": "/weui/cells/cells",
+        "mp-cell": "/weui/cell/cell",
+        "mp-halfScreenDialog": "/weui/half-screen-dialog/half-screen-dialog"
+    }
+}

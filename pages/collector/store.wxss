@@ -1,0 +1,104 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.tabs {
+    flex-shrink: 0;
+    padding: 2rpx 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(to bottom,#fff,rgba(100,211,117,0.1));
+}
+
+.tab {
+    width: 50%;
+    padding: 10rpx 0;
+    color: #666;
+    font-size: 12pt;
+    text-align: center;
+}
+
+.tab text {
+    padding: 4rpx 0;
+}
+
+.active text {
+    font-weight: bold;
+    color: #333;
+    border-bottom: solid 6rpx rgb(35,189,112);
+}
+
+.tab-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow-y: scroll;
+}
+
+.row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+
+.trash {
+    font-size: 11pt;
+}
+
+.unit {
+    font-size: 9pt;
+    color: #aaa;
+    padding: 0 10rpx;
+}
+
+.time {
+    padding-left: 30rpx;
+    font-size: 10pt;
+    font-family: Arial,Helvetica,sans-serif;
+    color: #aaa;
+}
+
+.cells .weui-cell__hd {
+    font-size: 12pt;
+    color: #999;
+    width: 150rpx;
+    overflow-x: hidden;
+}
+
+.cells .weui-cell__bd {
+    font-size: 12pt;
+    color: #666;
+}
+
+.date-hd {
+    flex: 1 1 auto;
+    color: #777;
+    font-size: 11pt;
+    white-space: nowrap;
+}
+
+.date {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11pt;
+    padding: 0 20rpx;
+}
+
+.date-split {
+    color: #777;
+    font-size: 12pt;
+}
+
+.btn-query {
+    font-size: 10pt!important;
+    font-weight: normal;
+}
+
+.left {
+    justify-content: flex-start;
+}

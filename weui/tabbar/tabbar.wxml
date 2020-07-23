@@ -1,0 +1,9 @@
+<view class="weui-tabbar {{extClass}}">
+    <view bindtap="tabChange" class="weui-tabbar__item {{index===current?'weui-bar__item_on':''}}" data-index="{{index}}" wx:for="{{list}}">
+        <view style="position: relative;display:inline-block;">
+            <image class="weui-tabbar__icon" src="{{current===index?item.selectedIconPath:item.iconPath}}"></image>
+            <mp-badge content="{{item.badge}}" style="position: absolute;top:-2px;left:calc(100% - 3px)" wx:if="{{item.badge}}"></mp-badge>
+        </view>
+        <view class="weui-tabbar__label">{{item.text}}</view>
+    </view>
+</view>

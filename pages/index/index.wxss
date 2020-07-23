@@ -1,0 +1,61 @@
+@import "../../__wuBaseWxss__/0.wxss";
+
+.my-cells-1 .weui-cell {
+    padding: 20rpx 32rpx!important;
+}
+
+.my-cells-2 .weui-cell {
+    padding: 16rpx 32rpx!important;
+}
+
+.weui-cell__bd {
+    font-size: 12pt;
+    color: #666;
+    display: flex;
+    align-items: center;
+}
+
+.weui-cells__title {
+    background: #ededed;
+    padding: 20rpx 10rpx;
+    font-size: 14pt;
+}
+
+.title-icon {
+    padding-right: 10rpx;
+    color: #004f1f;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.card-bd {
+    padding: 100rpx;
+    text-align: center;
+    color: #999;
+}
+
+.name {
+    flex: 1 1 auto;
+}
+
+.fixed {
+    flex: 0 0 auto;
+}
+
+.float {
+    flex: 1 1 auto;
+}
+
+.scroll {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+}
+
+.iconfont {
+    font-size: 42rpx;
+}

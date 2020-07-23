@@ -1,0 +1,48 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <scroll-view class="scroll-view" enableBackToTop="true" enableFlex="true" scrollY="true">
+        <view class="card">
+            <view class="card-hd">
+                <view style="flex-grow:2">我绑定的单位</view>
+                <button plain bindtap="click_bind_new" class="btn-mini" hoverClass="button-hover" size="mini" type="primary">绑定新单位</button>
+            </view>
+            <mp-cells extClass="binded-cells">
+                <mp-cell bindtap="click_busi" class="busis" data-idx="{{index}}" wx:for="{{list}}" wx:key="index">
+                    <view class="title-icon" slot="icon">
+                        <icon color="{{item.id==bid?'':'#ccc'}}" size="24" type="{{item.busi_block==1||item.bind_block==1?'warn':item.pass==1?'success':'waiting'}}"></icon>
+                    </view>
+                    <view>{{item.name}}</view>
+                    <view catchtap="click_unbind" class="title-icon" data-idx="{{index}}" slot="footer">
+                        <icon color="#e64340" size="24" type="cancel"></icon>
+                    </view>
+                </mp-cell>
+            </mp-cells>
+        </view>
+        <view class="card" wx:if="{{bid>0}}">
+            <view class="card-hd">
+                <block wx:if="{{power=='1'}}">编辑<icon size="24" style="padding:0 10rpx;" type="success"></icon>选中</block>单位信息
+    </view>
+            <mp-cells extClass="edit-cells">
+                <mp-cell extClass="" title="单位全称">
+                    <input adjustPosition="true" bindinput="input_typing" class="weui-input" cursorSpacing="400" value="{{name}}" placeholder="请输入单位全称" type="text"></input>
+                </mp-cell>
+                <mp-cell extClass="" title="联系人">
+                    <input adjustPosition="true" bindinput="input_typing" class="weui-input" cursorSpacing="400" value="{{contact}}" placeholder="请输入姓名" type="text"></input>
+                </mp-cell>
+                <mp-cell extClass="" title="手机号">
+                    <input adjustPosition="true" bindinput="input_phone" class="weui-input" cursorSpacing="400" placeholder="请输入手机号" type="number" value="{{phone}}"></input>
+                </mp-cell>
+                <mp-cell extClass="" title="单位地址">
+                    <input class="weui-input" disabled="true" value="{{address}}" placeholder="请获取地理位置"></input>
+                </mp-cell>
+                <mp-cell extClass="two-btn-bar" wx:if="{{power=='1'}}">
+                    <button plain bindtap="map_choose" class="btn-mini" disabled="{{btn_choose_on_map}}" hoverClass="button-hover" size="mini" type="primary">地图选点</button>
+                    <button plain bindtap="get_location" class="btn-mini" disabled="{{btn_getaddress}}" hoverClass="button-hover" size="mini" type="primary">我的位置(刚好在单位)</button>
+                </mp-cell>
+                <mp-cell extClass="one-btn-bar" wx:if="{{power=='1'}}">
+                    <button bindtap="click_edit_done" class="btn" disabled="{{btn_done}}" hoverClass="button-hover" loading="{{loading}}" type="primary">保存修改</button>
+                </mp-cell>
+            </mp-cells>
+        </view>
+    </scroll-view>
+</view>
+<mp-halfScreenDialog bindbuttontap="click_half_dialog" buttons="{{half_dialog_buttons}}" desc="{{unbind_busi_name}}" maskClosable="{{true}}" show="{{half_dialog_show}}" subTitle="您正在进行解绑单位操作" tips="解绑后，您不能再处理该单位事务。" title="解绑单位确认"></mp-halfScreenDialog>

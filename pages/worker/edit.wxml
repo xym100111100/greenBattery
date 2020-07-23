@@ -1,0 +1,52 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="hd-pad">tips：赋予管理员、停用等操作即刻生效；若员工离职可解除绑定。</view>
+    <mp-cells extClass="my-cells">
+        <mp-cell>
+            <view slot="title">手机</view>
+            <view class="number">{{phone}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view slot="title">姓名</view>
+            <view class="name">{{nick}}</view>
+        </mp-cell>
+        <mp-cell>
+            <view slot="title">角色</view>
+            <radio-group bindchange="click_power" class="checkbox" wx:if="{{role==2||role==3}}">
+                <radio checked="{{power=='1'}}" value="{{1}}">
+                    <text>管理员</text>
+                </radio>
+                <radio checked="{{power=='2'}}" value="{{2}}">
+                    <text>收集员</text>
+                </radio>
+                <radio checked="{{power=='3'}}" value="{{3}}">
+                    <text>库管员</text>
+                </radio>
+            </radio-group>
+            <checkbox-group bindchange="click_power" class="checkbox" wx:else>
+                <label class="checkbox">
+                    <checkbox checked="{{power=='1'}}" value="{{1}}"></checkbox>管理员
+				</label>
+            </checkbox-group>
+        </mp-cell>
+        <mp-cell>
+            <view slot="title">停用</view>
+            <checkbox-group bindchange="click_block" class="checkbox">
+                <checkbox checked="{{bind_block==1}}" value="{{1}}"></checkbox>停用后将无法处理事务
+			</checkbox-group>
+        </mp-cell>
+        <mp-cell wx:if="{{pass==0}}">
+            <view slot="title">绑定</view>
+            <view>
+                <button plain bindtap="click_bind" class="btn_mini" data-pass="1" hoverClass="button-hover" size="mini" type="primary">通过申请</button>
+                <button plain bindtap="click_bind" class="btn_mini" data-pass="0" hoverClass="button-hover" size="mini" type="warn">拒绝申请</button>
+            </view>
+        </mp-cell>
+        <mp-cell wx:else>
+            <view slot="title">绑定</view>
+            <view>
+                <button plain bindtap="click_unbind" class="btn_mini" hoverClass="button-hover" size="mini" type="warn">解除绑定</button>
+            </view>
+        </mp-cell>
+    </mp-cells>
+    <view class="copy-right">{{copyright}}</view>
+</view>

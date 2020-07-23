@@ -1,0 +1,57 @@
+<view class="page">
+    <view class="hd-pad">请选择用户类型</view>
+    <view class="bd-pad">
+        <view bindtap="click_type" class="type {{type==2?'active':''}}" data-type="2">
+            <icon color="{{type==2?'#09bb07':'#ccc'}}" size="30" type="success"></icon>
+            <view class="content">
+                <view class="intro">
+                    <text class="type-name">个人用户</text>
+                    <text class="type-tips">随手抓拍生态环境违法行为，协助政府监管治理。若提供的证据促成立案查处，将获得政府奖励。</text>
+                </view>
+            </view>
+        </view>
+        <view bindtap="click_type" class="type {{type==1?'active':''}}" data-type="1">
+            <icon color="{{type==1?'#09bb07':'#ccc'}}" size="30" type="success"></icon>
+            <view class="content">
+                <view class="intro">
+                    <text class="type-name">单位用户</text>
+                    <text class="type-tips">涉危险废物产生、收集、转运、处置的企业、个体 和 政府职能机构，包括：</text>
+                </view>
+                <view class="padding"></view>
+                <view class="list">
+                    <text class="name">产废单位</text>
+                    <text class="tips">产生危险废物，需要委托他人处理</text>
+                </view>
+                <view class="list">
+                    <text class="name">收集点</text>
+                    <text class="tips">收集危废，移交转运中心或处置单位</text>
+                </view>
+                <view class="list">
+                    <text class="name">转运中心</text>
+                    <text class="tips">接收危险废物，并移交处置单位</text>
+                </view>
+                <view class="list">
+                    <text class="name">生态环境局</text>
+                    <text class="tips">固体废物与辐射管理科</text>
+                </view>
+                <view class="list">
+                    <text class="name">生态环境执法队</text>
+                    <text class="tips">市环境监察执法支队</text>
+                </view>
+                <view class="list">
+                    <text class="name">网格员</text>
+                    <text class="tips">网格化管理工作人员</text>
+                </view>
+                <view class="list">
+                    <text class="name">政法委</text>
+                    <text class="tips">市政法委员会</text>
+                </view>
+                <view class="list">
+                    <text class="name">公安局派出所</text>
+                    <text class="tips">生态环境违法侦破打击</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <button bindtap="click_done" class="btn" disabled="{{btn_deny}}" hoverClass="button-hover" loading="{{loading}}" type="primary">确定选择</button>
+</view>

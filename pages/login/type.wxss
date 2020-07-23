@@ -1,0 +1,67 @@
+scroll-view {
+    height: 100%;
+}
+
+.type {
+    border: solid 1rpx #ccc;
+    border-radius: 10rpx;
+    padding: 30rpx;
+    margin-top: 30rpx;
+    display: flex;
+    align-items: flex-start;
+}
+
+.active {
+    border-color: #09bb07;
+}
+
+.type .content {
+    padding-left: 30rpx;
+}
+
+.intro {
+    vertical-align: baseline;
+}
+
+.type .type-name {
+    flex: 0 0 auto;
+    font-size: 32rpx;
+    color: #666;
+    font-weight: bold;
+}
+
+.type .type-tips {
+    flex: 1 1 auto;
+    padding-left: 10rpx;
+    font-size: 28rpx;
+    color: #aaa;
+}
+
+.padding {
+    padding: 10rpx 0;
+}
+
+.list {
+    display: flex;
+    align-items: baseline;
+    padding-top: 10rpx;
+}
+
+.list .name {
+    flex: 0 0 auto;
+    font-size: 11pt;
+    color: rgb(39,83,25);
+}
+
+.list .tips {
+    flex-grow: 1;
+    font-size: 10pt;
+    color: #aaa;
+    text-align: right;
+}
+
+.btn {
+    flex: 0 0 auto;
+    margin: 30rpx auto;
+    width: 95%!important;
+}

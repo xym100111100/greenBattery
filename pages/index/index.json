@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "mp-cell": "/weui/cell/cell",
+        "mp-cells": "/weui/cells/cells",
+        "mp-icon": "/weui/icon/icon",
+        "mp-badge": "/weui/badge/badge"
+    },
+    "enablePullDownRefresh": true
+}

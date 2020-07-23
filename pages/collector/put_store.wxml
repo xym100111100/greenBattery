@@ -1,0 +1,39 @@
+<view class="page">
+    <view class="hd-pad">
+        <view>tips：选择收集记录，提交入库申请，库管人员审核。</view>
+        <view>tips：不同类型危废不能在同一批次入库。</view>
+    </view>
+    <block wx:if="{{list.length>0}}">
+        <mp-cells class="cells" extClass="ext-cells">
+            <mp-cell bindtap="click_row" data-idx="{{index}}" wx:for="{{list}}" wx:key="index">
+                <checkbox checked="{{item.checked}}" slot="title" value="{{index}}"></checkbox>
+                <view>
+                    <view class="trash-name">{{item.trash}}</view>
+                    <view class="maker-name">{{item.name}}</view>
+                </view>
+                <view slot="footer">
+                    <view>
+                        <text class="number">{{item.weight/1000}}</text>
+                        <text class="unit">千克</text>
+                    </view>
+                    <view class="move-up" wx:if="{{item.tid==1}}">
+                        <text class="type">{{item.type==1?'Ⅰ':'Ⅱ'}}类</text>
+                        <text class="number">{{item.amount}}</text>
+                        <text class="unit">只</text>
+                    </view>
+                </view>
+            </mp-cell>
+        </mp-cells>
+        <view class="btn-bar">
+            <button plain bindtap="click_all" class="btn" hoverClass="button-hover" type="primary">
+                <text class="iconfont icon-quanxuan"></text>
+                <text>全选</text>
+            </button>
+            <button bindtap="click_done" class="btn" hoverClass="button-hover" loading="{{loading}}" type="primary">
+                <text class="iconfont icon-tijiao"></text>
+                <text>提交入库申请</text>
+            </button>
+        </view>
+    </block>
+    <view class="empty-bd" wx:else>暂时没有数据</view>
+</view>

@@ -1,0 +1,79 @@
+@import "../../__wuBaseWxss__/0.wxss";
+
+.iconfont {
+    font-size: 38rpx;
+    margin-right: 10rpx;
+    font-weight: normal;
+}
+
+.weui-cell__hd {
+    padding-right: 20rpx;
+}
+
+.weui-cell__ft {
+    padding-left: 10rpx;
+}
+
+.cells {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+}
+
+.trash-name {
+    font-size: 11pt;
+    color: #666;
+}
+
+.maker-name {
+    font-size: 10pt;
+    color: #aaa;
+}
+
+.number {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12pt;
+    font-weight: bold;
+    color: rgb(124,32,32);
+}
+
+.type {
+    font-size: 11pt;
+    color: #999;
+    padding-right: 6rpx;
+}
+
+.unit {
+    font-size: 10pt;
+    color: #aaa;
+    display: inline-block;
+    padding-left: 6rpx;
+}
+
+.move-up {
+    margin-top: -14rpx;
+}
+
+.btn-bar {
+    flex: 0 0 auto;
+    padding: 20rpx;
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    padding: 16rpx 24rpx;
+    white-space: nowrap;
+}
+
+.btn+.btn {
+    margin-left: 30rpx;
+    padding: 18rpx 24rpx;
+}
+
+.icon {
+    margin-right: 20rpx;
+}

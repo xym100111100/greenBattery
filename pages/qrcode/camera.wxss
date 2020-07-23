@@ -1,0 +1,36 @@
+.camera {
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.btn-bar {
+    position: absolute;
+    z-index: 2;
+    left: 50rpx;
+    right: 50rpx;
+    bottom: 50rpx;
+    height: 120rpx;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    width: 80rpx;
+    height: auto;
+}
+
+.btn-box {
+    text-align: center;
+    color: #fff;
+    padding: 20rpx 40rpx;
+}
+
+.btn-box+.btn-box {
+    margin-left: 160rpx;
+}

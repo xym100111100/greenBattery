@@ -1,0 +1,16 @@
+<view class="weui-slideview weui-movable-view {{icon?'weui-slideview_icon':''}} {{extClass}}" style="width: 100%;height: 100%;">
+    <view bindtouchend="{{handler.touchend}}" bindtouchmove="{{handler.touchmove}}" bindtouchstart="{{handler.touchstart}}" bindtransitionend="{{handler.transitionEnd}}" change:disable="{{handler.disableChange}}" change:duration="{{handler.durationChange}}" change:prop="{{handler.sizeReady}}" change:rebounce="{{handler.rebounceChange}}" change:show="{{handler.showChange}}" class="weui-slideview__left left" disable="{{disable}}" duration="{{duration}}" prop="{{size}}" rebounce="{{rebounce}}" show="{{show}}" style="width:100%;">
+        <slot></slot>
+    </view>
+    <view class="weui-slideview__right right">
+        <view class="weui-slideview__buttons" style="height:100%;width:100%;" wx:if="{{buttons&&buttons.length}}">
+            <view class="btn weui-slideview__btn__wrp {{item.className}} {{item.extClass}}" wx:for="{{buttons}}" wx:key="index">
+                <view bindtap="{{handler.hideButton}}" class="weui-slideview__btn" data-data="{{item.data}}" data-index="{{index}}">
+                    <text wx:if="{{!icon}}">{{item.text}}</text>
+                    <image class="weui-slideview__btn__icon" src="{{item.src}}" wx:else></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<wxs module="handler" src="slideview.wxs" />
