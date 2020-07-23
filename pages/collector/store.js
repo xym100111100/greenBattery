@@ -4,20 +4,29 @@ Page({
     data: {
         loading: !1,
         activeTab: 0,
-        list: [],
-        date1: "",
-        date2: "",
-        today: "",
+        list: [{
+            nick:"杰克",
+            phone:'18707895796',
+            trash_name:'小明',
+            s_weight:2222,
+            s_amount:434,
+            time:'1996-02-12',
+            s_weight:222,
+        }],
+        date1: "2001-03-17",
+        date2: "2019-03-17",
+        today: "2020-07-23",
         list1: []
     },
     onLoad: function() {
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 入库申请"
-        }), this.load_data(), this.setData({
-            date1: this.first_day(),
-            date2: this.today(),
-            today: this.today()
-        });
+        })
+        //  this.load_data(), this.setData({
+        //     date1: this.first_day(),
+        //     date2: this.today(),
+        //     today: this.today()
+        // });
     },
     click_tab: function(a) {
         var e = a.currentTarget.dataset.idx;

@@ -3,19 +3,29 @@ var e = getApp();
 Page({
     data: {
         copyright: e.globalData.app_copy_right,
-        trash: []
+        trash: [{
+            checked:true,
+            w_keep:2244,
+            id:1,
+            a_keep:11,
+            w_increase:3432,
+            a_increase:'11',
+            w_reduce:1233,
+            a_reduce:4322
+        }]
     },
     onLoad: function(a) {
         var t = this;
         wx.setNavigationBarTitle({
             title: e.globalData.app_name + " - 库存"
-        }), this.getOpenerEventChannel().on("receive", function(e) {
-            for (var a = e.trash, n = 0; n < a.length; n++) a[n].w_increase = 0, a[n].w_reduce = 0, 
-            a[n].w_keep = 0, a[n].a_increase = 0, a[n].a_reduce = 0, a[n].a_keep = 0;
-            t.setData({
-                trash: a
-            }), t.init();
-        });
+        })
+        //  this.getOpenerEventChannel().on("receive", function(e) {
+        //     for (var a = e.trash, n = 0; n < a.length; n++) a[n].w_increase = 0, a[n].w_reduce = 0, 
+        //     a[n].w_keep = 0, a[n].a_increase = 0, a[n].a_reduce = 0, a[n].a_keep = 0;
+        //     t.setData({
+        //         trash: a
+        //     }), t.init();
+        // });
     },
     onShow: function() {},
     onPullDownRefresh: function() {},

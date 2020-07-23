@@ -1,9 +1,9 @@
 App({
     globalData: {
-        app_name: "小程序",
-        app_copy_right: "内江市生态环境局监制",
-        api_root: "https://mp.lsws.art",
-        api_path: "/api/front/",
+        app_name: "美丽金小程序",
+        app_copy_right: "美丽金小程序",
+        api_root: "http://10.13.1.5:9021",
+        api_path: "",
         api_online: !1,
         openid: "",
         me: {},
@@ -71,7 +71,7 @@ App({
             method: "POST",
             url: this.globalData.api_root + this.globalData.api_path + t,
             data: a,
-            header: this.api_sign(),
+            header:{...this.api_sign(),'X-Auth-Token':'16a1fd6b-3efe-490c-9787-329707fb3223'} ,
             complete: function() {
                 i && i();
             },

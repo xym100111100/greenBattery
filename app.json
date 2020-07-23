@@ -1,11 +1,10 @@
 {
   "pages": [
- 
+    "pages/login/login",
     "pages/index/index",
     "pages/login/main",
     "pages/index/report",
     "pages/index/me",
-    "pages/login/login",
     "pages/login/type",
     "pages/busi/bind",
     "pages/busi/edit",
@@ -37,5 +36,6 @@
     "navigationBarBackgroundColor": "#23bd70",
     "navigationBarTextStyle": "white"
   },
+  "debug": false,
   "sitemapLocation": "sitemap.json"
 }

@@ -7,17 +7,25 @@ Page({
         date1: "",
         date2: "",
         today: "",
-        list: [],
+        list: [{
+            nick:"杰克",
+            phone:'18707895796',
+            trash_name:'小明',
+            weight:2222,
+            amount:434,
+            time:'1996-02-12'
+        }],
         list1: []
     },
     onLoad: function() {
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 入库记录"
-        }), this.load_data(), this.setData({
-            date1: this.first_day(),
-            date2: this.today(),
-            today: this.today()
-        });
+        })
+        // this.load_data(), this.setData({
+        //     date1: this.first_day(),
+        //     date2: this.today(),
+        //     today: this.today()
+        // });
     },
     click_tab: function(t) {
         this.setData({

@@ -3,22 +3,31 @@ var e = getApp();
 Page({
     data: {
         copyright: e.globalData.app_copy_right,
-        trash: []
+        trash: [{
+            name:'杰克',
+            w_keep:2000,
+            item:2,
+            w_increase:22,
+            id:1,
+            w_reduce:111111,
+            checked:true,
+        }]
     },
     onLoad: function(a) {
-        var t = this;
+        // var t = this;
         wx.setNavigationBarTitle({
-            title: e.globalData.app_name + " - 台账"
-        }), this.getOpenerEventChannel().on("receive", function(a) {
-            for (var n = a.trash, i = !1, r = 0; r < n.length; r++) n[r].checked && (i = !0), 
-            n[r].w_increase = 0, n[r].w_reduce = 0, n[r].w_keep = 0, n[r].a_increase = 0, n[r].a_reduce = 0, 
-            n[r].a_keep = 0;
-            i ? (t.setData({
-                trash: n
-            }), t.init()) : e.alert("提示", "请先配置危废类型。", function() {
-                wx.navigateBack();
-            });
-        });
+            title:  " 美丽金 - 台账"
+        })
+        // this.getOpenerEventChannel().on("receive", function(a) {
+        //     for (var n = a.trash, i = !1, r = 0; r < n.length; r++) n[r].checked && (i = !0), 
+        //     n[r].w_increase = 0, n[r].w_reduce = 0, n[r].w_keep = 0, n[r].a_increase = 0, n[r].a_reduce = 0, 
+        //     n[r].a_keep = 0;
+        //     i ? (t.setData({
+        //         trash: n
+        //     }), t.init()) : e.alert("提示", "请先配置危废类型。", function() {
+        //         wx.navigateBack();
+        //     });
+        // });
     },
     onShow: function() {},
     onPullDownRefresh: function() {},

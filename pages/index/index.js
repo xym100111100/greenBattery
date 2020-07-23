@@ -8,11 +8,11 @@ Page({
         icon_color: "#004f1f",
         nick: "",
         busi_name: "获取数据中...",
-        busi_pass: 0,
+        busi_pass: 1,
         busi_block: 0,
-        busi_role: 0,
+        busi_role: 1,
         power: "",
-        trash: [],
+        trash: [], 
         trash_badge: !1,
         worker_request: 0
     },
@@ -40,9 +40,9 @@ Page({
         }) : void (!e.globalData.me.bid || e.globalData.me.bid < 1 ? wx.reLaunch({
             url: "/pages/busi/bind"
         }) : this.my_busi());
-        wx.reLaunch({
-            url: "/pages/login/login"
-        });
+        // wx.reLaunch({
+        //     url: "/pages/login/login"
+        // });
     },
     my_busi: function() {
         var t = this;
@@ -56,7 +56,7 @@ Page({
                 nick: e.globalData.me.nick,
                 busi_name: a.data.name,
                 busi_block: a.data.block,
-                busi_role: a.data.role,
+                busi_role: 1,
                 busi_pass: a.data.pass,
                 power: a.data.power,
                 trash: a.data.trash,

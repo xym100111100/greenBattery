@@ -35,9 +35,9 @@ Page({
     onReachBottom: function() {},
     onShareAppMessage: function() {},
     init: function() {
-        a.globalData.me && a.globalData.me.token ? (this.load_data(), this.get_location()) : wx.reLaunch({
-            url: "/pages/login/login"
-        });
+        // a.globalData.me && a.globalData.me.token ? (this.load_data(), this.get_location()) : wx.reLaunch({
+        //     url: "/pages/login/login"
+        // });
     },
     reset_camera_box: function() {
         this.setData({

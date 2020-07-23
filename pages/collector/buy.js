@@ -5,7 +5,11 @@ Page({
         copyright: t.globalData.app_copy_right,
         loading: !1,
         btn_done: !1,
-        trash: [],
+        trash: [{
+            checked:true,
+            id:1,
+            name:'玻尿酸'
+        }],
         tid: 0,
         weight: "",
         type: 1,
@@ -15,16 +19,17 @@ Page({
         var e = this;
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 危废收集"
-        }), this.getOpenerEventChannel().on("receive", function(a) {
-            for (var i = 0, n = 0; n < a.trash.length; n++) a.trash[n].checked && i++;
-            if (0 != i) {
-                if (1 == i) for (var s = 0; s < a.trash.length; s++) a.trash[s].checked && (a.trash[s].check = !0, 
-                a.tid = a.trash[s].id);
-                e.setData(a);
-            } else t.alert("提醒", "请先配置经营危废种类", function() {
-                wx.navigateBack();
-            });
-        });
+        })
+        //  this.getOpenerEventChannel().on("receive", function(a) {
+        //     for (var i = 0, n = 0; n < a.trash.length; n++) a.trash[n].checked && i++;
+        //     if (0 != i) {
+        //         if (1 == i) for (var s = 0; s < a.trash.length; s++) a.trash[s].checked && (a.trash[s].check = !0, 
+        //         a.tid = a.trash[s].id);
+        //         e.setData(a);
+        //     } else t.alert("提醒", "请先配置经营危废种类", function() {
+        //         wx.navigateBack();
+        //     });
+        // });
     },
     onShow: function() {},
     click_trash: function(t) {

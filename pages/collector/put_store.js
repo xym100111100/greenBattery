@@ -3,7 +3,15 @@ var t = getApp();
 Page({
     data: {
         loading: !1,
-        list: [],
+        list: [{
+            trash:"小明",
+            name:'杰克',
+            type:1,
+            amount:22,
+            weight:200,
+            checked:true,
+            amount:2
+        }],
         checked_count: 0,
         idxs: []
     },
@@ -13,7 +21,7 @@ Page({
         });
     },
     onShow: function() {
-        this.init();
+        // this.init();
     },
     onReachBottom: function() {},
     init: function() {

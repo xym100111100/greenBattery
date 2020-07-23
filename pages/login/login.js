@@ -1,4 +1,6 @@
-var t = getApp();
+var API = require('../../utils/api.js')
+
+var app = getApp();
 
 Page({
     data: {
@@ -18,27 +20,27 @@ Page({
         code: ""
     },
     onLoad: function(e) {
-        wx.setNavigationBarTitle({
-            title: t.globalData.app_name + " - 登录"
-        }), this.setData({
-            copyright: t.globalData.app_copy_right
-        }), t.globalData.me.role && (t.globalData.me.role > 0 ? wx.redirectTo({
-            url: "/pages/index"
-        }) : wx.redirectTo({
-            url: "/pages/login/role"
-        })), wx.login({
-            success: function(e) {
-                e.code ? t.post("wx_api", {
-                    act: "code_to_openid",
-                    code: e.code
-                }, function(e) {
-                    t.globalData.openid = e.data.openid;
-                }) : (t.alert("错误", "微信登录失败：" + e.errMsg), console.log("wx.login -> ", e));
-            },
-            fail: function(e) {
-                t.alert("错误", "微信登录失败。"), console.log("wx.login -> ", e);
-            }
-        });
+        // wx.setNavigationBarTitle({
+        //     title: t.globalData.app_name + " - 登录"
+        // }), this.setData({
+        //     copyright: t.globalData.app_copy_right
+        // }), t.globalData.me.role && (t.globalData.me.role > 0 ? wx.redirectTo({
+        //     url: "/pages/index"
+        // }) : wx.redirectTo({
+        //     url: "/pages/login/role"
+        // })), wx.login({
+        //     success: function(e) {
+        //         e.code ? t.post("wx_api", {
+        //             act: "code_to_openid",
+        //             code: e.code
+        //         }, function(e) {
+        //             t.globalData.openid = e.data.openid;
+        //         }) : (t.alert("错误", "微信登录失败：" + e.errMsg), console.log("wx.login -> ", e));
+        //     },
+        //     fail: function(e) {
+        //         t.alert("错误", "微信登录失败。"), console.log("wx.login -> ", e);
+        //     }
+        // });
     },
     onReady: function() {},
     onShow: function() {},
@@ -115,41 +117,63 @@ Page({
         });
     },
     click_login: function() {
-        var e = this;
-        this.data.btn_login_deny || (11 == this.data.phone.length && !isNaN(this.data.phone) && this.data.phone.startsWith("1") ? 6 != this.data.code.length || isNaN(this.data.code) ? t.alert("验证码错误", "请输入正确的验证码。") : (this.setData({
-            login_loading: !0,
-            btn_login_deny: !0
-        }), wx.showLoading({
-            title: "登录中",
-            mask: !0
-        }), t.post("login", {
-            phone: this.data.phone,
-            code: this.data.code
-        }, function(t) {
-            e.login_ok(t);
-        }, function() {
-            wx.hideLoading(), e.setData({
-                btn_login_deny: !1,
-                login_loading: !1
-            });
-        })) : t.alert("手机号错误", "请输入正确的手机号，11位数字。"));
+        if(11 === this.data.phone.length && !isNaN(this.data.phone)){
+            wx.showLoading({
+                title: "登录中",
+            })
+            API.request('/login/sign',{phone:this.data.phone,code:this.data.code},'get',(res)=>{
+                wx.hideLoading()
+                console.log(res)
+            })
+        }else{
+            app.alert("手机号错误", "请输入正确的手机号，11位数字。")
+        }
+        
+      
+     
+        // this.data.btn_login_deny || (11 == this.data.phone.length && !isNaN(this.data.phone) && this.data.phone.startsWith("1") ? 6 != this.data.code.length || isNaN(this.data.code) ? t.alert("验证码错误", "请输入正确的验证码。") : (this.setData({
+        //     login_loading: !0,
+        //     btn_login_deny: !0
+        // }),
+        //  wx.showLoading({
+        //     title: "登录中",
+        //     mask: !0
+        // })
+       //  t.post("login", {
+        //     phone: this.data.phone,
+        //     code: this.data.code
+        // }, function(t) {
+        //     e.login_ok(t);
+        // }, function() {
+        //     wx.hideLoading(), e.setData({
+        //         btn_login_deny: !1,
+        //         login_loading: !1
+        //     });
+        // })) : t.alert("手机号错误", "请输入正确的手机号，11位数字。"));
+
+
+        // e.login_ok();
     },
     login_ok: function(e) {
-        var n = {
-            id: e.data.id,
-            phone: e.data.phone,
-            nick: e.data.nick,
-            token: e.data.token,
-            type: e.data.type
-        };
-        1 == n.type && (n.bid = e.data.bid, n.power = e.data.power), t.setMe(n), 0 == n.type ? wx.redirectTo({
-            url: "/pages/login/type"
-        }) : 1 == n.type ? n.bid < 1 ? wx.redirectTo({
-            url: "/pages/busi/bind"
-        }) : wx.redirectTo({
+        // var n = {
+        //     id: e.data.id,
+        //     phone: e.data.phone,
+        //     nick: e.data.nick,
+        //     token: e.data.token,
+        //     type: e.data.type
+        // };
+        // 1 == n.type && (n.bid = e.data.bid, n.power = e.data.power), t.setMe(n), 0 == n.type ? wx.redirectTo({
+        //     url: "/pages/login/type"
+        // }) : 1 == n.type ? n.bid < 1 ? wx.redirectTo({
+        //     url: "/pages/busi/bind"
+        // }) : wx.redirectTo({
+        //     url: "/pages/index/index"
+        // }) : wx.redirectTo({
+        //     url: "/pages/index/report"
+        // });
+
+        wx.redirectTo({
             url: "/pages/index/index"
-        }) : wx.redirectTo({
-            url: "/pages/index/report"
-        });
+        })
     }
 });

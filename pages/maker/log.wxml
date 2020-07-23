@@ -8,7 +8,7 @@
         <picker bindchange="dateChange" data-idx="2" end="{{today}}" mode="date" value="{{date2}}">
             <view class="date">{{date2}}</view>
         </picker>
-        <button catchtap="click_query" class="btn-log" hoverClass="button-hover" size="mini" type="primary">
+        <button catchtap="click_query" data-index="{{tempList}}" class="btn-log" hoverClass="button-hover" size="mini" type="primary">
             <icon color="#fff" size="16" type="search"></icon>查询</button>
     </view>
     <scroll-view bindscrolltolower="touch_bottom" bindscrolltoupper="touch_top" enableBackToTop="true" enableFlex="{{true}}" scrollY="true">

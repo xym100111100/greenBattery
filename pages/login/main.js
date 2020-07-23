@@ -36,8 +36,8 @@ Page({
         });
     },
     login: function() {
-        this.data.loadidng || wx.reLaunch({
-            url: "/pages/login/login"
-        });
+        // this.data.loadidng || wx.reLaunch({
+        //     url: "/pages/login/login"
+        // });
     }
 });
