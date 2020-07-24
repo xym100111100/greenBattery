@@ -88,7 +88,13 @@ module.exports = function(e) {
                 }
             },
             data: {
-                result: [],
+                result: [{
+                    text:'尔莫科技',
+                    value:0
+                },{
+                    text:'金钱天下',
+                    value:1
+                }],
                 checked_id: 0,
                 error: 0,
                 errmsg: ""

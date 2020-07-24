@@ -8,29 +8,29 @@
                 </view>
                 <view>{{busi_name}}</view>
             </mp-cell>
-            <block wx:if="{{power=='1'}}">
+            <block >
                 <mp-cell bindtap="click_worker" hover="true" link="true">
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="group-detail" size="22"></mp-icon>
                     </view>
                     <view class="name">人员管理</view>
-                    <mp-badge content="{{worker_request}}" wx:if="{{worker_request>0}}"></mp-badge>
+                    <mp-badge content="{{worker_request}}"></mp-badge>
                 </mp-cell>
-                <mp-cell bindtap="click_trash" hover="true" link="true" wx:if="{{busi_role==1}}">
+                <mp-cell bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">产废种类选择</view>
                     <mp-badge wx:if="{{trash_badge}}"></mp-badge>
                 </mp-cell>
-                <mp-cell bindtap="click_trash" hover="true" link="true" wx:elif="{{busi_role==2}}">
+                <mp-cell bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">收集危废种类选择</view>
                     <mp-badge wx:if="{{trash_badge}}"></mp-badge>
                 </mp-cell>
-                <mp-cell bindtap="click_trash" hover="true" link="true" wx:elif="{{busi_role==3}}">
+                <mp-cell bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
@@ -98,7 +98,7 @@
                     </view>
                     <view>库管：接收外勤入库</view>
                 </mp-cell>
-                <mp-cell bindtap="click_accept_collector" hover="true" link="true" wx:if="{{busi_role==3}}">
+                <mp-cell bindtap="click_accept_collector" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <text class="title-icon iconfont icon-deliver"></text>
                     </view>

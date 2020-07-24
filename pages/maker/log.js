@@ -7,10 +7,16 @@ Page({
         ec: null,
         tid: 0,
         name: "",
-        date1: "",
-        date2: "",
+        date1: "2020-01-05",
+        date2: "2020-01-23",
         today: "",
-        list: [],
+        list: [{
+            action_txt:'标题',
+            weight:22222,
+            type:'I',
+            amount:11,
+            date:'20202-02-13'
+        }],
         tempList:[{
             name:'小明同学'
         }],
@@ -24,7 +30,9 @@ Page({
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 历史记录"
         });
-        // var i = this.getOpenerEventChannel();
+  
+         var i = this.getOpenerEventChannel();
+         console.log(i)
         // i.on("receive", function(t) {
         //     t.ec = i, t.date1 = e.first_day(), t.date2 = e.today(), t.today = e.today(), e.setData(t), 
         //     e.load_data(!0);

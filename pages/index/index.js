@@ -7,7 +7,7 @@ Page({
         wx_msg: !1,
         icon_color: "#004f1f",
         nick: "",
-        busi_name: "获取数据中...",
+        busi_name: "尔莫科技",
         busi_pass: 1,
         busi_block: 0,
         busi_role: 1,

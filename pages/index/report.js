@@ -23,7 +23,14 @@ Page({
         address: "",
         report_photo: [],
         report_text: "",
-        list: []
+        list: [{
+            state:'已经处理',
+            inputtime:'20202-10-23',
+            imgs:[
+                "https://dss1.bdstatic.com/6OF1bjeh1BF3odCf/it/u=3806909753,3935034670&fm=74&app=80&f=JPEG&size=f121,90?sec=1880279984&t=2c58d140daa403362c1c65f731f1a83f",
+                "https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=588273209,372492901&fm=26&gp=0.jpg"
+            ]
+        }]
     },
     onLoad: function(t) {
         wx.setNavigationBarTitle({

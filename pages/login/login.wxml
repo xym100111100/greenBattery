@@ -8,18 +8,18 @@
         <view class="row">
             <mp-icon color="green" icon="cellphone" size="24"></mp-icon>
             <view class="input">
-                <input adjustPosition="{{true}}" bindinput="input_phone" cursorSpacing="100" maxlength="11" placeholder="手机号" placeholderClass="input-holder" type="number"></input>
+                <input adjustPosition="{{true}}"  value="{{phone}}"  cursorSpacing="100" maxlength="11" placeholder="手机号" placeholderClass="input-holder" type="number"></input>
             </view>
         </view>
         <view class="row">
             <mp-icon color="green" icon="comment" size="24"></mp-icon>
             <view class="input">
-                <input adjustPosition="{{true}}" bindinput="input_code" cursorSpacing="100"  maxlength="11" placeholder="验证码" placeholderClass="input-holder" type="number"></input>
+                <input adjustPosition="{{true}}" value="{{code}}"  cursorSpacing="100"  maxlength="6" placeholder="验证码" placeholderClass="input-holder" type="number"></input>
             </view>
             <button bindtap="get_code" class="btn-code" disabled="{{btn_code_deny}}" hoverClass="button-hover" loading="{{code_loading}}" plain="plain" size="mini" type="primary">{{btn_code_text}}</button>
         </view>
         <view class="row">
-            <button bindtap="click_login" class="btn-login" disabled="{{btn_login_deny}}" hoverClass="button-hover" loading="{{login_loading}}" type="primary">登录</button>
+            <button bindtap="click_login" class="btn-login"  hoverClass="button-hover" loading="{{login_loading}}" type="primary">登录</button>
         </view>
     </view>
     <view class="copy-right">{{copyright}}</view>

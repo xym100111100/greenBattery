@@ -4,9 +4,18 @@ Page({
     data: {
         loading: !1,
         activeTab: 0,
-        list: [],
-        date1: "",
-        date2: "",
+        list: [
+            {
+                trash_name:'核废料',
+                s_weight:100,
+                s_amount:1333,
+                s_time:'1992-02-18',
+                name:"管理员",
+                nick:'杰克'
+            }
+        ],
+        date1: "2019-02-20",
+        date2: "2019-02-16",
         today: "",
         list1: [],
         box_show: !1,
@@ -18,11 +27,12 @@ Page({
     onLoad: function() {
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 入库申请"
-        }), this.setData({
-            date1: this.first_day(),
-            date2: this.today(),
-            today: this.today()
-        }), this.load_data();
+        })
+        //  this.setData({
+        //     date1: this.first_day(),
+        //     date2: this.today(),
+        //     today: this.today()
+        // }), this.load_data();
     },
     click_tab: function(a) {
         var i = a.currentTarget.dataset.idx;

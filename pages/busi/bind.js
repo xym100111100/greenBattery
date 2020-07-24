@@ -58,12 +58,25 @@ Page({
         town: ""
     },
     onLoad: function() {
-        this.setData({
-            search: this.search.bind(this),
-            phone: e.globalData.me.phone,
-            contact: e.globalData.me.nick ? e.globalData.me.nick : "",
-            eventChannel: this.getOpenerEventChannel()
-        }), wx.setNavigationBarTitle({
+
+                this.setData({
+                    search: [{
+                        text:  "尔莫科技",
+                        value:'222'
+                    }],
+                    phone: e.globalData.me.phone,
+                    contact: e.globalData.me.nick ? e.globalData.me.nick : "",
+                    eventChannel: this.getOpenerEventChannel()
+                })
+
+
+        // this.setData({
+        //     search: this.search.bind(this),
+        //     phone: e.globalData.me.phone,
+        //     contact: e.globalData.me.nick ? e.globalData.me.nick : "",
+        //     eventChannel: this.getOpenerEventChannel()
+        // })
+         wx.setNavigationBarTitle({
             title: e.globalData.app_name + " - 绑定单位"
         });
     },

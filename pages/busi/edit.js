@@ -7,7 +7,13 @@ var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
 Page({
     data: {
         eventChannel: null,
-        list: [],
+        list: [{
+            id:1,
+            bind_block:2,
+            name:'尔莫科技', 
+            pass:1
+
+        }],
         bid: 0,
         name: "",
         contact: "",
@@ -50,26 +56,39 @@ Page({
     onHide: function() {},
     onUnload: function() {},
     init: function() {
-        var t = this;
-        a.post("my_busi", {}, function(e) {
-            t.setData({
-                list: e.data
-            });
-            for (var n = 0; n < e.data.length; n++) if (e.data[n].id == a.globalData.me.bid) {
-                t.setData({
-                    bid: e.data[n].id,
-                    name: e.data[n].name,
-                    contact: e.data[n].contact,
-                    phone: e.data[n].phone,
-                    input_phone: e.data[n].phone,
-                    lng: e.data[n].lng,
-                    lat: e.data[n].lat,
-                    address: e.data[n].address,
-                    power: e.data[n].power
+        var that = this;
+        that.setData({ 
+                    bid: 1,
+                    name: '安布雷拉',
+                    contact: '18278904219',
+                    phone:  '18278904219',
+                    input_phone:  '18',
+                    lng: 1,
+                    lat: 2,
+                    address: '北京',
+                    power: 'power'
                 });
-                break;
-            }
-        });
+
+        // var t = this;
+        // a.post("my_busi", {}, function(e) {
+        //     t.setData({
+        //         list: e.data
+        //     });
+        //     for (var n = 0; n < e.data.length; n++) if (e.data[n].id == a.globalData.me.bid) {
+        //         t.setData({
+        //             bid: e.data[n].id,
+        //             name: e.data[n].name,
+        //             contact: e.data[n].contact,
+        //             phone: e.data[n].phone,
+        //             input_phone: e.data[n].phone,
+        //             lng: e.data[n].lng,
+        //             lat: e.data[n].lat,
+        //             address: e.data[n].address,
+        //             power: e.data[n].power
+        //         });
+        //         break;
+        //     }
+        // });
     },
     click_bind_new: function() {
         var t = this;

@@ -7,7 +7,7 @@ Page({
         list: [{
             nick:"杰克",
             phone:'18707895796',
-            trash_name:'小明',
+            trash_name:'废电池',
             s_weight:2222,
             s_amount:434,
             time:'1996-02-12',

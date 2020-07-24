@@ -4,13 +4,13 @@ Page({
     data: {
         loading: !1,
         activeTab: 0,
-        date1: "",
-        date2: "",
+        date1: "2022-03-09",
+        date2: "2022-05-09",
         today: "",
         list: [{
             nick:"杰克",
             phone:'18707895796',
-            trash_name:'小明',
+            trash_name:'废电池',
             weight:2222,
             amount:434,
             time:'1996-02-12'

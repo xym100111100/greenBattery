@@ -1,5 +1,5 @@
 var API = require('../../utils/api.js')
-import {setToken,setUserInfo,getUserInfo} from"../../utils/auth"
+import {setToken,setUserInfo} from"../../utils/auth"
 
 var app = getApp();
 
@@ -17,8 +17,8 @@ Page({
         btn_code_deny: !0,
         btn_login_deny: !0,
         input_code_deny: !0,
-        phone: "",
-        code: ""
+        phone: "18278904219",
+        code: "333333"
     },
     onLoad: function(e) {
         // wx.setNavigationBarTitle({
@@ -73,15 +73,15 @@ Page({
         })) : t.alert("提示", "微信用户信息用作登录信息与系统功能绑定，需要获得授权才能继续。");
     },
     input_phone: function(t) {
-        var e = t.detail.value, n = !0;
-        "18982960805" != e ? (11 == e.length && e.startsWith("1") && !isNaN(e) && "获取验证码" == this.data.btn_code_text && (n = !1), 
-        this.setData({
-            phone: e,
-            btn_code_deny: n
-        })) : this.setData({
-            phone: e,
-            input_code_deny: !1
-        });
+        // var e = t.detail.value, n = !0;
+        // "18982960805" != e ? (11 == e.length && e.startsWith("1") && !isNaN(e) && "获取验证码" == this.data.btn_code_text && (n = !1), 
+        // this.setData({
+        //     phone: e,
+        //     btn_code_deny:n 
+        // })) : this.setData({
+        //     phone: e,
+        //     input_code_deny: true
+        // });
     },
     input_code: function(t) {
         var e = t.detail.value, n = !0;
@@ -118,17 +118,26 @@ Page({
         });
     },
     click_login: function() {
+        let that = this
         if(11 === this.data.phone.length && !isNaN(this.data.phone)){
             wx.showLoading({
                 title: "登录中",
             })
             API.request('/login/sign',{phone:this.data.phone,code:this.data.code},'get',(res)=>{
                 wx.hideLoading()
-              //  console.log(res)
                 if(res.code === 0){
-                    console.log(JSON.parse(getUserInfo()))
                     // 设置用户信息
-                 //   setUserInfo(JSON.stringify(res.data.info))  
+                     app.globalData.me.phone =  res.data.info.phone
+                     app.globalData.me.nick =   res.data.info.userName
+                     app.globalData.me.role = 2
+                    setUserInfo(JSON.stringify(res.data.info))  
+                    // 设置token
+                    setToken(res.data.token)
+                    //跳转页面
+                    that.login_ok()
+
+                }else{
+                    app.alert("手机号错误", "该用户不存在")
                 }
             })
         }else{

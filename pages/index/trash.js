@@ -5,18 +5,32 @@ Page({
         loading: !1,
         btn_done: !1,
         role: 0,
-        trash: []
+        trash: [
+            {
+                name:'核废料',
+                checked:true,
+                id:1,
+                capacity:100,
+            },
+            {
+                name:'废电池',
+                checked:false,
+                id:2,
+                capacity:100,
+            }
+        ]
     },
     onLoad: function(a) {
         var i = this;
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 危废种类"
-        }), this.getOpenerEventChannel().on("receive", function(t) {
-            i.setData({
-                role: t.role,
-                trash: t.trash
-            });
-        });
+        })
+        //  this.getOpenerEventChannel().on("receive", function(t) {
+        //     i.setData({
+        //         role: t.role,
+        //         trash: t.trash
+        //     });
+        // });
     },
     onShow: function() {},
     onPullDownRefresh: function() {},
