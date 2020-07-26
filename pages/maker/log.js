@@ -10,13 +10,22 @@ Page({
         date1: "2020-01-05",
         date2: "2020-01-23",
         today: "",
-        list: [{
-            action_txt:'标题',
+        list: [
+            {
+            action_txt:'产生',
             weight:22222,
             type:'I',
             amount:11,
             date:'20202-02-13'
-        }],
+        },
+        {
+            action_txt:'转出',
+            weight:22222,
+            type:'I',
+            amount:11,
+            date:'20202-02-13'
+        },
+    ],
         tempList:[{
             name:'小明同学'
         }],

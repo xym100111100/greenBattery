@@ -1,8 +1,8 @@
-var e = getApp();
+var app = getApp();
 
 Page({
     data: {
-        copyright: e.globalData.app_copy_right,
+        copyright: app.globalData.app_copy_right,
         wx_msg_bind_notify: "WaxtYavubpspcWMWzPaUcfTtf2836hZ1ZYYDYlCwHs0",
         wx_msg: !1,
         icon_color: "#004f1f",
@@ -18,8 +18,9 @@ Page({
     },
     onLoad: function(t) {
         wx.setNavigationBarTitle({
-            title: e.globalData.app_name + " - 首页"
+            title: app.globalData.app_name + " - 首页"
         });
+        this.init()
     },
     onReady: function() {},
     onShow: function() {
@@ -33,27 +34,35 @@ Page({
     onReachBottom: function() {},
     onShareAppMessage: function() {},
     init: function() {
-        if (e.globalData.me && e.globalData.me.token) return 1 != e.globalData.me.type ? 2 == e.globalData.me.type ? void wx.reLaunch({
-            url: "/pages/index/report"
-        }) : void wx.reLaunch({
-            url: "/pages/login/type"
-        }) : void (!e.globalData.me.bid || e.globalData.me.bid < 1 ? wx.reLaunch({
-            url: "/pages/busi/bind"
-        }) : this.my_busi());
+        // 判断用户是否有昵称来显示需要用户设置昵称的红点
+        if(app.globalData.me.nick){
+            this.setData({
+                nick: app.globalData.me.nick,
+            })
+        }
+        // 获取用户待处理工作
+        
+        // if (app.globalData.me && app.globalData.me.token) return 1 != app.globalData.me.type ? 2 == app.globalData.me.type ? void wx.reLaunch({
+        //     url: "/pages/index/report"
+        // }) : void wx.reLaunch({
+        //     url: "/pages/login/type"
+        // }) : void (!app.globalData.me.bid || app.globalData.me.bid < 1 ? wx.reLaunch({
+        //     url: "/pages/busi/bind"
+        // }) : this.my_busi());
         // wx.reLaunch({
         //     url: "/pages/login/login"
         // });
     },
     my_busi: function() {
         var t = this;
-        0 != e.globalData.api_online ? e.post("my_busi", {
+        0 != app.globalData.api_online ? app.post("my_busi", {
             act: "default"
         }, function(a) {
-            e.setMe({
+            app.setMe({
                 power: a.data.power,
                 role: a.data.role
             }), t.setData({
-                nick: e.globalData.me.nick,
+                nick: app.globalData.me.nick,
                 busi_name: a.data.name,
                 busi_block: a.data.block,
                 busi_role: 1,
@@ -76,7 +85,7 @@ Page({
             success: function(a) {
                 a.subscriptionsSetting.mainSwitch && "accept" == a.subscriptionsSetting[t.data.wx_msg_bind_notify] ? t.setData({
                     wx_msg: !0
-                }) : e.alert("提示", "作为管理员的您，需要负责单位人员的绑定审核与解绑知悉。请在接下来的订阅消息申请中选择同意。", function() {
+                }) : app.alert("提示", "作为管理员的您，需要负责单位人员的绑定审核与解绑知悉。请在接下来的订阅消息申请中选择同意。", function() {
                     t.request_subscription_message();
                 });
             }
@@ -89,7 +98,7 @@ Page({
             success: function(a) {
                 "requestSubscribeMessage:ok" == a.errMsg && "accept" == a[t.data.wx_msg_bind_notify] ? t.setData({
                     wx_msg: !0
-                }) : e.alert("提示", "请允许订阅通知消息，然后继续。", function() {
+                }) : app.alert("提示", "请允许订阅通知消息，然后继续。", function() {
                     t.request_subscription_message();
                 });
             },
@@ -109,13 +118,13 @@ Page({
         });
     },
     click_trash: function() {
-        var e = this;
+        var that = this;
         wx.navigateTo({
             url: "/pages/index/trash",
             success: function(t) {
                 t.eventChannel.emit("receive", {
-                    role: e.data.busi_role,
-                    trash: e.data.trash
+                    role: that.data.busi_role,
+                    trash: that.data.trash
                 });
             }
         });
@@ -131,7 +140,7 @@ Page({
         });
     },
     click_maker_log: function() {
-        var e = this;
+        var that = this;
         wx.navigateTo({
             url: "/pages/maker/index",
             success: function(t) {
@@ -162,23 +171,23 @@ Page({
         });
     },
     click_buy: function() {
-        var e = this;
+        var that = this;
         wx.navigateTo({
             url: "/pages/collector/buy",
             success: function(t) {
                 t.eventChannel.emit("receive", {
-                    trash: e.data.trash
+                    trash: that.data.trash
                 });
             }
         });
     },
     click_put_store: function() {
-        var e = this;
+        var that = this;
         wx.navigateTo({
             url: "/pages/collector/put_store",
             success: function(t) {
                 t.eventChannel.emit("receive", {
-                    trash: e.data.trash
+                    trash: that.data.trash
                 });
             }
         });
@@ -189,12 +198,12 @@ Page({
         });
     },
     click_stock: function() {
-        var e = this;
+        var that = this;
         wx.navigateTo({
             url: "/pages/store/stock",
             success: function(t) {
                 t.eventChannel.emit("receive", {
-                    trash: e.data.trash
+                    trash: that.data.trash
                 });
             }
         });

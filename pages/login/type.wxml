@@ -1,8 +1,8 @@
 <view class="page">
     <view class="hd-pad">请选择用户类型</view>
     <view class="bd-pad">
-        <view bindtap="click_type" class="type {{type==2?'active':''}}" data-type="2">
-            <icon color="{{type==2?'#09bb07':'#ccc'}}" size="30" type="success"></icon>
+        <view bindtap="click_type" class="type {{type===0?'active':''}}" data-type="0">
+            <icon color="{{type===0?'#09bb07':'#ccc'}}" size="30" type="success"></icon>
             <view class="content">
                 <view class="intro">
                     <text class="type-name">个人用户</text>

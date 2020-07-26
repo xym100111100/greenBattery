@@ -5,24 +5,47 @@ const userInfo = {
     data: {
       token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
       info: {
-        phone:'18278904219',
+        phone: '18278904219',
+        busiPass:1,
         adminUserNo: "1268793259442966528",
-        userName:'杰克',
+        userName: '杰克',
+        type: 1,
         roles: [{
           roleNo: "111",
           roleName: "admin",
         }]
       }
     }
-  },
-  '18707895796': {
+  }
+  ,
+  '18278904218': {
     code: 0,
     data: {
-      userName:'小明',
+      token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
+      info: {
+        busiPass:0,
+        adminUserNo: "1268793259442966528",
+        phone: '18278904218',
+        type: 1,
+        userName: '小明',
+        roles: [{
+          roleNo: "111",
+          roleName: "edit",
+        }]
+      }
+    }
+  }
+  ,
+  '18278904217': {
+    code: 0,
+    data: {
       token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
       info: {
         adminUserNo: "1268793259442966528",
-        phone:'18707895796',
+        phone: '18278904218',
+        type: 1,
+        busiPass:0,
+        userName: '小明',
         roles: [{
           roleNo: "111",
           roleName: "edit",
@@ -35,6 +58,13 @@ const MockData = {
   '/login/sign': (data) => {
     console.log(data)
     return userInfo[data.phone]
+  },
+  'user/setUserType': (data) => {
+    
+    return {
+      msg:'设置用户类型成功',
+      code:0,
+    }
   },
   '/bd/getBDInfoList': (data) => {
     return Mock.mock({

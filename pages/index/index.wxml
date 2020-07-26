@@ -71,7 +71,7 @@
                     <view>危废转出扫码确认</view>
                 </mp-cell>
             </block>
-            <block  wx:if="{{busi_role==1}}">
+            <block >
                 <mp-cell bindtap="click_buy" hover="true" link="true">
                     <view class="title-icon" slot="icon">
                         <text class="title-icon iconfont icon-huishou1"></text>
@@ -91,7 +91,7 @@
                     <view>外勤：入库记录</view>
                 </mp-cell>
             </block>
-            <block wx:if="{{busi_role==1}}">
+            <block>
                 <mp-cell bindtap="click_accept_store" hover="true" link="true">
                     <view class="title-icon" slot="icon">
                         <text class="title-icon iconfont icon-dianzicheng1"></text>

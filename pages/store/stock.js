@@ -11,7 +11,8 @@ Page({
             w_increase:3432,
             a_increase:'11',
             w_reduce:1233,
-            a_reduce:4322
+            a_reduce:4322,
+            name:'标题'
         }]
     },
     onLoad: function(a) {

@@ -35,7 +35,7 @@ function request(url, data, method, onSuccess, onFailed) {
         setTimeout(() => {
             onSuccess(Mock(url,data))
 
-        }, 1000);
+        }, 500);
     }
 }
 module.exports = {
