@@ -11,6 +11,9 @@ Page({
             id:1,
             w_reduce:111111,
             checked:true,
+            a_keep:1,
+            a_reduce:2,
+            a_increase:3,
         }]
     },
     onLoad: function(a) {

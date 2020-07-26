@@ -5,7 +5,16 @@ Page({
         copyright: t.globalData.app_copy_right,
         loading: !1,
         ec: null,
-        receivers: [],
+        receivers: [
+            {
+             id:12,
+             name:'尔莫科技'   
+            },
+            {
+             id:1,
+             name:'尔莫科技2'   
+            }
+        ],
         receiver: 0,
         show_camera: !0,
         photo: [],
