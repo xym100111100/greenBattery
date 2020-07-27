@@ -59,6 +59,44 @@ const MockData = {
     console.log(data)
     return userInfo[data.phone]
   },
+  '/add/busi': (data) => {
+      return{
+        code:0,
+        msg:'创建成功'
+      }
+  },
+  '/user/getUserWork': (data) => {
+    return {
+        code:0,
+        data:{
+          personnelManagement:false,
+          classSelect:false,
+        }
+    }
+  },
+  '/user/getMyBusi': (data) => {
+    return {
+        code:0,
+        data:{
+          name: '尔莫科技', 
+          contact: '杰克',
+          phone:  '18278904219',
+          address: '北京',
+        }
+    }
+  },
+  '/user/modifyMyBusi': (data) => {
+    return {
+        code:0,
+        data:{
+          busiNo:1,
+          name: '尔莫科技', 
+          contact: '杰克',
+          phone:  '18278904219',
+          address: '北京',
+        }
+    }
+  },
   'user/setUserType': (data) => {
     
     return {

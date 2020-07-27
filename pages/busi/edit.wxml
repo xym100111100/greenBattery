@@ -5,10 +5,10 @@
                 <view style="flex-grow:2">我绑定的单位</view>
                 <button plain bindtap="click_bind_new" class="btn-mini" hoverClass="button-hover" size="mini" type="primary">绑定新单位</button>
             </view>
-            <mp-cells extClass="binded-cells">
+            <mp-cells  wx:if="{{name}}"  extClass="binded-cells">
                 <mp-cell bindtap="click_busi" class="busis" data-idx="{{index}}" wx:for="{{list}}" wx:key="index">
                     <view class="title-icon" slot="icon">
-                        <icon color="{{item.id==bid?'':'#ccc'}}" size="24" type="{{item.busi_block==1||item.bind_block==1?'warn':item.pass==1?'success':'waiting'}}"></icon>
+                        <icon size="24" type="success"></icon>
                     </view>
                     <view>{{item.name}}</view>
                     <view catchtap="click_unbind" class="title-icon" data-idx="{{index}}" slot="footer">
@@ -17,9 +17,10 @@
                 </mp-cell>
             </mp-cells>
         </view>
-        <view class="card" wx:if="{{bid>0}}">
+        <view class="card" wx:if="{{name}}">
             <view class="card-hd">
-                <block wx:if="{{power=='1'}}">编辑<icon size="24" style="padding:0 10rpx;" type="success"></icon>选中</block>单位信息
+                <!-- <block wx:if="{{power=='1'}}" >编辑<icon size="24" style="padding:0 10rpx;" type="success"></icon>选中</block> -->
+                单位信息
     </view>
             <mp-cells extClass="edit-cells">
                 <mp-cell extClass="" title="单位全称">
@@ -32,13 +33,13 @@
                     <input adjustPosition="true" bindinput="input_phone" class="weui-input" cursorSpacing="400" placeholder="请输入手机号" type="number" value="{{phone}}"></input>
                 </mp-cell>
                 <mp-cell extClass="" title="单位地址">
-                    <input class="weui-input" disabled="true" value="{{address}}" placeholder="请获取地理位置"></input>
+                    <input class="weui-input" bindinput="input_typing"  value="{{address}}" placeholder="请获取地理位置"></input>
                 </mp-cell>
-                <mp-cell extClass="two-btn-bar" wx:if="{{power=='1'}}">
+                <mp-cell extClass="two-btn-bar" >
                     <button plain bindtap="map_choose" class="btn-mini" disabled="{{btn_choose_on_map}}" hoverClass="button-hover" size="mini" type="primary">地图选点</button>
                     <button plain bindtap="get_location" class="btn-mini" disabled="{{btn_getaddress}}" hoverClass="button-hover" size="mini" type="primary">我的位置(刚好在单位)</button>
                 </mp-cell>
-                <mp-cell extClass="one-btn-bar" wx:if="{{power=='1'}}">
+                <mp-cell extClass="one-btn-bar">
                     <button bindtap="click_edit_done" class="btn" disabled="{{btn_done}}" hoverClass="button-hover" loading="{{loading}}" type="primary">保存修改</button>
                 </mp-cell>
             </mp-cells>

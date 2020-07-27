@@ -18,10 +18,10 @@ Page({
         login_loading: !1,
         btn_code_text: "获取验证码",
         btn_code_second: 60,
-        btn_code_deny: !0,
+        btn_code_deny: !0, 
         btn_login_deny: !0,
         input_code_deny: !0,
-        phone: "18278904218",
+        phone: "18278904219",
         code: "333333"
     },
     onLoad: function (e) {
@@ -202,6 +202,9 @@ Page({
 
         }
 
+        wx.redirectTo({
+            url: "/pages/index/index"
+        })
 
 
         // var n = {

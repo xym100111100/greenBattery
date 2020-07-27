@@ -1,3 +1,9 @@
+
+var API = require('../../utils/api.js')
+import {
+    getAdminUserNo
+} from "../../utils/auth"
+
 var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
     return typeof t;
 } : function(t) {
@@ -12,8 +18,8 @@ Page({
             bind_block:2,
             name:'尔莫科技', 
             pass:1
-
-        }],
+        },
+    ],
         bid: 0,
         name: "",
         contact: "",
@@ -56,18 +62,25 @@ Page({
     onHide: function() {},
     onUnload: function() {},
     init: function() {
-        var that = this;
-        that.setData({ 
-                    bid: 1,
-                    name: '安布雷拉',
-                    contact: '18278904219',
-                    phone:  '18278904219',
-                    input_phone:  '18',
-                    lng: 1,
-                    lat: 2,
-                    address: '北京',
-                    power: 'power'
-                });
+        // 获取绑定的单位信息
+        API.request('/user/getMyBusi',{userNo:getAdminUserNo()},'get',(res)=>{
+            console.log(res)
+            this.setData({
+                ...res.data
+            })
+        })
+        // var that = this;
+        // that.setData({ 
+        //             bid: 1,
+        //             name: '安布雷拉',
+        //             contact: '18278904219',
+        //             phone:  '18278904219',
+        //             input_phone:  '18',
+        //             lng: 1,
+        //             lat: 2,
+        //             address: '北京',
+        //             power: 'power'
+        //         });
 
         // var t = this;
         // a.post("my_busi", {}, function(e) {
@@ -183,7 +196,7 @@ Page({
     },
     input_typing: function(t) {
         this.setData({
-            btn_done: !1
+            btn_done: false
         });
     },
     get_location: function() {
@@ -273,27 +286,35 @@ Page({
         });
     },
     click_edit_done: function() {
-        var t = this, e = {
-            act: "edit",
-            bid: this.data.bid
-        };
-        this.data.name.length < 4 ? a.alert("提示", "请输入单位名称，至少4字。") : (e.name = this.data.name, 
-        this.data.contact.length < 2 ? a.alert("提示", "请输入您的姓名，至少2字。") : (e.contact = this.data.contact, 
-        11 == this.data.input_phone.length && this.data.input_phone.startsWith("1") && !isNaN(this.data.input_phone) ? (e.phone = this.data.input_phone, 
-        "" != this.data.address ? (e.lng = this.data.lng, e.lat = this.data.lat, e.address = this.data.address, 
-        e.county = this.data.county, e.town = this.data.town, this.setData({
-            loading: !0,
-            btn_done: !0
-        }), a.post("my_busi", e, function(e) {
-            t.data.eventChannel && t.data.eventChannel.emit("reload"), a.toast("操作成功", "success"), 
-            setTimeout(function() {
-                wx.navigateBack();
-            }, 1e3);
-        }, function(a) {
-            t.setData({
-                loading: !1,
-                btn_done: !1
-            });
-        })) : a.alert("提示", "请获取地理位置。")) : a.alert("提示", "请输入正确的手机号。")));
+        console.log(this.data)
+        API.request('/user/modifyMyBusi',this.data,'put',(res)=>{
+            console.log(res)
+           if(res.code === 0){
+              a.alert("提示", "修改成功")
+           }
+        })
+
+        // var t = this, e = {
+        //     act: "edit",
+        //     bid: this.data.bid
+        // };
+        // this.data.name.length < 4 ? a.alert("提示", "请输入单位名称，至少4字。") : (e.name = this.data.name, 
+        // this.data.contact.length < 2 ? a.alert("提示", "请输入您的姓名，至少2字。") : (e.contact = this.data.contact, 
+        // 11 == this.data.input_phone.length && this.data.input_phone.startsWith("1") && !isNaN(this.data.input_phone) ? (e.phone = this.data.input_phone, 
+        // "" != this.data.address ? (e.lng = this.data.lng, e.lat = this.data.lat, e.address = this.data.address, 
+        // e.county = this.data.county, e.town = this.data.town, this.setData({
+        //     loading: !0,
+        //     btn_done: !0
+        // }), a.post("my_busi", e, function(e) {
+        //     t.data.eventChannel && t.data.eventChannel.emit("reload"), a.toast("操作成功", "success"), 
+        //     setTimeout(function() {
+        //         wx.navigateBack();
+        //     }, 1e3);
+        // }, function(a) {
+        //     t.setData({
+        //         loading: !1,
+        //         btn_done: !1
+        //     });
+        // })) : a.alert("提示", "请获取地理位置。")) : a.alert("提示", "请输入正确的手机号。")));
     }
 });

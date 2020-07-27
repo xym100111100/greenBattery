@@ -1,3 +1,8 @@
+var API = require('../../utils/api.js')
+import {
+    getAdminUserNo
+} from "../../utils/auth"
+
 var app = getApp();
 
 Page({
@@ -6,7 +11,7 @@ Page({
         wx_msg_bind_notify: "WaxtYavubpspcWMWzPaUcfTtf2836hZ1ZYYDYlCwHs0",
         wx_msg: !1,
         icon_color: "#004f1f",
-        nick: "",
+        nick: false,
         busi_name: "尔莫科技",
         busi_pass: 1,
         busi_block: 0,
@@ -14,7 +19,10 @@ Page({
         power: "",
         trash: [], 
         trash_badge: !1,
-        worker_request: 0
+        worker_request: 0,
+        personnelManagement:false, 
+        classSelect:false,
+     
     },
     onLoad: function(t) {
         wx.setNavigationBarTitle({
@@ -34,13 +42,19 @@ Page({
     onReachBottom: function() {},
     onShareAppMessage: function() {},
     init: function() {
-        // 判断用户是否有昵称来显示需要用户设置昵称的红点
-        if(app.globalData.me.nick){
+      
+     
+        // 获取用户待处理工作与用户名称是否存在
+        API.request('/user/getUserWork',{userNo:getAdminUserNo()},'get',(res)=>{
+            console.log(app.globalData.me.nick)
             this.setData({
-                nick: app.globalData.me.nick,
+                personnelManagement:res.data.personnelManagement,
+                classSelect:res.data.classSelect,
+                nick:app.globalData.me.nick?false:true
             })
-        }
-        // 获取用户待处理工作
+        })
+
+
         
         // if (app.globalData.me && app.globalData.me.token) return 1 != app.globalData.me.type ? 2 == app.globalData.me.type ? void wx.reLaunch({
         //     url: "/pages/index/report"

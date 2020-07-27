@@ -14,28 +14,28 @@
                         <mp-icon color="{{icon_color}}" icon="group-detail" size="22"></mp-icon>
                     </view>
                     <view class="name">人员管理</view>
-                    <mp-badge content="{{worker_request}}"></mp-badge>
+                    <mp-badge wx:if="{{personnelManagement}}"></mp-badge>
                 </mp-cell>
                 <mp-cell bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">产废种类选择</view>
-                    <mp-badge wx:if="{{trash_badge}}"></mp-badge>
+                    <mp-badge wx:if="{{classSelect}}"></mp-badge>
                 </mp-cell>
                 <mp-cell bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">收集危废种类选择</view>
-                    <mp-badge wx:if="{{trash_badge}}"></mp-badge>
+                    <mp-badge wx:if="{{classSelect}}"></mp-badge>
                 </mp-cell>
                 <mp-cell bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">经营危废种类选择</view>
-                    <mp-badge wx:if="{{trash_badge}}"></mp-badge>
+                    <mp-badge wx:if="{{classSelect}}"></mp-badge>
                 </mp-cell>
             </block>
             <mp-cell bindtap="click_me" hover="true" link="true">
@@ -43,7 +43,7 @@
                     <mp-icon color="{{icon_color}}" icon="lock" size="22"></mp-icon>
                 </view>
                 <view class="name">我的账号</view>
-                <mp-badge wx:if="{{nick==''}}"></mp-badge>
+                <mp-badge wx:if="{{nick}}"></mp-badge>
             </mp-cell>
         </mp-cells>
     </view>
