@@ -1,3 +1,5 @@
+var API = require('../../utils/api.js')
+
 var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
     return typeof t;
 } : function(t) {
@@ -90,6 +92,7 @@ Page({
         }), 1 == e && this.check_auth_for_location();
     },
     search: function(t) {
+        console.log("-=======")
         return t.length < 2 ? new Promise(function(t, e) {
             e("关键词太短");
         }) : new Promise(function(a, n) {
@@ -109,6 +112,7 @@ Page({
         });
     },
     selectResult: function(t) {
+        console.log("------------")
         var e = t.detail.item.value;
         this.search_bid == e ? this.setData({
             search_bid: 0
@@ -271,29 +275,38 @@ Page({
         });
     },
     click_create_done: function() {
-        var t = this;
-        if (!this.data.loading) {
-            var a = {
-                act: "create"
-            };
-            this.data.name.length < 4 ? e.alert("提示", "请输入单位名称，至少4字。") : (a.name = this.data.name, 
-            this.data.role_idx < 0 || !this.data.roles[this.data.role_idx] ? e.alert("提示", "请选择单位角色。") : (a.role = this.data.roles[this.data.role_idx].id, 
-            this.data.contact.length < 2 ? e.alert("提示", "请输入您的姓名，至少2字。") : (a.contact = this.data.contact, 
-            11 == this.data.phone.length && this.data.phone.startsWith("1") && !isNaN(this.data.phone) ? (a.phone = this.data.phone, 
-            "" != this.data.address ? (a.lng = this.data.lng, a.lat = this.data.lat, a.address = this.data.address, 
-            a.county = this.data.county, a.town = this.data.town, this.setData({
-                loading: !0
-            }), e.post("busi_bind", a, function(a) {
-                e.setMe(a.data), e.toast("操作成功", "success"), setTimeout(function() {
-                    t.data.eventChannel && "function" == typeof t.data.eventChannel.emit ? wx.navigateBack() : wx.redirectTo({
-                        url: "/pages/index/index"
-                    });
-                }, 1e3);
-            }, function(e) {
-                t.setData({
-                    loading: !1
-                });
-            })) : e.alert("提示", "请获取地理位置。")) : e.alert("提示", "请输入正确的手机号。"))));
-        }
+       console.log(this.data)
+        // API.request('/createBusiAndBin',{userNo:getAdminUserNo()},'get',(res)=>{
+        //     console.log(res)
+        //     this.setData({
+        //         ...res.data
+        //     })
+        // })
+
+
+        // var t = this;
+        // if (!this.data.loading) {
+        //     var a = {
+        //         act: "create"
+        //     };
+        //     this.data.name.length < 4 ? e.alert("提示", "请输入单位名称，至少4字。") : (a.name = this.data.name, 
+        //     this.data.role_idx < 0 || !this.data.roles[this.data.role_idx] ? e.alert("提示", "请选择单位角色。") : (a.role = this.data.roles[this.data.role_idx].id, 
+        //     this.data.contact.length < 2 ? e.alert("提示", "请输入您的姓名，至少2字。") : (a.contact = this.data.contact, 
+        //     11 == this.data.phone.length && this.data.phone.startsWith("1") && !isNaN(this.data.phone) ? (a.phone = this.data.phone, 
+        //     "" != this.data.address ? (a.lng = this.data.lng, a.lat = this.data.lat, a.address = this.data.address, 
+        //     a.county = this.data.county, a.town = this.data.town, this.setData({
+        //         loading: !0
+        //     }), e.post("busi_bind", a, function(a) {
+        //         e.setMe(a.data), e.toast("操作成功", "success"), setTimeout(function() {
+        //             t.data.eventChannel && "function" == typeof t.data.eventChannel.emit ? wx.navigateBack() : wx.redirectTo({
+        //                 url: "/pages/index/index"
+        //             });
+        //         }, 1e3);
+        //     }, function(e) {
+        //         t.setData({
+        //             loading: !1
+        //         });
+        //     })) : e.alert("提示", "请获取地理位置。")) : e.alert("提示", "请输入正确的手机号。"))));
+        // }
     }
 });

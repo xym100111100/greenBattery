@@ -6,24 +6,27 @@ const userInfo = {
       token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
       info: {
         phone: '18278904219',
-        busiPass:1,
+        busiPass: 1,
+        busiNo: 123,
         adminUserNo: "1268793259442966528",
         userName: '杰克',
         type: 1,
+        role:2,
         roles: [{
           roleNo: "111",
           roleName: "admin",
         }]
       }
     }
-  }
-  ,
+  },
   '18278904218': {
     code: 0,
     data: {
       token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
       info: {
-        busiPass:0,
+        busiPass: 0,
+        busiNo: 123,
+        role:2,
         adminUserNo: "1268793259442966528",
         phone: '18278904218',
         type: 1,
@@ -34,8 +37,7 @@ const userInfo = {
         }]
       }
     }
-  }
-  ,
+  },
   '18278904217': {
     code: 0,
     data: {
@@ -44,7 +46,9 @@ const userInfo = {
         adminUserNo: "1268793259442966528",
         phone: '18278904218',
         type: 1,
-        busiPass:0,
+        role:2,
+        busiPass: 0,
+        busiNo: 123,
         userName: '小明',
         roles: [{
           roleNo: "111",
@@ -59,49 +63,84 @@ const MockData = {
     console.log(data)
     return userInfo[data.phone]
   },
+  'select/busi/personnel': (data) => {
+    console.log(data)
+    return {
+      code:0,
+      data: [{
+          pass: 1,
+          ft: '停用',
+          nick: '杰克',
+          phone: '1827800374',
+          uid: 216,
+        },
+        {
+          pass: 1,
+          ft: '管理员',
+          nick: '小明',
+          phone: '1827800374',
+          uid: 215,
+        },
+        {
+          pass: 0,
+          ft: '申请绑定',
+          nick: '珍妮',
+          phone: '1827800374',
+          uid: 214,
+        },
+        {
+          pass: 1,
+          ft: '库管员',
+          nick: '杰克马',
+          phone: '1827800374',
+          uid: 213,
+        },
+      ]
+    }
+  },
   '/add/busi': (data) => {
-      return{
-        code:0,
-        msg:'创建成功'
-      }
+    return {
+      code: 0,
+      msg: '创建成功'
+    }
   },
   '/user/getUserWork': (data) => {
     return {
-        code:0,
-        data:{
-          personnelManagement:false,
-          classSelect:false,
-        }
+      code: 0,
+      data: {
+        personnelManagement: false,
+        classSelect: false,
+      }
     }
   },
-  '/user/getMyBusi': (data) => {
+  'getMyBusi': (data) => {
     return {
-        code:0,
-        data:{
-          name: '尔莫科技', 
-          contact: '杰克',
-          phone:  '18278904219',
-          address: '北京',
-        }
+      code: 0,
+      data: {
+        name: '尔莫科技',
+        contact: '杰克',
+        phone: '18278904219',
+        address: '北京',
+      }
     }
   },
   '/user/modifyMyBusi': (data) => {
     return {
-        code:0,
-        data:{
-          busiNo:1,
-          name: '尔莫科技', 
-          contact: '杰克',
-          phone:  '18278904219',
-          address: '北京',
-        }
+      code: 0,
+      data: {
+        busiNo: 1,
+        name: '尔莫科技',
+        contact: '杰克',
+        phone: '18278904219',
+        address: '北京',
+      }
     }
   },
   'user/setUserType': (data) => {
-    
+
     return {
-      msg:'设置用户类型成功',
-      code:0,
+      msg: '设置用户类型成功',
+      code: 0,
     }
   },
   '/bd/getBDInfoList': (data) => {

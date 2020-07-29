@@ -1,65 +1,53 @@
-var a = getApp();
+var API = require('../../utils/api.js')
+
+var app = getApp();
 
 Page({
     data: {
-        copyright: a.globalData.app_copy_right,
-        list: [
-            {
-                pass:1,
-                ft:'停用',
-                nick:'杰克',
-                phone:'1827800374',
-                uid:216,
-            },
-            {
-                pass:1,
-                ft:'管理员',
-                nick:'小明',
-                phone:'1827800374',
-                uid:215,
-            },
-            {
-                pass:0,
-                ft:'申请绑定',
-                nick:'珍妮',
-                phone:'1827800374',
-                uid:214,
-            },
-            {
-                pass:1,
-                ft:'库管员',
-                nick:'杰克马',
-                phone:'1827800374',
-                uid:213,
-            },
-        ]
+        copyright: app.globalData.app_copy_right,
+        list: []
     },
     onLoad: function(t) {
         wx.setNavigationBarTitle({
-            title: a.globalData.app_name + " - 人员管理"
+            title: app.globalData.app_name + " - 人员管理"
         });
+
     },
     onShow: function() {
         this.init();
     },
     onPullDownRefresh: function() {},
     init: function() {
-        var t = this;
-        // a.post("woker", {}, function(a) {
-        //     for (var i = 0; i < a.data.length; i++) "" == a.data[i].nick && (a.data[i].nick = "-"), 
-        //     0 == a.data[i].pass ? a.data[i].ft = "申请绑定" : 1 == a.data[i].user_block ? a.data[i].ft = "账号停用" : 1 == a.data[i].bind_block ? a.data[i].ft = "停用" : "1" == a.data[i].power ? a.data[i].ft = "管理员" : "2" == a.data[i].power ? a.data[i].ft = "收集员" : "3" == a.data[i].power ? a.data[i].ft = "库管员" : a.data[i].ft = "普通用户";
+    //查询单位人员
+    console.log(app.globalData.me)
+    API.request('select/busi/personnel',{busiNo:app.globalData.me.busiNo},'get',(res)=>{
+       this.setData({
+           list:res.data
+       })
+    })
+
+
+       // var t = this;
+        // app.post("woker", {}, function(app) {
+        //     for (var i = 0; i < app.data.length; i++) "" == app.data[i].nick && (app.data[i].nick = "-"), 
+        //     0 == app.data[i].pass ? app.data[i].ft = "申请绑定" : 1 == app.data[i].user_block ? app.data[i].ft = "账号停用" : 1 == app.data[i].bind_block ? app.data[i].ft = "停用" : "1" == app.data[i].power ? app.data[i].ft = "管理员" : "2" == app.data[i].power ? app.data[i].ft = "收集员" : "3" == app.data[i].power ? app.data[i].ft = "库管员" : app.data[i].ft = "普通用户";
         //     t.setData({
-        //         list: a.data
+        //         list: app.data
         //     });
         // });
     },
     click_worker: function(t) {
-        var i = this, e = t.currentTarget.dataset.idx;
-        this.data.list[e].uid != a.globalData.me.id ? wx.navigateTo({
-            url: "edit",
-            success: function(a) {
-                a.eventChannel.emit("receive", i.data.list[e]);
-            }
-        }) : a.alert("提示", "不能设置自己");
+        var that = this, index = t.currentTarget.dataset.idx;
+        if(this.data.list[index].uid != app.globalData.me.id){
+            wx.navigateTo({
+                url: "edit",
+                success: function(app) {
+                    app.eventChannel.emit("receive", that.data.list[index]);
+                }
+            })
+        }else{
+            app.alert("提示", "不能设置自己");
+        }
+     
     }
 });

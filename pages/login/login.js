@@ -140,9 +140,8 @@ Page({
                 wx.hideLoading()
                 if (res.code === 0) {
                     // 设置用户信息
-                    app.globalData.me.phone = res.data.info.phone
+                    app.globalData.me = res.data.info
                     app.globalData.me.nick = res.data.info.userName
-                    app.globalData.me.role = 2
                     setAdminUserNo(res.data.info.adminUserNo)
                     setUserInfo(JSON.stringify(res.data.info))
 

@@ -63,7 +63,7 @@ Page({
     onUnload: function() {},
     init: function() {
         // 获取绑定的单位信息
-        API.request('/user/getMyBusi',{userNo:getAdminUserNo()},'get',(res)=>{
+        API.request('getMyBusi',{userNo:getAdminUserNo()},'get',(res)=>{
             console.log(res)
             this.setData({
                 ...res.data

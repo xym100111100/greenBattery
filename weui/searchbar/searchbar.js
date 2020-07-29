@@ -133,6 +133,7 @@ module.exports = function(e) {
                     });
                 },
                 inputChange: function(t) {
+                    console.log(t.detail.value)
                     var e = this;
                     this.setData({
                         value: t.detail.value
