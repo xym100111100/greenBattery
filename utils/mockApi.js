@@ -11,7 +11,7 @@ const userInfo = {
         adminUserNo: "1268793259442966528",
         userName: '杰克',
         type: 1,
-        role:2,
+        role: 2,
         roles: [{
           roleNo: "111",
           roleName: "admin",
@@ -26,7 +26,7 @@ const userInfo = {
       info: {
         busiPass: 0,
         busiNo: 123,
-        role:2,
+        role: 2,
         adminUserNo: "1268793259442966528",
         phone: '18278904218',
         type: 1,
@@ -46,7 +46,7 @@ const userInfo = {
         adminUserNo: "1268793259442966528",
         phone: '18278904218',
         type: 1,
-        role:2,
+        role: 2,
         busiPass: 0,
         busiNo: 123,
         userName: '小明',
@@ -63,10 +63,39 @@ const MockData = {
     console.log(data)
     return userInfo[data.phone]
   },
+  '/saveBusiDangerousType': (data) => {
+    return {
+      code:0,
+      msg:'设置成功'
+    }
+  },
+  '/getBusiDangerousType': (data) => {
+   
+    return {
+      code:0,
+      data:[31,45]
+    }
+  },
+  'select/alltype': () => {
+    return {
+      code: 0,
+      data: [{
+          name: '核废料',
+          typeNo: 31,
+          capacity: 100,
+        },
+        {
+          name: '废电池',
+          typeNo: 45,
+          capacity: 100,
+        }
+      ]
+    }
+  },
   'select/busi/personnel': (data) => {
     console.log(data)
     return {
-      code:0,
+      code: 0,
       data: [{
           pass: 1,
           ft: '停用',

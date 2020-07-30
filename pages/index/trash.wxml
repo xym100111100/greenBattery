@@ -8,7 +8,7 @@
             <view class="card-hd">{{item.name}}</view>
             <view class="card-bd">
                 <view class="row">
-                    <checkbox checked="{{item.checked}}" value="{{item.id}}"></checkbox>
+                    <checkbox checked="{{item.checked}}" value="{{item.typeNo}}"></checkbox>
                     <view class="label">最大库存(吨)：</view>
                     <input bindblur="capacity_input" class="weui-input" data-idx="{{index}}" placeholder="请填写最大库存量" type="number" value="{{item.capacity}}"></input>
                 </view>
