@@ -19,15 +19,15 @@ Page({
 
 
     init: function () {
-        API.request('select/alltype', {}, 'get', (alltypeResult) => {
+        API.request('/wasteType/getAllWasteType', {}, 'get', (alltypeResult) => {
             if (alltypeResult.code === 0) {
-                API.request('/getBusiDangerousType', {
-                    busiNo: app.globalData.me.busiNo
+                API.request('/wasteType/getCompanyWasteType', {
+                    companyNo: app.globalData.me.companyNo
                 }, 'get', (res) => {
                     if (res.code === 0) {
                         alltypeResult.data.map(item => {
                             let result = res.data.some((busiItem) => {
-                                return item.typeNo === busiItem
+                                return item.wasteTypeNo === busiItem
                             })
                             item.checked = result ? true : false
                         })
@@ -45,7 +45,7 @@ Page({
         for (let i = 0, lenI = items.length; i < lenI; ++i) {
             items[i].checked = false
             let result = values.some((item) => {
-                return item == items[i].typeNo
+                return item == items[i].wasteTypeNo
             })
             items[i].checked = result ? true : false
 
@@ -56,7 +56,7 @@ Page({
     },
     capacity_input: function (val) {
         var trash = this.data.trash;
-        trash[val.currentTarget.dataset.idx].capacity = val.detail.value
+        trash[val.currentTarget.dataset.idx].defaultMaxValue = val.detail.value
         this.setData({
             trash: trash
         });
@@ -74,7 +74,7 @@ Page({
         }
         // 检查选择的危废是否有数量没有填
         result = that.data.trash.some(item => {
-            return item.checked && (item.capacity === '' || item.capacity === "0")
+            return item.checked && (item.defaultMaxValue === '' || item.defaultMaxValue === "0")
         })
         if (result) {
             app.alert("提示", "请填写中的类型的最大库存量")
@@ -84,10 +84,10 @@ Page({
         that.setData({
             loading:true
         })
-        API.request('/saveBusiDangerousType', {
-            busiNo: app.globalData.me.busiNo,
-            data: that.data.trash
-        }, 'post', (res) => {
+        API.request('/wasteType/setCompanyWasteType', {
+            companyNo: app.globalData.me.companyNo,
+            wasteTypeTo: that.data.trash
+        }, 'put', (res) => {
             if (res.code === 0) {
                 app.toast("设置成功", "success"), setTimeout(function () {
                     that.setData({
@@ -101,10 +101,10 @@ Page({
         // if (!this.data.btn_done) {
         //     for (var a = [], i = 0; i < this.data.trash.length; i++)
         //         if (this.data.trash[i].checked) {
-        //             if ("" == this.data.trash[i].capacity) return void app.alert("提示", "请填写“" + this.data.trash[i].name + "”的最大库存量。");
+        //             if ("" == this.data.trash[i].defaultMaxValue) return void app.alert("提示", "请填写“" + this.data.trash[i].name + "”的最大库存量。");
         //             a.push({
         //                 tid: this.data.trash[i].id,
-        //                 capacity: this.data.trash[i].capacity
+        //                 defaultMaxValue: this.data.trash[i].defaultMaxValue
         //             });
         //         }
         //     a.length < 1 ? app.alert("提示", "请勾选危废。") : app.post("busi_trash", {

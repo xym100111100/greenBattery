@@ -25,11 +25,11 @@
     <mp-cells class="scroll" extClass="cells" wx:else>
         <mp-cell bindtap="click_row" data-idx="{{index}}" hover="true" link="true" wx:for="{{list}}" wx:key="index">
             <view class="imgs-line" slot="title">
-                <image class="img" mode="aspectFill" src="{{img}}" wx:for="{{item.imgs}}" wx:for-index="idx" wx:for-item="img" wx:key="img"></image>
+                <image class="img" mode="aspectFill" src="{{img}}" wx:for="{{item.url}}" wx:for-index="idx" wx:for-item="img" wx:key="img"></image>
             </view>
             <view class="row-body">
-                <view class="state">{{item.state}}</view>
-                <view class="time">{{item.inputtime}}</view>
+                <view class="state">{{item.operatorResults}}</view>
+                <view class="time">{{item.operatorTime}}</view>
             </view>
         </mp-cell>
     </mp-cells>

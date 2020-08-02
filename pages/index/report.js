@@ -1,12 +1,15 @@
-var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
-    return typeof t;
-} : function(t) {
-    return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
-}, a = getApp();
+var API = require('../../utils/api.js')
+
+// var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
+//     return typeof t;
+// } : function(t) {
+//     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
+// },
+var  app = getApp();
 
 Page({
     data: {
-        copyright: a.globalData.app_copy_right,
+        copyright: app.globalData.app_copy_right,
         loading: !1,
         ec: null,
         current_photo: "",
@@ -23,25 +26,35 @@ Page({
         address: "",
         report_photo: [],
         report_text: "",
-        list: [{
-            state:'已经处理',
-            inputtime:'20202-10-23',
-            imgs:[
-                "https://dss1.bdstatic.com/6OF1bjeh1BF3odCf/it/u=3806909753,3935034670&fm=74&app=80&f=JPEG&size=f121,90?sec=1880279984&t=2c58d140daa403362c1c65f731f1a83f",
-                "https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=588273209,372492901&fm=26&gp=0.jpg"
-            ]
-        }]
+        // list: [{
+        //     state:'已经处理',
+        //     inputtime:'20202-10-23',
+        //     imgs:[
+        //         "https://dss1.bdstatic.com/6OF1bjeh1BF3odCf/it/u=3806909753,3935034670&fm=74&app=80&f=JPEG&size=f121,90?sec=1880279984&t=2c58d140daa403362c1c65f731f1a83f",
+        //         "https://dss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=588273209,372492901&fm=26&gp=0.jpg"
+        //     ]
+        // }]
+        list:[]
     },
     onLoad: function(t) {
         wx.setNavigationBarTitle({
-            title: a.globalData.app_name + " - 违法举报"
-        }), this.init();
+            title: app.globalData.app_name + " - 违法举报"
+        })
+         this.init();
     },
     onShow: function() {},
     onPullDownRefresh: function() {},
     onReachBottom: function() {},
     onShareAppMessage: function() {},
     init: function() {
+
+        API.request('/report/getReportByUserNo',{userNo:app.globalData.me.userNo},'get',(res)=>{
+                console.log(res)
+                this.setData({
+                    list:res.data
+                })
+        })
+
         // a.globalData.me && a.globalData.me.token ? (this.load_data(), this.get_location()) : wx.reLaunch({
         //     url: "/pages/login/login"
         // });
