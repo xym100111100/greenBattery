@@ -8,7 +8,7 @@
         <view class="row">
             <mp-icon color="green" icon="cellphone" size="24"></mp-icon>
             <view class="input">
-                <input bindinput="input_phone"  adjustPosition="{{true}}"  value="{{phone}}"  cursorSpacing="100" maxlength="11" placeholder="手机号" placeholderClass="input-holder" type="number"></input>
+                <input bindinput="input_phone"  adjustPosition="{{true}}"  value="{{cell}}"  cursorSpacing="100" maxlength="11" placeholder="手机号" placeholderClass="input-holder" type="number"></input>
             </view>
         </view>
         <view class="row">

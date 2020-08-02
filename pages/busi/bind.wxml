@@ -16,7 +16,7 @@
             <view class="hd-pad">请填写以下各项</view>
             <mp-cells>
                 <mp-cell title="单位全称">
-                    <input class="weui-input" value="{{name}}" placeholder="请输入单位全称" type="text"></input>
+                    <input bindinput="companyNameInput"   class="weui-input" value="{{companyName}}" placeholder="请输入单位全称" type="text"></input>
                 </mp-cell>
                 <mp-cell title="单位角色">
                     <picker bindchange="roleChange" range="{{roles}}" rangeKey="text" value="{{role_idx}}">
@@ -25,10 +25,10 @@
                     </picker>
                 </mp-cell>
                 <mp-cell title="您的姓名">
-                    <input class="weui-input" value="{{contact}}" placeholder="请输入姓名" type="text"></input>
+                    <input  bindinput="name_input" class="weui-input" value="{{contact}}" placeholder="请输入姓名" type="text"></input>
                 </mp-cell>
                 <mp-cell title="手机号">
-                    <input class="weui-input number" value="{{phone}}" placeholder="请输入手机号" placeholderClass="placeholder" type="number"></input>
+                    <input  bindinput="cell_input" class="weui-input number" value="{{cell}}" placeholder="请输入手机号" placeholderClass="placeholder" type="number"></input>
                 </mp-cell>
                 <mp-cell title="单位地址">
                     <input class="weui-input" disabled="true" value="{{address}}" placeholder="请获取地理位置"></input>

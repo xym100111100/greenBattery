@@ -25,3 +25,7 @@
     text-align: center;
     font-size: 10pt;
 }
+.name{
+    width: 200rpx;
+    overflow: hidden;
+}

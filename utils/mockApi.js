@@ -1,6 +1,6 @@
 var Mock = require("./mock")
 const userInfo = {
-  '18278904219': {
+  '18278904214': {
     code: 0,
     data: {
       token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
@@ -12,54 +12,44 @@ const userInfo = {
         userName: '杰克',
         type: 1,
         role: 2,
-        roles: [{
-          roleNo: "111",
-          roleName: "admin",
-        }]
       }
     }
   },
-  '18278904218': {
+  '18278904213': { // 已经选择类型为单位的用户
     code: 0,
     data: {
       token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
-      info: {
-        busiPass: 0,
-        busiNo: 123,
         role: 2,
-        adminUserNo: "1268793259442966528",
+        userNo: "1268793259442966528",
         phone: '18278904218',
         type: 1,
         userName: '小明',
-        roles: [{
-          roleNo: "111",
-          roleName: "edit",
-        }]
-      }
+        busiNo:'232621',
+        busiType:1
     }
   },
-  '18278904217': {
+  '18278904212': {  // 已经选择类型为个人的用户
     code: 0,
     data: {
       token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
-      info: {
-        adminUserNo: "1268793259442966528",
-        phone: '18278904218',
-        type: 1,
-        role: 2,
-        busiPass: 0,
-        busiNo: 123,
-        userName: '小明',
-        roles: [{
-          roleNo: "111",
-          roleName: "edit",
-        }]
-      }
+        state:1,
+        cell:'18278904217',  
+        userNo:'123',
+        type:0
+    }
+  },
+  '18278904211': {  // 第一次登陆的用户，角色和类型都没有
+    code: 0,
+    data: {
+      token: "14a2d93b-6ada-4cc2-aa8c-b3a6d67ba2a4",
+        state:1,
+        cell:'18278904217',  
+        userNo:'123'
     }
   }
 }
 const MockData = {
-  '/login/sign': (data) => {
+  '/login': (data) => {
     console.log(data)
     return userInfo[data.phone]
   },
@@ -92,7 +82,7 @@ const MockData = {
       ]
     }
   },
-  'select/busi/personnel': (data) => {
+  '/company/selectCompanyPersonnel': (data) => {
     console.log(data)
     return {
       code: 0,
@@ -133,12 +123,12 @@ const MockData = {
       msg: '创建成功'
     }
   },
-  '/user/getUserWork': (data) => {
+  '/company/getUserWork': (data) => {
     return {
       code: 0,
       data: {
-        personnelManagement: false,
-        classSelect: false,
+        personnelManagement: true,
+        classSelect: true, 
       }
     }
   },

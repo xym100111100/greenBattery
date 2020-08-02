@@ -16,26 +16,26 @@
                     <view class="name">人员管理</view>
                     <mp-badge wx:if="{{personnelManagement}}"></mp-badge>
                 </mp-cell>
-                <mp-cell bindtap="click_trash" hover="true" link="true" >
+                <mp-cell wx:if="{{companyType == 1}}"  bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">产废种类选择</view>
-                    <mp-badge wx:if="{{classSelect}}"></mp-badge>
+                    <mp-badge wx:if="{{wasteTypeSelect}}"></mp-badge>
                 </mp-cell>
-                <mp-cell bindtap="click_trash" hover="true" link="true" >
+                <mp-cell wx:if="{{companyType == 2}}" bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">收集危废种类选择</view>
-                    <mp-badge wx:if="{{classSelect}}"></mp-badge>
+                    <mp-badge wx:if="{{wasteTypeSelect}}"></mp-badge>
                 </mp-cell>
-                <mp-cell bindtap="click_trash" hover="true" link="true" >
+                <mp-cell wx:if="{{companyType == 3}}"  bindtap="click_trash" hover="true" link="true" >
                     <view class="title-icon" slot="icon">
                         <mp-icon color="{{icon_color}}" icon="setting" size="22"></mp-icon>
                     </view>
                     <view class="name">经营危废种类选择</view>
-                    <mp-badge wx:if="{{classSelect}}"></mp-badge>
+                    <mp-badge wx:if="{{wasteTypeSelect}}"></mp-badge>
                 </mp-cell>
             </block>
             <mp-cell bindtap="click_me" hover="true" link="true">
@@ -57,7 +57,7 @@
                 </view>
                 <view>违法举报</view>
             </mp-cell>
-            <block wx:if="{{busi_role==1}}">
+            <block wx:if="{{companyType == 1}}">
                 <mp-cell bindtap="click_maker_log" hover="true" link="true">
                     <view class="title-icon" slot="icon">
                         <text class="title-icon iconfont icon-kucun"></text>
@@ -71,7 +71,7 @@
                     <view>危废转出扫码确认</view>
                 </mp-cell>
             </block>
-            <block >
+            <block  wx:if="{{companyType == 2 || companyType == 3}}"  >
                 <mp-cell bindtap="click_buy" hover="true" link="true">
                     <view class="title-icon" slot="icon">
                         <text class="title-icon iconfont icon-huishou1"></text>
@@ -91,8 +91,8 @@
                     <view>外勤：入库记录</view>
                 </mp-cell>
             </block>
-            <block>
-                <mp-cell bindtap="click_accept_store" hover="true" link="true">
+            <block  wx:if="{{companyType == 2 || companyType == 3}}" >
+                <mp-cell   bindtap="click_accept_store" hover="true" link="true">
                     <view class="title-icon" slot="icon">
                         <text class="title-icon iconfont icon-dianzicheng1"></text>
                     </view>

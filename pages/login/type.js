@@ -61,7 +61,7 @@ Page({
                 app.toast(res.msg);
                 setTimeout(() => {
                     wx.reLaunch({
-                        url: "/pages/index/index"
+                        url: "/pages/busi/bind"
                     });
                 }, 1000);
                 return

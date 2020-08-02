@@ -1,10 +1,12 @@
 var API = require('../../utils/api.js')
 
-var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
-    return typeof t;
-} : function(t) {
-    return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
-}, e = getApp();
+// var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
+//     return typeof t;
+// } : function(t) {
+//     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
+// }, e = getApp();
+
+var  app = getApp()
 
 Page({
     data: {
@@ -13,7 +15,6 @@ Page({
         activeTab: 0,
         search_bid: 0,
         wx_msg_bind_ret: "ACRwFd2SlzXf6RX2Ebsn0YDFICLgx3YFrJdGVDb4bt0",
-        name: "",
         roles: [ {
             id: 1,
             text: "产废单位",
@@ -49,7 +50,7 @@ Page({
         } ],
         role_idx: 0,
         contact: "",
-        phone: "",
+        cell: "",
         location_be_deny: !1,
         btn_getaddress: !0,
         btn_choose_on_map: !0,
@@ -57,7 +58,16 @@ Page({
         lat: "",
         address: "",
         county: "",
-        town: ""
+        town: "",
+
+        companyContactsName: "",
+        companyContactsCell:'',
+        companyName:'',
+        companyType: '',
+        companyAddress:'',
+        companyAreaName:'',
+        companyCityName:'',
+
     },
     onLoad: function() {
 
@@ -66,22 +76,39 @@ Page({
                         text:  "尔莫科技",
                         value:'222'
                     }],
-                    phone: e.globalData.me.phone,
-                    contact: e.globalData.me.nick ? e.globalData.me.nick : "",
+                    cell: app.globalData.me.cell,
+                    contact: app.globalData.me.username ? app.globalData.me.username : "",
                     eventChannel: this.getOpenerEventChannel()
                 })
 
 
         // this.setData({
         //     search: this.search.bind(this),
-        //     phone: e.globalData.me.phone,
+        //     cell: e.globalData.me.cell,
         //     contact: e.globalData.me.nick ? e.globalData.me.nick : "",
         //     eventChannel: this.getOpenerEventChannel()
         // })
          wx.setNavigationBarTitle({
-            title: e.globalData.app_name + " - 绑定单位"
+            title: app.globalData.app_name + " - 绑定单位"
         });
     },
+    companyNameInput(val){
+        console.log(val)
+        this.setData({
+            companyName: val.detail.value
+        })
+    },
+    name_input(val){
+        this.setData({
+            companyContactsName:val.detail.value
+        })
+    },
+    cell_input(val){
+        this.setData({
+            companyContactsCell:val.detail.value
+        })
+    },
+
     onUnload: function() {
         this.data.eventChannel && "function" == typeof this.data.eventChannel.emit && this.data.eventChannel.emit("reload");
     },
@@ -103,7 +130,7 @@ Page({
                 var e = [];
                 t.data.map(function(t) {
                     e.push({
-                        text: t.name,
+                        text: t.companyName,
                         value: t.id,
                         role: t.role
                     });
@@ -175,7 +202,8 @@ Page({
     },
     roleChange: function(t) {
         this.setData({
-            role_idx: 1 * t.detail.value
+            role_idx: 1 * t.detail.value,
+            companyType: 1 * t.detail.value
         });
     },
     check_auth_for_location: function() {
@@ -276,12 +304,26 @@ Page({
     },
     click_create_done: function() {
        console.log(this.data)
-        // API.request('/createBusiAndBin',{userNo:getAdminUserNo()},'get',(res)=>{
-        //     console.log(res)
-        //     this.setData({
-        //         ...res.data
-        //     })
-        // })
+       let payload={
+        companyType:this.data.companyType,
+        companyContactsName:this.data.companyContactsName,
+        companyName:this.data.companyName,
+        companyContactsCell:this.data.companyContactsCell,
+        companyAddress:'22',
+        companyAreaName:'33',
+        companyCityName:'nn',
+        latitude:this.data.lat,
+        longitude:this.data.lng,
+        createdUserNo:app.globalData.me.userNo,
+
+       }
+
+        API.request('/company/createBatteryCompany',payload,'post',(res)=>{
+           if(res.code === 0){
+            app.toast("创建成功", "success")
+           }
+         
+        })
 
 
         // var t = this;
@@ -289,10 +331,10 @@ Page({
         //     var a = {
         //         act: "create"
         //     };
-        //     this.data.name.length < 4 ? e.alert("提示", "请输入单位名称，至少4字。") : (a.name = this.data.name, 
+        //     this.data.companyName.length < 4 ? e.alert("提示", "请输入单位名称，至少4字。") : (a.companyName = this.data.companyName, 
         //     this.data.role_idx < 0 || !this.data.roles[this.data.role_idx] ? e.alert("提示", "请选择单位角色。") : (a.role = this.data.roles[this.data.role_idx].id, 
         //     this.data.contact.length < 2 ? e.alert("提示", "请输入您的姓名，至少2字。") : (a.contact = this.data.contact, 
-        //     11 == this.data.phone.length && this.data.phone.startsWith("1") && !isNaN(this.data.phone) ? (a.phone = this.data.phone, 
+        //     11 == this.data.cell.length && this.data.cell.startsWith("1") && !isNaN(this.data.cell) ? (a.cell = this.data.cell, 
         //     "" != this.data.address ? (a.lng = this.data.lng, a.lat = this.data.lat, a.address = this.data.address, 
         //     a.county = this.data.county, a.town = this.data.town, this.setData({
         //         loading: !0

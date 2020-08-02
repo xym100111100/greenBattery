@@ -98,7 +98,7 @@
 }
 
 .weui-cell_label-block .weui-label {
-    width: auto;
+    width: 50;
     word-break: initial;
     hyphens: auto;
 }

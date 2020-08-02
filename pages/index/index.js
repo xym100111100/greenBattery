@@ -20,8 +20,9 @@ Page({
         trash: [], 
         trash_badge: !1,
         worker_request: 0,
-        personnelManagement:false, 
-        classSelect:false,
+        applicationBindingCount:false, 
+        wasteTypeSelect:false,
+        companyType: '',
      
     },
     onLoad: function(t) {
@@ -31,9 +32,6 @@ Page({
         this.init()
     },
     onReady: function() {},
-    onShow: function() {
-        this.init();
-    },
     onHide: function() {},
     onUnload: function() {},
     onPullDownRefresh: function() {
@@ -42,15 +40,14 @@ Page({
     onReachBottom: function() {},
     onShareAppMessage: function() {},
     init: function() {
-      
      
         // 获取用户待处理工作与用户名称是否存在
-        API.request('/user/getUserWork',{userNo:getAdminUserNo()},'get',(res)=>{
-            console.log(app.globalData.me.nick)
+        API.request('/company/getUserWork',{companyNo:app.globalData.me.companyNo},'get',(res)=>{
             this.setData({
-                personnelManagement:res.data.personnelManagement,
-                classSelect:res.data.classSelect,
-                nick:app.globalData.me.nick?false:true
+                applicationBindingCount:res.data.applicationBindingCount,
+                wasteTypeSelect:res.data.wasteTypeSelect,
+                nick:app.globalData.me.nick?false:true,
+                companyType:app.globalData.me.companyType
             })
         })
 
@@ -117,7 +114,7 @@ Page({
                 });
             },
             fail: function(e, t) {
-                console.log(e, t);
+             
             }
         });
     },

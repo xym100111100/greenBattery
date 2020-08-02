@@ -5,35 +5,35 @@
                 <view style="flex-grow:2">我绑定的单位</view>
                 <button plain bindtap="click_bind_new" class="btn-mini" hoverClass="button-hover" size="mini" type="primary">绑定新单位</button>
             </view>
-            <mp-cells  wx:if="{{name}}"  extClass="binded-cells">
+            <mp-cells  wx:if="{{companyName}}"  extClass="binded-cells">
                 <mp-cell bindtap="click_busi" class="busis" data-idx="{{index}}" wx:for="{{list}}" wx:key="index">
                     <view class="title-icon" slot="icon">
                         <icon size="24" type="success"></icon>
                     </view>
-                    <view>{{item.name}}</view>
+                    <view>{{item.companyName}}</view>
                     <view catchtap="click_unbind" class="title-icon" data-idx="{{index}}" slot="footer">
                         <icon color="#e64340" size="24" type="cancel"></icon>
                     </view>
                 </mp-cell>
             </mp-cells>
         </view>
-        <view class="card" wx:if="{{name}}">
+        <view class="card" wx:if="{{companyName}}">
             <view class="card-hd">
                 <!-- <block wx:if="{{power=='1'}}" >编辑<icon size="24" style="padding:0 10rpx;" type="success"></icon>选中</block> -->
                 单位信息
     </view>
             <mp-cells extClass="edit-cells">
                 <mp-cell extClass="" title="单位全称">
-                    <input adjustPosition="true" bindinput="input_typing" class="weui-input" cursorSpacing="400" value="{{name}}" placeholder="请输入单位全称" type="text"></input>
+                    <input adjustPosition="true" bindinput="input_typing" class="weui-input" cursorSpacing="400" value="{{companyName}}" placeholder="请输入单位全称" type="text"></input>
                 </mp-cell>
                 <mp-cell extClass="" title="联系人">
-                    <input adjustPosition="true" bindinput="input_typing" class="weui-input" cursorSpacing="400" value="{{contact}}" placeholder="请输入姓名" type="text"></input>
+                    <input adjustPosition="true" bindinput="input_typing" class="weui-input" cursorSpacing="400" value="{{companyContactsName}}" placeholder="请输入姓名" type="text"></input>
                 </mp-cell>
                 <mp-cell extClass="" title="手机号">
-                    <input adjustPosition="true" bindinput="input_phone" class="weui-input" cursorSpacing="400" placeholder="请输入手机号" type="number" value="{{phone}}"></input>
+                    <input adjustPosition="true" bindinput="input_phone" class="weui-input" cursorSpacing="400" placeholder="请输入手机号" type="number" value="{{companyContactsCell}}"></input>
                 </mp-cell>
                 <mp-cell extClass="" title="单位地址">
-                    <input class="weui-input" bindinput="input_typing"  value="{{address}}" placeholder="请获取地理位置"></input>
+                    <input class="weui-input" bindinput="input_typing"  value="{{companyAddress}}" placeholder="请获取地理位置"></input>
                 </mp-cell>
                 <mp-cell extClass="two-btn-bar" >
                     <button plain bindtap="map_choose" class="btn-mini" disabled="{{btn_choose_on_map}}" hoverClass="button-hover" size="mini" type="primary">地图选点</button>

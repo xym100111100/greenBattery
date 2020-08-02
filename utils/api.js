@@ -1,23 +1,21 @@
-const API_HOST = "http://10.13.1.5:9021";
-const DEBUG = true; //切换数据入口
+const API_HOST = "http://127.0.0.1:9055";
+const DEBUG = false; //切换数据入口
 const Mock = require("./mockApi")
 // params没有参数请传一个空对象
 function request(url, data, method, onSuccess, onFailed) {
-  
     let isGet = method === 'get' ? true : false
-    let params = "&"
+    let params = "?"
     if (isGet) {
-        let params = "&"
         for (var key in data) {
-            params += key + "=" + data[key] + "?"
+            params += key + "=" + data[key] + "&"
         }
         params = params.slice(0, params.length - 1)
       
     }
-
+    let newUrl = isGet ? API_HOST + url + params : API_HOST + url
     if (!DEBUG) {
         wx.request({
-            url: isGet ? API_HOST + url + params : +API_HOST + url,
+            url: newUrl,
             method: method ? method : "post",
             data: isGet ? '' : data,
             header: {
@@ -31,6 +29,7 @@ function request(url, data, method, onSuccess, onFailed) {
             },
         });
     } else {
+     
         // 模拟请求延迟
         setTimeout(() => {
             onSuccess(Mock(url,data))

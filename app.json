@@ -36,6 +36,11 @@
     "navigationBarBackgroundColor": "#23bd70",
     "navigationBarTextStyle": "white"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "请确认授权"
+    }
+  },
   "debug": false,
   "sitemapLocation": "sitemap.json"
 }

@@ -16,21 +16,21 @@ Page({
         list: [{
             id:1,
             bind_block:2,
-            name:'尔莫科技', 
+            companyName:'尔莫科技', 
             pass:1
         },
     ],
         bid: 0,
-        name: "",
-        contact: "",
+        companyName: "",
+        companyContactsName: "",
         input_phone: "",
-        phone: "",
+        companyContactsCell: "",
         location_be_deny: !1,
         btn_getaddress: !1,
         btn_choose_on_map: !1,
         lng: "",
         lat: "",
-        address: "",
+        companyAddress: "",
         county: "",
         town: "",
         loading: !1,
@@ -62,8 +62,8 @@ Page({
     onHide: function() {},
     onUnload: function() {},
     init: function() {
-        // 获取绑定的单位信息
-        API.request('getMyBusi',{userNo:getAdminUserNo()},'get',(res)=>{
+        // 获取单位信息
+        API.request('/company/getMyBatteryCompany',{userNo:getAdminUserNo()},'get',(res)=>{
             console.log(res)
             this.setData({
                 ...res.data
@@ -72,13 +72,13 @@ Page({
         // var that = this;
         // that.setData({ 
         //             bid: 1,
-        //             name: '安布雷拉',
-        //             contact: '18278904219',
-        //             phone:  '18278904219',
+        //             companyName: '安布雷拉',
+        //             companyContactsName: '18278904219',
+        //             companyContactsCell:  '18278904219',
         //             input_phone:  '18',
         //             lng: 1,
         //             lat: 2,
-        //             address: '北京',
+        //             companyAddress: '北京',
         //             power: 'power'
         //         });
 
@@ -90,13 +90,13 @@ Page({
         //     for (var n = 0; n < e.data.length; n++) if (e.data[n].id == a.globalData.me.bid) {
         //         t.setData({
         //             bid: e.data[n].id,
-        //             name: e.data[n].name,
-        //             contact: e.data[n].contact,
-        //             phone: e.data[n].phone,
-        //             input_phone: e.data[n].phone,
+        //             companyName: e.data[n].companyName,
+        //             companyContactsName: e.data[n].companyContactsName,
+        //             companyContactsCell: e.data[n].companyContactsCell,
+        //             input_phone: e.data[n].companyContactsCell,
         //             lng: e.data[n].lng,
         //             lat: e.data[n].lat,
-        //             address: e.data[n].address,
+        //             companyAddress: e.data[n].companyAddress,
         //             power: e.data[n].power
         //         });
         //         break;
@@ -125,13 +125,13 @@ Page({
                 power: n.power
             }), e.setData({
                 bid: n.id,
-                name: n.name,
-                contact: n.contact,
-                phone: n.phone,
-                input_phone: n.phone,
+                companyName: n.companyName,
+                companyContactsName: n.companyContactsName,
+                companyContactsCell: n.companyContactsCell,
+                input_phone: n.companyContactsCell,
                 lng: n.lng,
                 lat: n.lat,
-                address: n.address,
+                companyAddress: n.companyAddress,
                 power: n.power
             });
         }) : a.alert("提示", "您与该单位的绑定关系暂时被停用") : a.alert("提示", "该单位暂时被停用"));
@@ -139,7 +139,7 @@ Page({
     click_unbind: function(t) {
         this.setData({
             unbind_idx: t.currentTarget.dataset.idx,
-            unbind_busi_name: this.data.list[t.currentTarget.dataset.idx].name,
+            unbind_busi_name: this.data.list[t.currentTarget.dataset.idx].companyName,
             half_dialog_show: !0
         });
     },
@@ -166,26 +166,26 @@ Page({
                         power: o.power
                     }), e.setData({
                         bid: o.id,
-                        name: o.name,
-                        contact: o.contact,
-                        phone: o.phone,
-                        input_phone: o.phone,
+                        companyName: o.companyName,
+                        companyContactsName: o.companyContactsName,
+                        companyContactsCell: o.companyContactsCell,
+                        input_phone: o.companyContactsCell,
                         lng: o.lng,
                         lat: o.lat,
-                        address: o.address,
+                        companyAddress: o.companyAddress,
                         power: o.power
                     }), e.input_typing()) : (a.setMe({
                         bid: 0,
                         power: ""
                     }), e.setData({
                         bid: 0,
-                        name: "",
-                        contact: "",
-                        phone: "",
+                        companyName: "",
+                        companyContactsName: "",
+                        companyContactsCell: "",
                         input_phone: "",
                         lng: 0,
                         lat: 0,
-                        address: "",
+                        companyAddress: "",
                         power: "",
                         btn_choose_on_map: !0,
                         btn_getaddress: !0
@@ -267,7 +267,7 @@ Page({
                 }
                 if (0 == i.status) {
                     var o = {
-                        address: i.result.address,
+                        companyAddress: i.result.companyAddress,
                         county: i.result.ad_info.adcode,
                         btn_done: !1
                     };
@@ -298,10 +298,10 @@ Page({
         //     act: "edit",
         //     bid: this.data.bid
         // };
-        // this.data.name.length < 4 ? a.alert("提示", "请输入单位名称，至少4字。") : (e.name = this.data.name, 
-        // this.data.contact.length < 2 ? a.alert("提示", "请输入您的姓名，至少2字。") : (e.contact = this.data.contact, 
-        // 11 == this.data.input_phone.length && this.data.input_phone.startsWith("1") && !isNaN(this.data.input_phone) ? (e.phone = this.data.input_phone, 
-        // "" != this.data.address ? (e.lng = this.data.lng, e.lat = this.data.lat, e.address = this.data.address, 
+        // this.data.companyName.length < 4 ? a.alert("提示", "请输入单位名称，至少4字。") : (e.companyName = this.data.companyName, 
+        // this.data.companyContactsName.length < 2 ? a.alert("提示", "请输入您的姓名，至少2字。") : (e.companyContactsName = this.data.companyContactsName, 
+        // 11 == this.data.input_phone.length && this.data.input_phone.startsWith("1") && !isNaN(this.data.input_phone) ? (e.companyContactsCell = this.data.input_phone, 
+        // "" != this.data.companyAddress ? (e.lng = this.data.lng, e.lat = this.data.lat, e.companyAddress = this.data.companyAddress, 
         // e.county = this.data.county, e.town = this.data.town, this.setData({
         //     loading: !0,
         //     btn_done: !0

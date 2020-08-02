@@ -11,16 +11,32 @@ Page({
         wx.setNavigationBarTitle({
             title: app.globalData.app_name + " - 人员管理"
         });
-
+        this.init();
     },
     onShow: function() {
-        this.init();
+      
     },
     onPullDownRefresh: function() {},
     init: function() {
     //查询单位人员
-    console.log(app.globalData.me)
-    API.request('select/busi/personnel',{busiNo:app.globalData.me.busiNo},'get',(res)=>{
+    API.request('/company/selectCompanyPersonnel',{companyNo:app.globalData.me.companyNo},'get',(res)=>{
+        res.data.map(item=>{
+            switch (item.companyRole) {
+                case 1:
+                    item.role = '管理员'
+                    break;
+                case 2:
+                    item.role = '收集员'
+                    break;
+                case 3:
+                    item.role = '库管员'
+                    break;
+                default:
+                    item.role = '申请绑定'
+                    break;
+            }
+        })
+
        this.setData({
            list:res.data
        })
@@ -38,7 +54,7 @@ Page({
     },
     click_worker: function(t) {
         var that = this, index = t.currentTarget.dataset.idx;
-        if(this.data.list[index].uid != app.globalData.me.id){
+        if(this.data.list[index].userNo != app.globalData.me.userNo){
             wx.navigateTo({
                 url: "edit",
                 success: function(app) {
