@@ -41,11 +41,11 @@ Page({
         this.setData({
             loading: true
         })
-        API.request('user/setUserType', {
-            type: this.data.type,
-            adminUserNo: getAdminUserNo()
-        }, 'put', (res) => {
-            this.setData({
+        API.request('/user/updateUserType', {
+            userType: this.data.type,
+            userNo: getAdminUserNo()
+        }, 'get', (res) => { 
+            this.setData({ 
                 loading: false
             })
             if (res.code === 0 && this.data.type === 0) {

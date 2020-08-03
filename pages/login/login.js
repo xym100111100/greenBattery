@@ -2,7 +2,9 @@ var API = require('../../utils/api.js')
 import {
     setToken,
     setUserInfo,
-    setAdminUserNo
+    setAdminUserNo,
+    getUserOpenIdKey,
+    setUserOpenIdKey
 } from "../../utils/auth"
 
 var app = getApp();
@@ -22,7 +24,8 @@ Page({
         btn_login_deny: !0,
         input_code_deny: !0,
         cell: "18278904213",
-        code: "333333"
+        code: "333333",
+
     },
     onLoad: function (e) {
         // wx.setNavigationBarTitle({
@@ -32,7 +35,7 @@ Page({
         // }), t.globalData.me.role && (t.globalData.me.role > 0 ? wx.redirectTo({
         //     url: "/pages/index"
         // }) : wx.redirectTo({
-        //     url: "/pages/login/role"
+        //     url: "/pages/login/role" 
         // })), wx.login({
         //     success: function(e) {
         //         e.code ? t.post("wx_api", {
@@ -46,6 +49,37 @@ Page({
         //         t.alert("错误", "微信登录失败。"), console.log("wx.login -> ", e);
         //     }
         // });
+        if(!getUserOpenIdKey()){
+            this.login().then(res => {
+                console.log(res)
+                this.getOpenid(res.code)
+            })
+        }
+    },
+    login() {
+        return new Promise(function (resolve, reject) {
+            wx.login({
+                success: function (res) {
+                    if (res.code) {
+                        resolve(res);
+                    } else {
+                        reject(res);
+                    }
+                },
+                fail: function (err) {
+                    reject(err);  
+                }
+            });
+        });
+    },
+    getOpenid(code) {
+        API.request('/getOpenid', { 
+            code
+        }, 'get', (res) => {
+            if(res.code === 0){
+                setUserOpenIdKey(res.data)
+            }
+        })
     },
     onReady: function () {},
     onShow: function () {},
@@ -60,21 +94,50 @@ Page({
             e = parseInt(e.join("")), (t = t.split("."))[1] && (t[1] = t[1].padStart(2, "0")),
             t[2] && (t[2] = t[2].padStart(2, "0")), t = parseInt(t.join("")), e >= t;
     },
-    getPhoneNumber: function (e) {
-        var n = this;
-        "getPhoneNumber:ok" == e.detail.errMsg && e.detail.encryptedData && e.detail.iv ? (wx.showLoading({
-            title: "登录中",
-            mask: !0
-        }), t.post("wx_api", {
-            act: "getphone",
-            openid: t.globalData.openid,
-            encrypt: e.detail.encryptedData,
-            iv: e.detail.iv
-        }, function (t) {
-            n.login_ok(t);
-        }, function () {
-            wx.hideLoading();
-        })) : t.alert("提示", "微信用户信息用作登录信息与系统功能绑定，需要获得授权才能继续。");
+    getPhoneNumber: function (val) {
+        var that = this
+        console.log(val)
+        // wx.request({
+        //   url: '/loginByWechat',
+        //   method:'get', 
+        //   data:{
+        //     openid:getUserOpenIdKey(),
+        //     iv:val.detail.iv,
+        //     encryptedData:val.detail.encryptedData
+        //   }
+        // })
+        API.request('/loginByWechat', {  
+            openid:getUserOpenIdKey(),
+            iv:val.detail.iv,
+            encryptedData:val.detail.encryptedData
+        }, 'get', (res) => {
+           if(res.code === 0){
+            // 设置用户信息
+            app.globalData.me = res.data
+            app.globalData.me.nick = res.data.userName
+            setAdminUserNo(res.data.userNo)
+            setUserInfo(JSON.stringify(res.data))
+
+            // 设置token
+            setToken(res.data.token)
+
+            that.login_ok(res.data)
+           }
+        })
+
+        //     "getPhoneNumber:ok" == e.detail.errMsg && e.detail.encryptedData && e.detail.iv ? (wx.showLoading({
+        //         title: "登录中",
+        //         mask: !0
+        //     }), app.post("wx_api", {
+        //         act: "getphone",
+        //         openid: app.globalData.openid,
+        //         encrypt: e.detail.encryptedData,
+        //         iv: e.detail.iv
+        //     }, function (t) {
+        //         n.login_ok(t);
+        //     }, function () {
+        //         wx.hideLoading();
+        //     })) : app.alert("提示", "微信用户信息用作登录信息与系统功能绑定，需要获得授权才能继续。");
     },
     input_phone: function (val) {
         let cell = val.detail.value
@@ -137,7 +200,7 @@ Page({
                 cell: this.data.cell,
                 code: this.data.code
             }, 'get', (res) => {
-                
+
                 wx.hideLoading()
                 if (res.code === 0) {
                     // 设置用户信息
@@ -186,22 +249,17 @@ Page({
     },
     login_ok: function (info) {
         // 如果用户类型是空的则跳转到设置用户类型界面
-        if (!info.userType &&  parseInt(info.userType) !== 0) {
-            // 跳到绑定页面
-            wx.redirectTo({
-                url: "/pages/login/userType"
-            })
-        }
-        // 如果是个人用户则跳到违法举报界面
+
+        // 如果是个人用户则跳到违法举报界面 
         if (info.userType === 0) {
             wx.redirectTo({
                 url: "/pages/index/report"
             })
-        } else {
+        } else if(info.userType === 1) {
             //  如果没有绑定单位则跳到绑定单位界面
             if (!info.companyNo) {
                 wx.redirectTo({
-                    url: "/pages/busi/bind"
+                    url: "/pages/busi/bind" 
                 })
             } else {
                 // 跳到首页
@@ -210,6 +268,13 @@ Page({
                 })
 
             }
+        }
+
+        if (!info.userType) {
+            // 跳到绑定页面
+            wx.redirectTo({
+                url: "/pages/login/type" 
+            })
         }
 
 

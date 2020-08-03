@@ -7,6 +7,10 @@ const UserRoleKey = 'UserRoleKey'
 
 const UserInfoKey = "UserInfoKey"
 
+const UserOpenIdKey = "UserOpenIdKey"
+
+
+
 
 export function getUserInfo() {
   
@@ -75,6 +79,20 @@ export function setUserRole(userRole) {
 
 export function removeUserRole() {
   return wx.removeStorageSync(UserRoleKey)
+}
+
+
+
+export function getUserOpenIdKey() {
+  return wx.getStorageSync(UserOpenIdKey)
+}
+
+export function setUserOpenIdKey(userOpenIdKey) {
+  return  wx.setStorageSync(UserOpenIdKey, userOpenIdKey)
+}
+
+export function removeUserOpenIdKey() {
+  return wx.removeStorageSync(UserOpenIdKey)
 }
 
 
