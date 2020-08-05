@@ -23,6 +23,7 @@ Page({
         applicationBindingCount:false, 
         wasteTypeSelect:false,
         companyType: '',
+        companyRole:''
      
     },
     onLoad: function(t) {
@@ -43,12 +44,19 @@ Page({
      
         // 获取用户待处理工作与用户名称是否存在
         API.request('/company/getUserWork',{companyNo:app.globalData.me.companyNo},'get',(res)=>{
+            
             this.setData({
-                applicationBindingCount:res.data.applicationBindingCount,
-                wasteTypeSelect:res.data.wasteTypeSelect,
                 nick:app.globalData.me.nick?false:true,
-                companyType:app.globalData.me.companyType
+                companyType:app.globalData.me.companyType,
+                companyRole:app.globalData.me.role
             })
+            if(res.code === 0){
+                this.setData({
+                    applicationBindingCount:res.data.applicationBindingCount,
+                    wasteTypeSelect:res.data.wasteTypeSelect,
+                })
+            }
+
         })
 
 

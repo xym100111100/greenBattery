@@ -1,10 +1,10 @@
 var API = require('../../utils/api.js')
 
-// var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
-//     return typeof t;
-// } : function(t) {
-//     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
-// }, e = getApp();
+var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
+    return typeof t;
+} : function(t) {
+    return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
+}, e = getApp();
 
 var  app = getApp()
 
@@ -63,7 +63,7 @@ Page({
         companyContactsName: "",
         companyContactsCell:'',
         companyName:'',
-        companyType: '',
+        companyType: 0,
         companyAddress:'',
         companyAreaName:'',
         companyCityName:'',
@@ -74,11 +74,7 @@ Page({
     onLoad: function() {
 
                 this.setData({
-                    search: [{
-                        text:  "尔莫科技",
-                        value:'222'
-                    }],
-                    cell: app.globalData.me.cell,
+                    companyContactsCell: app.globalData.me.cell,
                     contact: app.globalData.me.username ? app.globalData.me.username : "",
                     eventChannel: this.getOpenerEventChannel()
                 })
@@ -95,7 +91,7 @@ Page({
         });
     },
     companyNameInput(val){
-        console.log(val)
+  
         this.setData({
             companyName: val.detail.value
         })
@@ -114,11 +110,14 @@ Page({
     onUnload: function() {
         this.data.eventChannel && "function" == typeof this.data.eventChannel.emit && this.data.eventChannel.emit("reload");
     },
-    click_tab: function(t) {
-        var e = t.currentTarget.dataset.idx;
+    click_tab: function(val) {
+        let  index = val.currentTarget.dataset.idx;
         this.setData({
-            activeTab: e
-        }), 1 == e && this.check_auth_for_location();
+            activeTab: index
+        })
+        if(index == 1 ){
+            this.check_auth_for_location();
+        } 
     },
     search: function(val) {
         API.request('/company/getBatteryCompanyByName',{companyName:val.detail},'get',(res)=>{
@@ -135,7 +134,7 @@ Page({
       })
     },
     selectresult: function(val) {
-        console.log("选择的单位",val.detail.checkedNo)
+        
         this.setData({
             companyNo:val.detail.checkedNo
         })
@@ -217,35 +216,41 @@ Page({
     },
     roleChange: function(t) {
         this.setData({
-            role_idx: 1 * t.detail.value,
+            role_idx: 1 * t.detail.value ,
             companyType: 1 * t.detail.value
         });
     },
     check_auth_for_location: function() {
+      
         var t = this;
-        this.data.location_be_deny ? wx.openSetting({
-            success: function(e) {
-                e.authSetting["scope.userLocation"] && (t.setData({
-                    location_be_deny: !1
-                }), t.startLocation());
-            }
-        }) : wx.authorize({
-            scope: "scope.userLocation",
-            success: function() {
-                t.startLocation();
-            },
-            fail: function(a) {
-                a.errMsg.includes("auth deny") ? e.alert("授权提示", "必须获取位置信息，才能创建单位。", function() {
-                    wx.openSetting({
-                        success: function(e) {
-                            e.authSetting["scope.userLocation"] && (t.setData({
-                                location_be_deny: !1
-                            }), t.startLocation());
-                        }
-                    });
-                }) : e.alert("错误", a.errMsg);
-            }
-        });
+        if(this.data.location_be_deny){
+            wx.openSetting({
+                success: function(e) {
+                    e.authSetting["scope.userLocation"] && (t.setData({
+                        location_be_deny: !1
+                    }), t.startLocation());
+                }
+            })
+        }else{
+            wx.authorize({
+                scope: "scope.userLocation",
+                success: function() {
+                    t.startLocation();
+                },
+                fail: function(a) {
+                    a.errMsg.includes("auth deny") ? e.alert("授权提示", "必须获取位置信息，才能创建单位。", function() {
+                        wx.openSetting({
+                            success: function(e) {
+                                e.authSetting["scope.userLocation"] && (t.setData({
+                                    location_be_deny: !1
+                                }), t.startLocation());
+                            }
+                        });
+                    }) : e.alert("错误", a.errMsg);
+                }
+            });
+        }
+         
     },
     startLocation: function() {
         var t = this;
@@ -260,7 +265,7 @@ Page({
                 });
             },
             fail: function(t) {
-                e.alert("失败", t.errMsg);
+                app.alert("失败", t.errMsg); 
             },
             success: function(e) {
                 t.setData({
@@ -307,7 +312,10 @@ Page({
                 if (0 == i.status) {
                     var s = {
                         address: i.result.address,
-                        county: i.result.ad_info.adcode
+                        county: i.result.ad_info.adcode,
+                        companyAddress:i.result.address_component.street+i.result.address_component.street_number,
+                        companyAreaName:i.result.address_component.district,
+                        companyCityName:i.result.address_component.city
                     };
                     i.result.address_reference && i.result.address_reference.town && (s.town = i.result.address_reference.town.id), 
                     a.setData(s);
@@ -318,15 +326,14 @@ Page({
         });
     },
     click_create_done: function() {
-       console.log(this.data)
        let payload={
-        companyType:this.data.companyType,
+        companyType:this.data.companyType +1, // 因为选择的时候是从0开始的，后续优化处理
         companyContactsName:this.data.companyContactsName,
         companyName:this.data.companyName,
         companyContactsCell:this.data.companyContactsCell,
-        companyAddress:'22',
-        companyAreaName:'33',
-        companyCityName:'nn',
+        companyAddress:this.data.companyAddress,
+        companyAreaName:this.data.companyAreaName,
+        companyCityName:this.data.companyCityName,
         latitude:this.data.lat,
         longitude:this.data.lng,
         createdUserNo:app.globalData.me.userNo,

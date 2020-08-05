@@ -21,7 +21,6 @@ Page({
             title: app.globalData.app_name + " - 人员编辑"
         });
         this.getOpenerEventChannel().on("receive", function(payload) {
-            console.log(payload)
             payload.companyType = app.globalData.me.companyType
             that.setData(payload);
         });
@@ -30,7 +29,6 @@ Page({
 
     },
     click_power: function(val) {
-        console.log(val.detail.value[0])
         if(val.detail.value.length <1){
             return 
         }

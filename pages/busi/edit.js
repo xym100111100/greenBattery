@@ -8,7 +8,8 @@ var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
     return typeof t;
 } : function(t) {
     return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
-}, a = getApp();
+}
+let app  = getApp();
 
 Page({
     data: {
@@ -56,7 +57,7 @@ Page({
     onReady: function() {},
     onShow: function() {
         wx.setNavigationBarTitle({
-            title: a.globalData.app_name + " - 我的单位"
+            title: app.globalData.app_name + " - 我的单位"
         });
     },
     onHide: function() {},
@@ -64,10 +65,13 @@ Page({
     init: function() {
         // 获取单位信息
         API.request('/company/getMyBatteryCompany',{userNo:getAdminUserNo()},'get',(res)=>{
-            console.log(res)
-            this.setData({
-                ...res.data
-            })
+       
+            if(res.code === 0){
+                this.setData({
+                    ...res.data
+                })
+            }
+           
         })
         // var that = this;
         // that.setData({ 
@@ -286,9 +290,7 @@ Page({
         });
     },
     click_edit_done: function() {
-        console.log(this.data)
         API.request('/user/modifyMyBusi',this.data,'put',(res)=>{
-            console.log(res)
            if(res.code === 0){
               a.alert("提示", "修改成功")
            }

@@ -1,6 +1,6 @@
-const API_HOST = "http://127.0.0.1:9055";
+const API_HOST = "http://10.13.1.3:9055";
 const DEBUG = false; //切换数据入口
-const Mock = require("./mockApi")
+
 // params没有参数请传一个空对象
 function request(url, data, method, onSuccess, onFailed) {
 
@@ -22,10 +22,10 @@ function request(url, data, method, onSuccess, onFailed) {
     } else {
      
         // 模拟请求延迟
-        setTimeout(() => {
-            onSuccess(Mock(url,data))
+        // setTimeout(() => {
+        //     onSuccess(Mock(url,data))
 
-        }, 500);
+        // }, 500);
     }
 }
 module.exports = {

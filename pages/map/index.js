@@ -33,10 +33,10 @@ Page({
             });
         });
     },
-    click_map: function(t) {
+    click_map: function(val) {
         this.setData({
-            "marker[0].latitude": t.detail.latitude,
-            "marker[0].longitude": t.detail.longitude
+            "marker[0].latitude": val.detail.latitude,
+            "marker[0].longitude": val.detail.longitude
         }), this.get_address();
     },
     get_address: function() {
@@ -58,7 +58,10 @@ Page({
                     var i = {
                         btn_deny: !1,
                         address: o.result.address,
-                        county: o.result.ad_info.adcode
+                        county: o.result.ad_info.adcode,
+                        companyAddress:o.result.address_component.street+o.result.address_component.street_number,
+                        companyAreaName:o.result.address_component.district,
+                        companyCityName:o.result.address_component.city
                     };
                     o.result.address_reference && o.result.address_reference.town && (i.town = o.result.address_reference.town.id), 
                     a.setData(i);
@@ -74,8 +77,13 @@ Page({
             lat: this.data.marker[0].latitude,
             address: this.data.address,
             county: this.data.county,
-            town: this.data.town
+            town: this.data.town,
+            companyAddress:this.data.companyAddress,
+            companyAreaName:this.data.companyAreaName,
+            companyCityName:this.data.companyCityName
+
         };
+        
         this.data.eventChannel.emit("callback", t), wx.navigateBack();
     },
     onReady: function() {},

@@ -41,10 +41,8 @@ Page({
         return t.getFullYear() + "-" + (1 + t.getMonth()).toString().padStart(2, "0") + "-01";
     },
     touch_top: function() {
-        console.log("touch_top");
     },
     touch_bottom: function() {
-        console.log("touch_bottom");
     },
     load_data: function() {
         var a = this, e = !(arguments.length > 0 && void 0 !== arguments[0]) || arguments[0];

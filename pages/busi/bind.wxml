@@ -28,7 +28,7 @@
                     <input  bindinput="name_input" class="weui-input" value="{{contact}}" placeholder="请输入姓名" type="text"></input>
                 </mp-cell>
                 <mp-cell title="手机号">
-                    <input  bindinput="cell_input" class="weui-input number" value="{{cell}}" placeholder="请输入手机号" placeholderClass="placeholder" type="number"></input>
+                    <input  bindinput="cell_input" class="weui-input number" value="{{companyContactsCell}}" placeholder="请输入手机号" placeholderClass="placeholder" type="number"></input>
                 </mp-cell>
                 <mp-cell title="单位地址">
                     <input class="weui-input" disabled="true" value="{{address}}" placeholder="请获取地理位置"></input>
