@@ -14,10 +14,10 @@
     </view>
     <view bindtap="hideInput" class="weui-search-bar__cancel-btn" wx:if="{{cancel&&searchState}}">{{cancelText}}</view>
 </view>
-<scroll-view enableFlex="{{true}}" scrollY="{{true}}" wx:if="{{error==0&&searchState&&result.length>0}}">
+<scroll-view enableFlex="{{true}}" scrollY="{{true}}" wx:if="{{error==0&&searchState&&searchData.length>0}}">
     <mp-cells class="searchbar-result  {{extClass}}">
-        <mp-cell bindtap="selectResult" class="{{item.value==checked_id?'active':''}}" data-index="{{index}}" wx:for="{{result}}" wx:key="index">
-            <view>{{item.text}}</view>
+        <mp-cell bindtap="selectResult" class="{{item.companyNo==checkedNo?'active':''}}" data-index="{{index}}" wx:for="{{searchData}}" wx:key="index">
+            <view>{{item.companyName}}</view>
         </mp-cell>
     </mp-cells>
 </scroll-view>

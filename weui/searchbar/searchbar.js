@@ -74,6 +74,10 @@ module.exports = function(e) {
                     type: Function,
                     value: null
                 },
+                selectresult:{
+                    type:Function,
+                    value:null
+                },
                 throttle: {
                     type: Number,
                     value: 500
@@ -85,6 +89,9 @@ module.exports = function(e) {
                 cancel: {
                     type: Boolean,
                     value: !0
+                },
+                searchData:{
+                    type:Array,
                 }
             },
             data: {
@@ -95,7 +102,7 @@ module.exports = function(e) {
                     text:'金钱天下',
                     value:1
                 }],
-                checked_id: 0,
+                checkedNo: 0,
                 error: 0,
                 errmsg: ""
             },
@@ -134,36 +141,46 @@ module.exports = function(e) {
                 },
                 inputChange: function(t) {
                     console.log(t.detail.value)
-                    var e = this;
-                    this.setData({
-                        value: t.detail.value
-                    }), this.triggerEvent("input", t.detail), Date.now() - this.lastSearch < this.data.throttle || "function" == typeof this.data.search && (this.lastSearch = Date.now(), 
-                    this.timerId = setTimeout(function() {
-                        e.data.search(t.detail.value).then(function(t) {
-                            e.setData({
-                                result: t,
-                                error: 0,
-                                errmsg: ""
-                            });
-                        }).catch(function(t) {
-                            e.setData({
-                                result: [],
-                                error: 1,
-                                errmsg: t
-                            }), console.log("search error", t);
-                        });
-                    }, this.data.throttle));
+                    this.triggerEvent("search", t.detail.value)
+                    // var e = this;
+                    // this.setData({
+                    //     value: t.detail.value
+                    // }), this.triggerEvent("selectresult", t.detail), Date.now() - this.lastSearch < this.data.throttle || "function" == typeof this.data.search && (this.lastSearch = Date.now(), 
+                    // this.timerId = setTimeout(function() {
+                    //     e.data.search(t.detail.value).then(function(t) {
+                    //         e.setData({
+                    //             result: t,
+                    //             error: 0,
+                    //             errmsg: ""
+                    //         });
+                    //     }).catch(function(t) {
+                    //         e.setData({
+                    //             result: [],
+                    //             error: 1,
+                    //             errmsg: t
+                    //         }), console.log("search error", t);
+                    //     });
+                    // }, this.data.throttle));
                 },
-                selectResult: function(t) {
-                    var e = t.currentTarget.dataset.index, r = this.data.result[e];
-                    this.data.checked_id == r.value ? this.setData({
-                        checked_id: 0
-                    }) : (this.setData({
-                        checked_id: r.value
-                    }), this.triggerEvent("selectresult", {
-                        index: e,
-                        item: r
-                    }));
+                selectResult: function(val) {
+                    let index = val.currentTarget.dataset.index
+                    console.log(this.data.searchData[index].companyNo)
+                    this.setData({
+                        checkedNo:this.data.searchData[index].companyNo
+                    })
+              
+                    this.triggerEvent("selectresult",{
+                        checkedNo:this.data.searchData[index].companyNo
+                    })
+                    // var e = t.currentTarget.dataset.index, r = this.data.result[e];
+                    // this.data.companyNo == r.value ? this.setData({
+                    //     checkedNo: 0
+                    // }) : (this.setData({
+                    //     checkedNo: r.value
+                    // }), this.triggerEvent("selectresult", {
+                    //     index: e,
+                    //     item: r
+                    // }));
                 }
             }
         });

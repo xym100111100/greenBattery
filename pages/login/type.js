@@ -44,7 +44,7 @@ Page({
         API.request('/user/updateUserType', {
             userType: this.data.type,
             userNo: getAdminUserNo()
-        }, 'get', (res) => { 
+        }, 'put', (res) => { 
             this.setData({ 
                 loading: false
             })

@@ -18,7 +18,7 @@
             </view>
             <button bindtap="get_code" class="btn-code" disabled="{{btn_code_deny}}" hoverClass="button-hover" loading="{{code_loading}}" plain="plain" size="mini" type="primary">{{btn_code_text}}</button>
         </view>
-        <view class="row">
+        <view class="row"> 
             <button bindtap="click_login" class="btn-login"  hoverClass="button-hover" loading="{{login_loading}}" type="primary">登录</button>
         </view>
     </view>

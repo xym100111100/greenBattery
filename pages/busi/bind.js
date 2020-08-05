@@ -67,6 +67,8 @@ Page({
         companyAddress:'',
         companyAreaName:'',
         companyCityName:'',
+        searchData:[],
+        companyNo:'',
 
     },
     onLoad: function() {
@@ -118,46 +120,59 @@ Page({
             activeTab: e
         }), 1 == e && this.check_auth_for_location();
     },
-    search: function(t) {
-        console.log("-=======")
-        return t.length < 2 ? new Promise(function(t, e) {
-            e("关键词太短");
-        }) : new Promise(function(a, n) {
-            e.post("busi_search", {
-                token: e.globalData.me.token,
-                key: t
-            }, function(t) {
-                var e = [];
-                t.data.map(function(t) {
-                    e.push({
-                        text: t.companyName,
-                        value: t.id,
-                        role: t.role
-                    });
-                }), e.length < 1 ? n("没有搜索结果") : a(e);
-            });
-        });
+    search: function(val) {
+        API.request('/company/getBatteryCompanyByName',{companyName:val.detail},'get',(res)=>{
+            if(res.data.length > 0 ){
+             this.setData({
+                 searchData:res.data
+             })
+            }else{
+             this.setData({
+                 searchData:[]
+             })
+            }
+             
+      })
     },
-    selectResult: function(t) {
-        console.log("------------")
-        var e = t.detail.item.value;
-        this.search_bid == e ? this.setData({
-            search_bid: 0
-        }) : this.setData({
-            search_bid: e
-        });
+    selectresult: function(val) {
+        console.log("选择的单位",val.detail.checkedNo)
+        this.setData({
+            companyNo:val.detail.checkedNo
+        })
+        // var e = val.detail.item.value;
+        // this.search_bid == e ? this.setData({
+        //     search_bid: 0
+        // }) : this.setData({
+        //     search_bid: e
+        // });
     },
     click_search_done: function() {
-        var t = this;
-        this.data.loading || (this.data.search_bid < 1 ? e.alert("提示", "请选中要绑定的单位") : this.check_subscription_message().then(function(e) {
-            t.send_to_server();
-        }, function(a) {
-            t.request_subscription_message().then(function(e) {
-                t.send_to_server();
-            }, function(t) {
-                e.alert("提示", "请允许订阅绑定单位审核结果通知，然后继续。");
-            });
-        }));
+        if(!this.data.companyNo){
+            app.alert("提示", "请选中要绑定的单位") 
+            return ;
+        }
+        let payload = {}
+        payload.companyNo = this.data.companyNo
+        payload.userNo=app.globalData.me.userNo
+        API.request('/user/bindingBatteryCompany',payload,'get',(res)=>{
+                if(res.code === 0){
+                    app.alert("提示","已申请绑定，等待单位管理员审核",(res)=>{
+                        wx.navigateTo({
+                            url: "/pages/index/index",})
+                    })
+                }
+        })
+
+        // var t = this;
+        // this.data.loading || (this.data.search_bid < 1 ? e.alert("提示", "请选中要绑定的单位") : this.check_subscription_message().then(function(e) {
+        //     t.send_to_server();
+        // }, function(a) {
+        //     t.request_subscription_message().then(function(e) {
+        //         t.send_to_server();
+        //     }, function(t) {
+        //         e.alert("提示", "请允许订阅绑定单位审核结果通知，然后继续。");
+        //     });
+        // }));
     },
     check_subscription_message: function() {
         var t = this;

@@ -9,7 +9,7 @@
             </view>
         </view>
         <view class="tab-content" wx:if="{{activeTab==0}}">
-            <mp-searchbar bindselectresult="selectResult" class="mp-searchbar" extClass="search-bar" placeholder="名称关键字，2字以上（含）" search="{{search}}" throttle="300"></mp-searchbar>
+            <mp-searchbar bindsearch="search" class="mp-searchbar" extClass="search-bar" placeholder="名称关键字，2字以上（含）" bindselectresult="selectresult" searchData="{{searchData}}" throttle="300"></mp-searchbar>
             <button bindtap="click_search_done" class="btn" disabled="{{btn_done}}" hoverClass="button-hover" loading="{{loading}}" type="primary">绑定选中单位</button>
         </view>
         <view class="tab-content create" wx:else>
