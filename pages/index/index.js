@@ -48,7 +48,7 @@ Page({
             this.setData({
                 nick:app.globalData.me.nick?false:true,
                 companyType:app.globalData.me.companyType,
-                companyRole:app.globalData.me.role
+                companyRole:app.globalData.me.companyRole
             })
             if(res.code === 0){
                 this.setData({
@@ -164,7 +164,7 @@ Page({
             url: "/pages/maker/index",
             success: function(t) {
                 t.eventChannel.emit("receive", {
-                    trash: e.data.trash
+                    trash: that.data.trash
                 });
             }
         });

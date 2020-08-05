@@ -27,7 +27,7 @@ Page({
                     if (res.code === 0) {
                         alltypeResult.data.map(item => {
                             let result = res.data.some((busiItem) => {
-                                return item.wasteTypeNo === busiItem
+                                return item.wasteTypeNo === busiItem.wasteTypeNo
                             })
                             item.checked = result ? true : false
                         })

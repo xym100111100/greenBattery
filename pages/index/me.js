@@ -16,12 +16,14 @@ Page({
         wx.setNavigationBarTitle({
             title: app.globalData.app_name + " - 我的账户"
         });
-        var e = {
-            phone: app.globalData.me.phone,
+        let data  = {
+            phone: app.globalData.me.cell,
             nick: app.globalData.me.nick,
             type: app.globalData.me.type
         };
-        1 == app.globalData.me.type ? e.type = "单位用户" : e.type = "个人用户", this.setData(e);
+        1 == app.globalData.me.userType ? data.type = "单位用户" : data.type = "个人用户"
+
+         this.setData(data);
     },
     onShow: function () {},
     click_logout: function () { 

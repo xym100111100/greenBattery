@@ -1,8 +1,8 @@
-var e = getApp();
+var app = getApp();
 
 Page({
     data: {
-        copyright: e.globalData.app_copy_right,
+        copyright: app.globalData.app_copy_right,
         trash: [{
             name:'杰克',
             w_keep:2000,
@@ -12,14 +12,14 @@ Page({
             w_reduce:111111,
             checked:true,
             a_keep:1,
-            a_reduce:2,
+            a_reduce:2, 
             a_increase:3,
         }]
     },
     onLoad: function(a) {
         // var t = this;
         wx.setNavigationBarTitle({
-            title:  " 美丽金 - 台账"
+            title: app.globalData.app_name +  "  - 台账"
         })
         // this.getOpenerEventChannel().on("receive", function(a) {
         //     for (var n = a.trash, i = !1, r = 0; r < n.length; r++) n[r].checked && (i = !0), 
