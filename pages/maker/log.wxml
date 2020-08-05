@@ -15,17 +15,17 @@
         <mp-cells extClass="my-cells">
             <mp-slideview bindbuttontap="click_del" buttons="{{slideButtons}}" data-idx="{{index}}" wx:for="{{list}}" wx:key="index">
                 <mp-cell>
-                    <view class="action" slot="title">{{item.action_txt}}</view>
+                    <view class="action" slot="title">{{item.action}}</view>
                     <view class="row">
-                        <view class="number kg">{{item.weight/1000}}</view>
+                        <view class="number kg">{{item.recordWeight/1000}}</view>
                         <view class="unit">KG</view>
                         <block wx:if="{{tid==1}}">
                             <view class="type">{{item.type}}类</view>
-                            <view class="number small">{{item.amount}}</view>
+                            <view class="number small">{{item.recordQuantity}}</view>
                             <view class="unit">只</view>
                         </block>
                     </view>
-                    <view slot="footer">{{item.date}}</view>
+                    <view slot="footer">{{item.recordDay}}</view>
                 </mp-cell>
             </mp-slideview>
         </mp-cells>

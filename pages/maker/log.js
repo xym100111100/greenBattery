@@ -1,5 +1,6 @@
-var t = getApp();
 var API = require('../../utils/api.js')
+
+var app = getApp();
 
 Page({
     data: {
@@ -10,62 +11,75 @@ Page({
         date1: "2020-01-05",
         date2: "2020-01-23",
         today: "",
-        list: [
-            {
-            action_txt:'产生',
-            weight:22222,
-            type:'I',
-            amount:11,
-            date:'20202-02-13'
-        },
-        {
-            action_txt:'转出',
-            weight:22222,
-            type:'I',
-            amount:11,
-            date:'20202-02-13'
-        },
-    ],
-        tempList:[{
-            name:'小明同学'
+        // list: [{
+        //         action_txt: '产生',
+        //         weight: 22222,
+        //         type: 'I',
+        //         amount: 11,
+        //         date: '20202-02-13'
+        //     },
+        //     {
+        //         action_txt: '转出',
+        //         weight: 22222,
+        //         type: 'I',
+        //         amount: 11,
+        //         date: '20202-02-13'
+        //     },
+        // ],
+        list:[],
+        tempList: [{
+            name: '小明同学'
         }],
-        slideButtons: [ {
+        slideButtons: [{
             type: "warn",
             text: "删除"
-        } ]
+        }],
+        standingBookNo: ''
     },
-    onLoad: function(a) {
-        var e = this;
+    onLoad: function (a) {
+        var that = this;
         wx.setNavigationBarTitle({
-            title: t.globalData.app_name + " - 历史记录"
+            title: app.globalData.app_name + " - 历史记录"
         });
-  
-         var i = this.getOpenerEventChannel();
-         console.log(i)
-        // i.on("receive", function(t) {
-        //     t.ec = i, t.date1 = e.first_day(), t.date2 = e.today(), t.today = e.today(), e.setData(t), 
-        //     e.load_data(!0);
-        // });
+
+        var ec = this.getOpenerEventChannel();
+        ec.on("receive", function (data) {
+            data.ec = ec
+            data.date1 = that.first_day()
+            data.date2 = that.today()
+            data.today = that.today()
+             that.setData(data),
+             that.load_data();
+        });
     },
-    onShow: function() {},
-    onUnload: function() {},
-    onPullDownRefresh: function() {},
-    onReachBottom: function() {},
-    today: function() {
+    onShow: function () {},
+    onUnload: function () {},
+    onPullDownRefresh: function () {},
+    onReachBottom: function () {},
+    today: function () {
         var t = new Date();
         return t.getFullYear() + "-" + (1 + t.getMonth()).toString().padStart(2, "0") + "-" + t.getDate().toString().padStart(2, "0");
     },
-    first_day: function() {
+    first_day: function () {
         var t = new Date();
         return t.getFullYear() + "-" + (1 + t.getMonth()).toString().padStart(2, "0") + "-01";
     },
-    load_data: function(val) {
-        wx.removeStorageSync('userInfo')
-        
-        API.request('/bd/getBDInfoList',{lime:1,page:10},'get',(res)=>{
+    load_data: function () {
+        API.request('/standingBook/getStandingBookDetail',{standingBookNo:this.data.standingBookNo},'get',(res)=>{
             console.log(res)
+            if(res.code === 0){
+                res.data.map(item=>{
+                    item.action = item.recordAction ===1?'转出':'产生'
+                    item.type  =  item.damagedType === 1?'Ⅰ类':'Ⅱ'
+                })
+                this.setData({
+                    list:res.data
+                })
+            }
+           
         })
-       
+
+
         // var a = this, e = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
         // if (e || !this.data.loading) {
         //     this.setData({
@@ -89,24 +103,27 @@ Page({
         //     });
         // }
     },
-    dateChange: function(t) {
-        var a = t.currentTarget.dataset.idx, e = t.detail.value, i = {};
+    dateChange: function (t) {
+        var a = t.currentTarget.dataset.idx,
+            e = t.detail.value,
+            i = {};
         i["date" + a] = e, this.setData(i);
     },
-    click_query: function(val) {
+    click_query: function (val) {
         console.log(val)
         this.load_data(!0);
     },
-    touch_top: function(t) {},
-    touch_bottom: function(t) {
+    touch_top: function (t) {},
+    touch_bottom: function (t) {
         this.load_data();
     },
-    click_del: function(a) {
-        var e = this, i = a.currentTarget.dataset.idx;
+    click_del: function (a) {
+        var e = this,
+            i = a.currentTarget.dataset.idx;
         "1" == t.globalData.me.power || this.data.list[i].uid == t.globalData.me.id ? 3 != this.data.list[i].action ? t.post("maker_log", {
             act: "del",
             id: this.data.list[i].id
-        }, function(a) {
+        }, function (a) {
             t.toast("删除成功", "success");
             var n = e.data.list;
             n.splice(i, 1), e.setData({

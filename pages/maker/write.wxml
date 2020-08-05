@@ -26,7 +26,7 @@
                 <input bindinput="input_weight" class="weui-input number" placeholder="最多三位小数" placeholderClass="place-holder" type="digit"></input>
                 <view slot="footer">千克（KG）</view>
             </mp-cell>
-            <block wx:if="{{id==1}}">
+            <block >
                 <mp-cell>
                     <view slot="title">破损类别</view>
                     <radio-group bindchange="typeChange" class="radio-group">
@@ -39,7 +39,7 @@
                     </radio-group>
                 </mp-cell>
                 <mp-cell>
-                    <view slot="title">计数数量</view>
+                    <view slot="title">计数数量</view> 
                     <input bindinput="input_amount" class="weui-input number" placeholder="填写整数" placeholderClass="place-holder" type="number"></input>
                     <view slot="footer">只</view>
                 </mp-cell>
