@@ -49,12 +49,24 @@ Page({
         //         t.alert("错误", "微信登录失败。"), console.log("wx.login -> ", e);
         //     }
         // });
+        this.getInfo()
         if(!getUserOpenIdKey()){
             this.login().then(res => {
-                console.log(res)
+                // 获取用户信息
                 this.getOpenid(res.code)
             })
         }
+    },
+    getInfo(){
+        let that = this
+        wx.getUserInfo({
+            success: function(res) {
+              var userInfo = res.userInfo
+              that.setData({
+                userInfo
+               })
+            }
+          })
     },
     login() {
         return new Promise(function (resolve, reject) {
@@ -109,7 +121,8 @@ Page({
         API.request('/loginByWechat', {  
             openid:getUserOpenIdKey(),
             iv:val.detail.iv,
-            encryptedData:val.detail.encryptedData
+            encryptedData:val.detail.encryptedData,
+            nickName:userInfo.nickName
         }, 'get', (res) => {
            if(res.code === 0){
             // 设置用户信息

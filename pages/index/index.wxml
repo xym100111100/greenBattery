@@ -43,7 +43,7 @@
 					<mp-icon color="{{icon_color}}" icon="lock" size="22"></mp-icon>
 				</view>
 				<view class="name">我的账号</view>
-				<mp-badge wx:if="{{nick}}"></mp-badge>
+				<mp-badge wx:if="{{username}}"></mp-badge>
 			</mp-cell>
 		</mp-cells>
 	</view>

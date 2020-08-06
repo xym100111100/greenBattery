@@ -22,7 +22,7 @@
                 <text class="unit">千克-KG</text>
             </view>
         </mp-cell>
-        <block wx:if="{{tid==1}}">
+        <block wx:if="{{wasteTypeNo === 1}}">
             <mp-cell>
                 <view slot="title">破损类别</view>
                 <view>{{type==1?'Ⅰ类':'Ⅱ类'}}</view>

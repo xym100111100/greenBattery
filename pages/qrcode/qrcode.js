@@ -39,7 +39,8 @@ Page({
                 dWidth: 60,
                 dHeight: 60
             }
-        }), setTimeout(function() {
+        })
+         setTimeout(function() {
             a.count_down();
         }, 1e3);
     },
@@ -55,17 +56,18 @@ Page({
         }
     },
     update_status: function() {
+        console.log("----------------")
         var t = this;
-        a.post("qrcode_status", {
-            qrcode: this.data.content
-        }, function(e) {
-            e.data && e.data > 0 && (t.setData({
-                status: e.data
-            }), 2 == e.data ? (a.toast("对方已确认"), setTimeout(function() {
-                wx.navigateBack({
-                    delta: 2
-                });
-            }, 1e3)) : 1 == e.data && a.toast("对方已扫码"));
-        });
+        // a.post("qrcode_status", {
+        //     qrcode: this.data.content
+        // }, function(e) {
+        //     e.data && e.data > 0 && (t.setData({
+        //         status: e.data
+        //     }), 2 == e.data ? (a.toast("对方已确认"), setTimeout(function() {
+        //         wx.navigateBack({
+        //             delta: 2
+        //         });
+        //     }, 1e3)) : 1 == e.data && a.toast("对方已扫码"));
+        // });
     }
 });

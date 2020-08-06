@@ -19,6 +19,7 @@ Page({
         });
     },
     click_shoot: function() {
+        console.log("---------")
         var a = this;
         wx.createCameraContext().takePhoto({
             quality: "high",

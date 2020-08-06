@@ -11,7 +11,7 @@ Page({
         wx_msg_bind_notify: "WaxtYavubpspcWMWzPaUcfTtf2836hZ1ZYYDYlCwHs0",
         wx_msg: !1,
         icon_color: "#004f1f",
-        nick: false,
+        username: false,
         busi_name: "尔莫科技",
         busi_pass: 1,
         busi_block: 0,
@@ -46,7 +46,7 @@ Page({
         API.request('/company/getUserWork',{companyNo:app.globalData.me.companyNo},'get',(res)=>{
             
             this.setData({
-                nick:app.globalData.me.nick?false:true,
+                username:app.globalData.me.username?false:true,
                 companyType:app.globalData.me.companyType,
                 companyRole:app.globalData.me.companyRole
             })
@@ -81,7 +81,7 @@ Page({
                 power: a.data.power,
                 role: a.data.role
             }), t.setData({
-                nick: app.globalData.me.nick,
+                username: app.globalData.me.username,
                 busi_name: a.data.name,
                 busi_block: a.data.block,
                 busi_role: 1,
@@ -170,22 +170,33 @@ Page({
         });
     },
     click_maker_scan: function() {
+        let that = this
         wx.scanCode({
             onlyFromCamera: !0,
             scanType: [ "qrcode" ],
             complete: function(t) {
+              
                 if ("scanCode:ok" == t.errMsg && "QR_CODE" == t.scanType) {
-                    var a = JSON.parse(t.result);
-                    if (!a.act) return void e.alert("错误", "未知的二维码");
-                    e.post("scan_qrcode", a, function(e) {
                         wx.navigateTo({
-                            url: e.data.url,
+                            url:'/pages/collector/maker_confirm?warehouseOutNo='+t.result ,
                             success: function(t) {
-                                t.eventChannel.emit("receive", e.data.trade);
+                                t.eventChannel.emit("receive", that.data.trade);
                             }
                         });
-                    });
                 } else "scanCode:fail cancel" != t.errMsg && e.alert("提示", "扫码失败：" + t.errMsg);
+
+                // if ("scanCode:ok" == t.errMsg && "QR_CODE" == t.scanType) {
+                //     var a = JSON.parse(t.result);
+                //     if (!a.act) return void app.alert("错误", "未知的二维码");
+                //     e.post("scan_qrcode", a, function(e) {
+                //         wx.navigateTo({
+                //             url: e.data.url,
+                //             success: function(t) {
+                //                 t.eventChannel.emit("receive", e.data.trade);
+                //             }
+                //         });
+                //     });
+                // } else "scanCode:fail cancel" != t.errMsg && e.alert("提示", "扫码失败：" + t.errMsg);
             }
         });
     },

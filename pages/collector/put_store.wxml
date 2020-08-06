@@ -13,12 +13,12 @@
                 </view>
                 <view slot="footer">
                     <view>
-                        <text class="number">{{item.weight/1000}}</text>
+                        <text class="number">{{item.transportWeight/1000}}</text>
                         <text class="unit">千克</text>
                     </view>
-                    <view class="move-up" wx:if="{{item.tid==1}}">
-                        <text class="type">{{item.type==1?'Ⅰ':'Ⅱ'}}类</text>
-                        <text class="number">{{item.amount}}</text>
+                    <view class="move-up" wx:if="{{item.wasteTypeNo==1}}">
+                        <text class="type">{{item.damagedType==1?'Ⅰ':'Ⅱ'}}类</text>
+                        <text class="number">{{item.transportQuantity}}</text>
                         <text class="unit">只</text>
                     </view>
                 </view>

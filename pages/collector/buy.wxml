@@ -4,8 +4,8 @@
         <mp-cell>
             <view slot="title">选择危废</view>
             <radio-group bindchange="click_trash" class="radio-trash">
-                <radio checked="{{item.check}}" class="radio" value="{{item.id}}" wx:if="{{item.checked}}" wx:for="{{trash}}" wx:key="index">
-                    <text>{{item.name}}</text>
+                <radio checked="{{item.check}}" class="radio" value="{{item.wasteTypeNo}}" wx:if="{{item.checked}}" wx:for="{{trash}}" wx:key="index">
+                    <text>{{item.wasteTypeName}}</text>
                 </radio>
             </radio-group>
         </mp-cell>
@@ -14,7 +14,7 @@
             <input adjustPosition="{{true}}" bindinput="input_weight" class="weui-input number" cursorSpacing="150" placeholder="最多三位小数" placeholderClass="place-holder" type="digit"></input>
             <view slot="footer">千克 - KG</view>
         </mp-cell>
-        <block wx:if="{{tid==1}}">
+        <block wx:if="{{wasteTypeNo === 1}}" >
             <mp-cell>
                 <view slot="title">破损类别</view>
                 <radio-group bindchange="click_type" class="radio-type">
