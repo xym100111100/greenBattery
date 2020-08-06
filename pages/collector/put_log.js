@@ -56,7 +56,6 @@ Page({
     touch_bottom: function() {
     },
     load_data: function() {
-        console.log()
         API.request('/warehouse/getWarehouseListByTimeInterval', {applyCompanyNo:this.data.applyCompanyNo}, 'get', (res) => {
             console.log(res)
             if(res.code === 0){

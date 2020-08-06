@@ -23,7 +23,7 @@ Page({
             title: app.globalData.app_name + " - 外勤入库"
         });
 
-
+        this.init()
 
 
     },

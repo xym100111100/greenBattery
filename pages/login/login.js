@@ -23,7 +23,7 @@ Page({
         btn_code_deny: !0,
         btn_login_deny: !0,
         input_code_deny: !0,
-        cell: "18278904219",
+        cell: "18278904219", 
         code: "333333",
 
     },
