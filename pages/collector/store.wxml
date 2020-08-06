@@ -11,16 +11,16 @@
         <view class="empty-bd" wx:if="{{list.length==0}}"> 暂时没有数据 </view>
         <mp-cells extClass="cells" wx:else>
             <mp-cell bindtap="click_row" data-idx="{{index}}" link="true" wx:for="{{list}}" wx:key="index">
-                <view class="user" slot="title">{{item.nick?item.nick:item.phone}}</view>
+                <view class="user" slot="title">{{item.applyUserName?item.applyUserName:item.phone}}</view>
                 <view class="trash">{{item.trash_name}}</view>
                 <view class="row">
-                    <view class="number">{{item.s_weight/1000}}</view>
+                    <view class="number">{{item.applyWeight/1000}}</view>
                     <view class="unit">千克</view>
                     <block wx:if="{{item.tid==1}}">
                         <view class="number">{{item.s_amount}}</view>
                         <view class="unit">只</view>
                     </block>
-                    <view class="time">{{item.s_time}}</view>
+                    <view class="time">{{item.applyTime}}</view>
                 </view>
             </mp-cell>
         </mp-cells>
@@ -39,18 +39,18 @@
                 <icon color="#fff" size="16" type="search"></icon>查询</button>
         </view>
         <scroll-view bindscrolltolower="touch_bottom" bindscrolltoupper="touch_top" enableBackToTop="true" enableFlex="{{true}}" scrollY="true">
-            <mp-cells extClass="cells" wx:if="{{list1.length>0}}">
-                <mp-cell bindtap="click_row" data-idx="{{index}}" link="true" wx:for="{{list1}}" wx:key="index">
-                    <view class="user" slot="title">{{item.nick?item.nick:item.phone}}</view>
+            <mp-cells extClass="cells" wx:if="{{list.length>0}}">
+                <mp-cell bindtap="click_row" data-idx="{{index}}" link="true" wx:for="{{list}}" wx:key="index">
+                    <view class="user" slot="title">{{item.applyUserName?item.applyUserName:item.phone}}</view>
                     <view class="trash">{{item.trash_name}}</view>
                     <view class="row">
-                        <view class="number">{{item.s_weight/1000}}</view>
+                        <view class="number">{{item.applyWeight/1000}}</view>
                         <view class="unit">千克</view>
                         <block wx:if="{{item.tid==1}}">
                             <view class="number">{{item.s_amount}}</view>
                             <view class="unit">只</view>
                         </block>
-                        <view class="time">{{item.s_time}}</view>
+                        <view class="time">{{item.applyTime}}</view>
                     </view>
                 </mp-cell>
             </mp-cells>

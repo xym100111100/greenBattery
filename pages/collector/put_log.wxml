@@ -29,13 +29,13 @@
                     <view class="user" slot="title">{{item.username?item.username:item.phone}}</view>
                     <view class="trash">{{item.trash_name}}</view>
                     <view class="row">
-                        <view class="number">{{item.weight/1000}}</view>
+                        <view class="number">{{item.applyWeight/1000}}</view>
                         <view class="unit">千克</view>
                         <block wx:if="{{item.tid==1}}">
-                            <view class="number">{{item.amount}}</view>
+                            <view class="number">{{item.applyQuantity}}</view>
                             <view class="unit">只</view>
                         </block>
-                        <view class="time">{{item.time}}</view>
+                        <view class="time">{{item.applyTime}}</view>
                     </view>
                 </mp-cell>
             </mp-cells>

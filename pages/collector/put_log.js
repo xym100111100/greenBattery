@@ -19,7 +19,7 @@ Page({
         // }],
         list: [],
         applyCompanyNo:'',
-        state:'',
+        state:0,
     },
     onLoad: function() {
         wx.setNavigationBarTitle({
@@ -38,9 +38,10 @@ Page({
         //     today: this.today()
         // });
     },
-    click_tab: function(t) {
+    click_tab: function(val) {
         this.setData({
-            activeTab: t.currentTarget.dataset.idx
+            activeTab: val.currentTarget.dataset.idx,
+            state:val.currentTarget.dataset.idx
         }), this.load_data();
     },
     today: function() {
@@ -56,7 +57,7 @@ Page({
     touch_bottom: function() {
     },
     load_data: function() {
-        API.request('/warehouse/getWarehouseListByTimeInterval', {applyCompanyNo:this.data.applyCompanyNo}, 'get', (res) => {
+        API.request('/warehouse/getWarehouseListByTimeInterval', {applyCompanyNo:this.data.applyCompanyNo,state:this.data.state}, 'get', (res) => {
             console.log(res)
             if(res.code === 0){
                 res.data.map(item=>{
