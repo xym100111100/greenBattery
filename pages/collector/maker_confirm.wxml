@@ -5,20 +5,20 @@
     <mp-cells extClass="my-cells">
         <mp-cell>
             <view slot="title">收集单位</view>
-            <view>{{busi_name}}</view>
+            <view>{{applyCompanyName}}</view>
         </mp-cell>
         <mp-cell>
             <view slot="title">收集人员</view>
-            <view>{{nick!=''?nick:phone}}</view>
+            <view>{{applyUserName}}</view>
         </mp-cell>
         <mp-cell>
             <view slot="title">转出危废</view>
-            <view>{{trash_name}}</view>
+            <view>{{trashName}}</view>
         </mp-cell>
         <mp-cell>
             <view slot="title">转出质量</view>
             <view class="row">
-                <text class="number">{{weight/1000}}</text>
+                <text class="number">{{warehouseOutWeight/1000}}</text>
                 <text class="unit">千克-KG</text>
             </view>
         </mp-cell>
@@ -30,7 +30,7 @@
             <mp-cell>
                 <view slot="title">转出数量</view>
                 <view class="row">
-                    <text class="number">{{amount}}</text>
+                    <text class="number">{{warehouseOutQuantity}}</text>
                     <text class="unit">只</text>
                 </view>
             </mp-cell>

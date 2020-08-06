@@ -5,7 +5,7 @@ Page({
         loading: !1,
         activeTab: 0,
         list: [{
-            nick:"杰克",
+            nick:"杰克1",
             phone:'18707895796',
             trash_name:'废电池',
             s_weight:2222,
@@ -16,7 +16,32 @@ Page({
         date1: "2001-03-17",
         date2: "2019-03-17",
         today: "2020-07-23",
-        list1: []
+        list1: [{
+            trash_name:'废电池',
+            s_time:'2022-09-09',
+            s_weight:100,
+            tid:1,
+            s_amount:22,
+            a_time:'202-03-20',
+            a_weight:22,
+            a_amount:20,
+            name:'尔莫科技',
+            nick:'小明',
+            state:1,
+        },
+        {
+            trash_name:'废电池',
+            s_time:'2022-09-09',
+            s_weight:100,
+            tid:1,
+            s_amount:22,
+            a_time:'202-03-20',
+            a_weight:22,
+            a_amount:20,
+            name:'尔莫科技',
+            nick:'小明',
+            state:0,
+        }],
     },
     onLoad: function() {
         wx.setNavigationBarTitle({
@@ -67,7 +92,7 @@ Page({
             url: "/pages/collector/store_detail",
             success: function(t) {
                 t.eventChannel.emit("receive", {
-                    row: a.data.list1[e]
+                  //  row: a.data.list1[e]
                 });
             }
         });
@@ -101,7 +126,7 @@ Page({
                 skip: e ? 0 : i.length
             }, function(t) {
                 e && (i = []), t.data.length > 0 && (i = i.concat(t.data)), a.setData({
-                    list1: i,
+               //     list1: i,
                     loading: !1
                 });
             });

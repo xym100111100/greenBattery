@@ -9,7 +9,7 @@ Page({
         id: 0,
         inputtime: 0,
         tid: 0,
-        trash_name: "",
+        trashName: "",
         weight: 0,
         type: 0,
         amount: 0,
@@ -27,10 +27,13 @@ Page({
         API.request('/warehouseOut/getWarehouseOutByNo', {
             warehouseOutNo:data.warehouseOutNo
         }, 'get', (res) => {
-               console.log(res)
-               this.setData({
-                ...res.data     
-               })
+              if(res.code === 0){
+                res.data.trashName = res.data.wasteTypeNo==1?'废电池':'其他'
+                this.setData({
+                    ...res.data     
+                   })
+                   
+              }
                
         })
         
@@ -46,11 +49,11 @@ Page({
             confirmUserNo:app.globalData.me.userNo
         }, 'get', (res) => {
             if(res.code === 0){
-                wx.toast("确认完成", "success"), setTimeout(function() {
+                app.toast("确认完成", "success"), setTimeout(function() {
                     wx.navigateBack();
                 }, 1e3);
             }else{
-                wx.toast(res.msg, "error")
+                app.toast(res.msg, "error")
             }
         })
 

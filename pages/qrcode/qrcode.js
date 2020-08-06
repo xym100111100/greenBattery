@@ -58,6 +58,7 @@ Page({
     update_status: function() {
         console.log("----------------")
         var t = this;
+        
         // a.post("qrcode_status", {
         //     qrcode: this.data.content
         // }, function(e) {
