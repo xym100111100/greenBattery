@@ -5,7 +5,7 @@
             <view slot="title">出库危废</view>
             <text class="trash-name">{{name}}</text>
         </mp-cell>
-        <block wx:if="{{id==1&&show_transit}}">
+        <!-- <block wx:if="{{id==1&&show_transit}}"> -->
             <mp-cell>
                 <view slot="title">出库目标</view>
                 <radio-group bindchange="click_target" class="radio-trash">
@@ -27,13 +27,13 @@
                 <view slot="title">接收单位</view>
                 <radio-group bindchange="click_receiver" class="radio-trash">
                     <view wx:for="{{receivers}}" wx:key="index">
-                        <radio checked="{{item.id==receiver}}" class="radio" value="{{item.id}}">
-                            <text>{{item.name}}</text>
+                        <radio checked="{{item.companyNo==receiver}}" class="radio" value="{{item.companyNo}}">
+                            <text>{{item.companyName}}</text>
                         </radio>
                     </view>
                 </radio-group>
             </mp-cell>
-        </block>
+        <!-- </block> -->
         <mp-cell>
             <view slot="title">出库质量</view>
             <input adjustPosition="true" bindblur="input_weight" class="weui-input number" cursorSpacing="200" placeholder="最多三位小数" placeholderClass="place-holder" type="digit" value="{{weight}}"></input>

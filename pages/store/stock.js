@@ -1,24 +1,27 @@
-var e = getApp();
+var API = require('../../utils/api.js')
+
+var app = getApp();
 
 Page({
     data: {
-        copyright: e.globalData.app_copy_right,
-        trash: [{
-            checked:true,
-            w_keep:2244,
-            id:1,
-            a_keep:11,
-            w_increase:3432,
-            a_increase:'11',
-            w_reduce:1233,
-            a_reduce:4322,
-            name:'标题'
-        }]
+        copyright: app.globalData.app_copy_right,
+        // trash: [{
+        //     checked:true,
+        //     w_keep:2244,
+        //     id:1,
+        //     a_keep:11,
+        //     w_increase:3432,
+        //     a_increase:'11',
+        //     w_reduce:1233,
+        //     a_reduce:4322,
+        //     name:'标题'
+        // }]
+        trash:[]
     },
     onLoad: function(a) {
         var t = this;
         wx.setNavigationBarTitle({
-            title: e.globalData.app_name + " - 库存"
+            title: app.globalData.app_name + " - 库存"
         })
         //  this.getOpenerEventChannel().on("receive", function(e) {
         //     for (var a = e.trash, n = 0; n < a.length; n++) a[n].w_increase = 0, a[n].w_reduce = 0, 
@@ -27,6 +30,19 @@ Page({
         //         trash: a
         //     }), t.init();
         // });
+
+        API.request('/standingBook/getStandingBookByCompanyNo',{companyNo:app.globalData.me.companyNo},'get',(res)=>{
+            console.log(res)
+            if(res.code === 0){
+                res.data.map(item=>{
+                    item.checked = true
+                }) 
+                this.setData({
+                    trash:res.data
+                 })  
+            }
+
+        })
     },
     onShow: function() {},
     onPullDownRefresh: function() {},
