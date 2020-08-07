@@ -95,7 +95,7 @@ Page({
                 wasteTypeNos: [],
                 transportNos: [],
                 applyQuantity: 0,
-                applyWeigh: 0,
+                applyWeight: 0,
                 applyCompanyNo: app.globalData.me.companyNo,
                 applyUserNo: app.globalData.me.userNo
             }
@@ -103,7 +103,7 @@ Page({
                 payload.wasteTypeNos.push(item.wasteTypeNo)
                 payload.transportNos.push(item.transportNo)
                 payload.applyQuantity = payload.applyQuantity +item.transportQuantity
-                payload.applyWeigh = payload.applyWeigh +item.transportWeight
+                payload.applyWeight = payload.applyWeight +item.transportWeight
             })
            
             API.request('/warehouse/createdWarehouse', payload, 'post', (res) => {

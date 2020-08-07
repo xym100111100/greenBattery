@@ -5,21 +5,32 @@ Page({
         loading: !1,
         ec: null,
         tid: 0,
-        date1: "",
-        date2: "",
-        today: "",
-        list: []
+        date1: "2020-02-20",
+        date2: "2020-02-21",
+        today: "2020-08-07",
+        tid:1,
+        list: [{
+            out:true,
+            amount:11,
+            inputtime:'2020-11-11',
+            weight:222, },
+            {
+            out:false,
+            amount:11,
+            inputtime:'2020-11-11',
+            weight:222, }
+        ]
     },
     onLoad: function(a) {
         var n = this;
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 历史记录"
         });
-        var e = this.getOpenerEventChannel();
-        e.on("receive", function(t) {
-            t.ec = e, t.date1 = n.first_day(), t.date2 = n.today(), t.today = n.today(), n.setData(t), 
-            n.load_data(!0);
-        });
+        // var e = this.getOpenerEventChannel();
+        // e.on("receive", function(t) {
+        //     t.ec = e, t.date1 = n.first_day(), t.date2 = n.today(), t.today = n.today(), n.setData(t), 
+        //     n.load_data(!0);
+        // });
     },
     onShow: function() {},
     onUnload: function() {},

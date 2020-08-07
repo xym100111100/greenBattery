@@ -12,12 +12,12 @@
         <mp-cells extClass="cells" wx:else>
             <mp-cell bindtap="click_row" data-idx="{{index}}" link="true" wx:for="{{list}}" wx:key="index">
                 <view class="user" slot="title">{{item.applyUserName?item.applyUserName:item.phone}}</view>
-                <view class="trash">{{item.trash_name}}</view>
+                <view class="trash">{{item.wasteTypeName}}</view>
                 <view class="row">
                     <view class="number">{{item.applyWeight/1000}}</view>
                     <view class="unit">千克</view>
-                    <block wx:if="{{item.tid==1}}">
-                        <view class="number">{{item.s_amount}}</view>
+                    <block wx:if="{{item.wasteTypeNo==1}}">
+                        <view class="number">{{item.applyQuantity}}</view>
                         <view class="unit">只</view>
                     </block>
                     <view class="time">{{item.applyTime}}</view>
@@ -42,12 +42,12 @@
             <mp-cells extClass="cells" wx:if="{{list.length>0}}">
                 <mp-cell bindtap="click_row" data-idx="{{index}}" link="true" wx:for="{{list}}" wx:key="index">
                     <view class="user" slot="title">{{item.applyUserName?item.applyUserName:item.phone}}</view>
-                    <view class="trash">{{item.trash_name}}</view>
+                    <view class="trash">{{item.wasteTypeName}}</view>
                     <view class="row">
                         <view class="number">{{item.applyWeight/1000}}</view>
                         <view class="unit">千克</view>
-                        <block wx:if="{{item.tid==1}}">
-                            <view class="number">{{item.s_amount}}</view>
+                        <block wx:if="{{item.wasteTypeNo==1}}">
+                            <view class="number">{{item.applyQuantity}}</view>
                             <view class="unit">只</view>
                         </block>
                         <view class="time">{{item.applyTime}}</view>

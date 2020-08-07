@@ -123,7 +123,7 @@ Page({
             url: "/pages/collector/store_detail",
             success: function(t) {
                 t.eventChannel.emit("receive", {
-                  //  row: a.data.list1[e]
+                    row: a.data.list[e]
                 });
             }
         });

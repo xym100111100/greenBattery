@@ -1,15 +1,15 @@
 <view class="page">
     <view class="bd-pad">
-        <view class="collect-name">{{nick?nick:phone}}</view>
+        <view class="collect-name">{{applyUserName?applyUserName:phone}}</view>
         <view class="row">
             <view class="label">合计</view>
             <view class="{{a_weight?'fixed':'number'}}">{{s_weight/1000}}</view>
-            <view class="number" wx:if="{{a_weight}}">{{a_weight/1000}}</view>
+            <view class="number" wx:if="{{applyWeight}}">{{applyWeight/1000}}</view>
             <view class="unit">KG</view>
             <block wx:if="{{s_amount>0}}">
                 <view class="label">，</view>
                 <view class="{{a_amount?'fixed':'number'}}">{{s_amount}}</view>
-                <view class="number" wx:if="{{a_amount>0}}">{{a_amount}}</view>
+                <view class="number" wx:if="{{applyQuantity>0}}">{{applyQuantity}}</view>
                 <view class="unit">只</view>
             </block>
         </view>
@@ -18,18 +18,18 @@
         <mp-cell wx:for="{{collect}}" wx:key="index">
             <view class="index" slot="title">{{index+1}}</view>
             <view>
-                <view class="trash-name">{{item.trash_name}}</view>
-                <view class="maker-name">{{item.name}}</view>
-                <view class="time">{{item.finishtime}}</view>
+                <view class="trash-name">{{item.wasteTypeName}}</view>
+                <view class="maker-name">{{item.transportCompanyName}}</view>
+                <view class="time">{{item.receiveTime}}</view>
             </view>
             <view slot="footer">
                 <view>
-                    <text class="number">{{item.weight/1000}}</text>
+                    <text class="number">{{item.transportWeight/1000}}</text>
                     <text class="unit">千克</text>
                 </view>
-                <view wx:if="{{item.tid==1}}">
+                <view wx:if="{{item.wasteTypeNo==1}}">
                     <text class="type">{{item.type==1?'Ⅰ':'Ⅱ'}}类</text>
-                    <text class="amount">{{item.amount}}</text>
+                    <text class="amount">{{item.transportQuantity}}</text>
                     <text class="unit">只</text>
                 </view>
             </view>
