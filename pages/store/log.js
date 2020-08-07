@@ -1,3 +1,5 @@
+var API = require('../../utils/api.js')
+
 var t = getApp();
 
 Page({
@@ -26,11 +28,14 @@ Page({
         wx.setNavigationBarTitle({
             title: t.globalData.app_name + " - 历史记录"
         });
-        // var e = this.getOpenerEventChannel();
-        // e.on("receive", function(t) {
-        //     t.ec = e, t.date1 = n.first_day(), t.date2 = n.today(), t.today = n.today(), n.setData(t), 
-        //     n.load_data(!0);
-        // });
+        var e = this.getOpenerEventChannel();
+        e.on("receive", function(t) {
+            t.ec = e, t.date1 = n.first_day(), t.date2 = n.today(), t.today = n.today(), n.setData(t), 
+            n.load_data(!0);
+        });
+
+
+
     },
     onShow: function() {},
     onUnload: function() {},
@@ -45,25 +50,39 @@ Page({
         return t.getFullYear() + "-" + (1 + t.getMonth()).toString().padStart(2, "0") + "-01";
     },
     load_data: function() {
-        var a = this, n = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
-        if (n || !this.data.loading) {
-            this.setData({
-                loading: !0
-            });
-            var e = this.data.list;
-            t.post("stock", {
-                act: "log",
-                tid: this.data.tid,
-                d1: this.data.date1,
-                d2: this.data.date2,
-                skip: n ? 0 : e.length
-            }, function(t) {
-                n && (e = []), t.data.length > 0 && (e = e.concat(t.data)), a.setData({
-                    list: e,
-                    loading: !1
-                });
-            });
-        }
+
+        API.request('/standingBook/getStandingBookDetail',{standingBookNo:this.data.standingBookNo},'get',(res)=>{
+            console.log(res)
+            if(res.code === 0){
+                res.data.map(item=>{
+                    item.out = item.recordAction ===1?true:false
+                })
+                this.setData({
+                    list:res.data
+                })
+            }
+           
+        })
+
+        // var a = this, n = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
+        // if (n || !this.data.loading) {
+        //     this.setData({
+        //         loading: !0
+        //     });
+        //     var e = this.data.list;
+        //     t.post("stock", {
+        //         act: "log",
+        //         tid: this.data.tid,
+        //         d1: this.data.date1,
+        //         d2: this.data.date2,
+        //         skip: n ? 0 : e.length
+        //     }, function(t) {
+        //         n && (e = []), t.data.length > 0 && (e = e.concat(t.data)), a.setData({
+        //             list: e,
+        //             loading: !1
+        //         });
+        //     });
+        // }
     },
     dateChange: function(t) {
         var a = t.currentTarget.dataset.idx, n = t.detail.value, e = {};

@@ -1,20 +1,23 @@
-var t = getApp();
+var API = require('../../utils/api.js')
+
+var app = getApp();
 
 Page({
     data: {
         loading: !1,
         activeTab: 0,
-        list: [
-            {
-                trash_name:'核废料',
-                s_weight:100,
-                s_amount:1333,
-                s_time:'1992-02-18',
-                name:"尔莫科技",
-                nick:'杰克',
-                tid:1,
-            }
-        ],
+        // list: [
+        //     {
+        //         trash_name:'核废料',
+        //         s_weight:100,
+        //         s_amount:1333,
+        //         s_time:'1992-02-18',
+        //         name:"尔莫科技",
+        //         nick:'杰克',
+        //         tid:1,
+        //     }
+        // ],
+        list:[],
         date1: "2019-02-20",
         date2: "2019-02-16",
         today: "",
@@ -48,38 +51,50 @@ Page({
         box_ani: {},
         box_idx: -1,
         box_weight: 0,
-        box_amount: 0
+        box_amount: 0,
+        state:0
     },
     onLoad: function() {
         wx.setNavigationBarTitle({
-            title: t.globalData.app_name + " - 入库申请"
+            title: app.globalData.app_name + " - 入库申请"
         })
+
+
         //  this.setData({
         //     date1: this.first_day(),
         //     date2: this.today(),
         //     today: this.today()
-        // }), this.load_data();
+        // }),
+         this.load_data();
     },
     click_tab: function(a) {
         var i = a.currentTarget.dataset.idx;
         this.setData({
             activeTab: i
         }), 0 == i ? (wx.setNavigationBarTitle({
-            title: t.globalData.app_name + " - 入库申请"
+            title: app.globalData.app_name + " - 入库申请"
         }), this.load_data()) : (wx.setNavigationBarTitle({
-            title: t.globalData.app_name + " - 入库记录"
+            title: app.globalData.app_name + " - 入库记录"
         }), this.load_data1());
     },
     load_data: function() {
-        var a = this;
-        t.post("stock", {
-            act: "trans_in",
-            tab: 0
-        }, function(t) {
-            a.setData({
-                list: t.data
-            });
-        });
+
+        API.request('/warehouse/getWarehouseListByTimeInterval', {applyCompanyNo:app.globalData.me.companyNo,state:this.data.state}, 'get', (res) => {
+                if(res.code === 0){
+                    this.setData({
+                        list:res.data
+                    })
+                }
+        })
+        // var a = this;
+        // t.post("stock", {
+        //     act: "trans_in",
+        //     tab: 0
+        // }, function(t) {
+        //     a.setData({
+        //         list: t.data
+        //     });
+        // });
     },
     box_show: function() {
         this.setData({

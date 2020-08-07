@@ -11,17 +11,17 @@
         <view class="empty-bd" wx:if="{{list.length==0}}"> 暂时没有数据 </view>
         <mp-cells extClass="cells" wx:else>
             <mp-cell bindtap="click_row" data-idx="{{index}}" link="true" wx:for="{{list}}" wx:key="index">
-                <view class="trash">{{item.trash_name}}</view>
+                <view class="trash">{{item.wasteTypeName}}</view>
                 <view class="row">
-                    <view class="number">{{item.s_weight/1000}}</view>
+                    <view class="number">{{item.applyWeight/1000}}</view>
                     <view class="unit">千克</view>
                     <block wx:if="{{item.tid==1}}">
-                        <view class="number">{{item.s_amount}}</view>
+                        <view class="number">{{item.applyQuantity}}</view>
                         <view class="unit">只</view>
                     </block>
-                    <view class="time">{{item.s_time}}</view>
+                    <view class="time">{{item.applyTime}}</view>
                 </view>
-                <view class="busi_name">{{item.name}} - <text>{{item.nick?item.nick:item.phone}}</text>
+                <view class="busi_name">{{item.name}} - <text>{{item.applyUserName?item.applyUserName:item.phone}}</text>
                 </view>
             </mp-cell>
         </mp-cells>

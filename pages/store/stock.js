@@ -95,9 +95,9 @@ Page({
                 }
             },
             success: function(e) {
-                e.eventChannel.emit("receive", {
-                    tid: a.data.trash[t].id
-                });
+                e.eventChannel.emit("receive", 
+                    a.data.trash[t]
+                );
             }
         });
     }

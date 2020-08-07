@@ -185,13 +185,13 @@ Page({
                     damagedType: this.data.type,
                     warehouseOutQuantity: this.data.amount,
                     warehouseOutWeight: this.data.weight,
-                    wasteTypeNo: ""
+                    wasteTypeNo: this.data.companyWasteType[0].wasteTypeNo
                 }
 
 
-                this.data.companyWasteType.map(item => {
-                    data.wasteTypeNo = data.wasteTypeNo + item.wasteTypeNo + "/"
-                })
+                // this.data.companyWasteType.map(item => {
+                //     data.wasteTypeNo = data.wasteTypeNo + item.wasteTypeNo
+                // })
                 data.wasteTypeNo.substring(0, data.wasteTypeNo.length)
                 API.request('/warehouseOut/transferCenter', data, 'post', (res) => {
                     if (res.code === 0) {

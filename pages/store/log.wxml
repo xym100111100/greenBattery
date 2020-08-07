@@ -16,14 +16,14 @@
             <mp-cell wx:for="{{list}}" wx:key="index">
                 <view class="action {{item.out?'red':'green'}}" slot="title">{{item.out?'出库':'入库'}}</view>
                 <view class="row">
-                    <view class="number kg {{item.out?'red':'green'}}">{{item.weight/1000}}</view>
+                    <view class="number kg {{item.out?'red':'green'}}">{{item.recordWeight/1000}}</view>
                     <view class="unit">KG</view>
-                    <block wx:if="{{tid==1}}">
-                        <view class="number small">{{item.amount}}</view>
+                    <block >
+                        <view class="number small">{{item.recordQuantity}}</view>
                         <view class="unit">只</view>
                     </block>
                 </view>
-                <view slot="footer">{{item.inputtime}}</view>
+                <view slot="footer">{{item.recordDay}}</view>
             </mp-cell>
         </mp-cells>
     </scroll-view>
