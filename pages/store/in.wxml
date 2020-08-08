@@ -15,7 +15,7 @@
                 <view class="row">
                     <view class="number">{{item.applyWeight/1000}}</view>
                     <view class="unit">千克</view>
-                    <block wx:if="{{item.tid==1}}">
+                    <block wx:if="{{item.wasteTypeNo==1}}">
                         <view class="number">{{item.applyQuantity}}</view>
                         <view class="unit">只</view>
                     </block>
@@ -84,7 +84,7 @@
                 <input bindblur="input_weight" class="input-number" placeholder="请输入数字" placeholderClass="input-placeholder" type="digit" value="{{box_weight}}"></input>
                 <view class="unit">千克</view>
             </view>
-            <view class="row" wx:if="{{box_show_amount}}">
+            <view class="row" >
                 <view class="label">入库数量</view>
                 <input bindblur="input_amount" class="input-number" placeholder="请输入数字" placeholderClass="input-placeholder" type="number" value="{{box_amount}}"></input>
                 <view class="unit">只</view>

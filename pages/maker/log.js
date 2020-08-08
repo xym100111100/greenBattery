@@ -66,10 +66,10 @@ Page({
     },
     load_data: function () {
         API.request('/standingBook/getStandingBookDetail',{standingBookNo:this.data.standingBookNo},'get',(res)=>{
-            console.log(res)
+            console.log(res) 
             if(res.code === 0){
                 res.data.map(item=>{
-                    item.action = item.recordAction ===1?'转出':'产生'
+                    item.action = item.recordAction ===1?'产生':'转出'
                     item.type  =  item.damagedType === 1?'Ⅰ类':'Ⅱ'
                 })
                 this.setData({

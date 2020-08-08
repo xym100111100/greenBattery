@@ -8,7 +8,7 @@ Page({
         id: 0,
         name: "",
         date: "",
-        action: 0,
+        action: 1,
         weight: "",
         amount: "",
         type: 1,
