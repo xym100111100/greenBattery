@@ -76,12 +76,12 @@ Page({
             title: app.globalData.app_name + " - 入库申请"
         }), this.load_data()) : (wx.setNavigationBarTitle({
             title: app.globalData.app_name + " - 入库记录"
-        }), this.load_data1());
+        }), this.load_data1()); 
     },
-    load_data: function () {
+    load_data: function () { 
 
-        API.request('/warehouse/getWarehouseListByTimeInterval', {
-            applyCompanyNo: app.globalData.me.companyNo,
+        API.request('/warehouse/getWarehouseListByCenter', {
+            receiveCompanyNo: app.globalData.me.companyNo,
             state: this.data.state
         }, 'get', (res) => {
             if (res.code === 0) {
@@ -235,26 +235,27 @@ Page({
         console.log("touch_bottom");
     },
     load_data1: function () {
-        var a = this,
-            i = !(arguments.length > 0 && void 0 !== arguments[0]) || arguments[0];
-        if (i || !this.data.loading) {
-            this.setData({
-                loading: !0
-            });
-            var o = this.data.list1;
-            app.post("stock", {
-                act: "trans_in",
-                tab: 1,
-                d1: this.data.date1,
-                d2: this.data.date2,
-                skip: i ? 0 : o.length
-            }, function (t) {
-                i && (o = []), t.data.length > 0 && (o = o.concat(t.data)), a.setData({
-                    list1: o,
-                    loading: !1
-                });
-            });
-        }
+        
+        // var a = this,
+        //     i = !(arguments.length > 0 && void 0 !== arguments[0]) || arguments[0];
+        // if (i || !this.data.loading) {
+        //     this.setData({
+        //         loading: !0
+        //     });
+        //     var o = this.data.list1;
+        //     app.post("stock", {
+        //         act: "trans_in",
+        //         tab: 1,
+        //         d1: this.data.date1,
+        //         d2: this.data.date2,
+        //         skip: i ? 0 : o.length
+        //     }, function (t) {
+        //         i && (o = []), t.data.length > 0 && (o = o.concat(t.data)), a.setData({
+        //             list1: o,
+        //             loading: !1
+        //         });
+        //     });
+        // }
     },
     dateChange: function (t) {
         var a = t.currentTarget.dataset.idx,
