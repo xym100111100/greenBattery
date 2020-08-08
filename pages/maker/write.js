@@ -8,7 +8,7 @@ Page({
         id: 0,
         name: "",
         date: "",
-        action: 1,
+        action: 0,
         weight: "",
         amount: "",
         type: 1,
@@ -58,7 +58,7 @@ Page({
             success: function (a) {
                 a.eventChannel.emit("receive", {
                     tid: that.data.id,
-                    name: that.data.name,
+                    name: that.data.userName,
                     standingBookNo:that.data.standingBookNo
                 });
             }
@@ -90,7 +90,8 @@ Page({
             damagedType: this.data.type,
             recordQuantity: this.data.amount,
             userNo: app.globalData.me.userNo,
-            standingBookNo: this.data.standingBookNo
+            standingBookNo: this.data.standingBookNo,
+            username:app.globalData.me.username
         };
 
         API.request('/standingBook/addStandingBookDetail', payload, 'put', (res) => {

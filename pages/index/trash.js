@@ -68,7 +68,6 @@ Page({
             return item.checked
         })
         if (!result) {
-
             app.alert("提示", "请勾选危废。")
             return
         }
@@ -80,13 +79,14 @@ Page({
             app.alert("提示", "请填写中的类型的最大库存量")
             return
         }
+        let data =  that.data.trash.filter(item=>item.checked)
         // 提交
         that.setData({
             loading:true
         })
         API.request('/wasteType/setCompanyWasteType', {
             companyNo: app.globalData.me.companyNo,
-            wasteTypeTo: that.data.trash
+            wasteTypeTo:data
         }, 'put', (res) => {
             if (res.code === 0) {
                 app.toast("设置成功", "success"), setTimeout(function () {

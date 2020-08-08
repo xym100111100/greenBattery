@@ -1,12 +1,13 @@
 var API = require('../../utils/api.js')
 
-var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
-    return typeof t;
-} : function(t) {
-    return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
-}, e = getApp();
+var t = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (t) {
+        return typeof t;
+    } : function (t) {
+        return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
+    },
+    e = getApp();
 
-var  app = getApp()
+var app = getApp()
 
 Page({
     data: {
@@ -15,7 +16,7 @@ Page({
         activeTab: 0,
         search_bid: 0,
         wx_msg_bind_ret: "ACRwFd2SlzXf6RX2Ebsn0YDFICLgx3YFrJdGVDb4bt0",
-        roles: [ {
+        roles: [{
             id: 1,
             text: "产废单位",
             intro: "产生危险废物，需要委托他人处理"
@@ -47,7 +48,7 @@ Page({
             id: 8,
             text: "公安局派出所",
             intro: "生态环境违法侦破、打击"
-        } ],
+        }],
         role_idx: 0,
         contact: "",
         cell: "",
@@ -61,23 +62,23 @@ Page({
         town: "",
 
         companyContactsName: "",
-        companyContactsCell:'',
-        companyName:'',
+        companyContactsCell: '',
+        companyName: '',
         companyType: 0,
-        companyAddress:'',
-        companyAreaName:'',
-        companyCityName:'',
-        searchData:[],
-        companyNo:'',
+        companyAddress: '',
+        companyAreaName: '',
+        companyCityName: '',
+        searchData: [],
+        companyNo: '',
 
     },
-    onLoad: function() {
+    onLoad: function () {
 
-                this.setData({
-                    companyContactsCell: app.globalData.me.cell,
-                    contact: app.globalData.me.username ? app.globalData.me.username : "",
-                    eventChannel: this.getOpenerEventChannel()
-                })
+        this.setData({
+            companyContactsCell: app.globalData.me.cell,
+            companyContactsName: app.globalData.me.username ? app.globalData.me.username : "",
+            eventChannel: this.getOpenerEventChannel()
+        })
 
 
         // this.setData({
@@ -86,57 +87,62 @@ Page({
         //     contact: e.globalData.me.nick ? e.globalData.me.nick : "",
         //     eventChannel: this.getOpenerEventChannel()
         // })
-         wx.setNavigationBarTitle({
+        wx.setNavigationBarTitle({
             title: app.globalData.app_name + " - 绑定单位"
         });
     },
-    companyNameInput(val){
-  
+    companyNameInput(val) {
+
         this.setData({
             companyName: val.detail.value
         })
     },
-    name_input(val){
+    name_input(val) {
         this.setData({
-            companyContactsName:val.detail.value
+            companyContactsName: val.detail.value
         })
     },
-    cell_input(val){
+    cell_input(val) {
         this.setData({
-            companyContactsCell:val.detail.value
+            companyContactsCell: val.detail.value
         })
     },
 
-    onUnload: function() {
+    onUnload: function () {
         this.data.eventChannel && "function" == typeof this.data.eventChannel.emit && this.data.eventChannel.emit("reload");
     },
-    click_tab: function(val) {
-        let  index = val.currentTarget.dataset.idx;
+    click_tab: function (val) {
+        let index = val.currentTarget.dataset.idx;
         this.setData({
             activeTab: index
         })
-        if(index == 1 ){
+        if (index == 1) {
             this.check_auth_for_location();
-        } 
+        }
     },
-    search: function(val) {
-        API.request('/company/getBatteryCompanyByName',{companyName:val.detail},'get',(res)=>{
-            if(res.data.length > 0 ){
-             this.setData({
-                 searchData:res.data
-             })
-            }else{
-             this.setData({
-                 searchData:[]
-             })
+    search: function (val) {
+        API.request('/company/getBatteryCompanyByName', {
+            companyName: val.detail
+        }, 'get', (res) => {
+            if (res.data.length > 0) {
+                let data = res.data.filter(item => {
+                    return item.companyNo != app.globalData.me.companyNo
+                })
+                this.setData({
+                    searchData: data
+                })
+            } else {
+                this.setData({
+                    searchData: []
+                })
             }
-             
-      })
+
+        })
     },
-    selectresult: function(val) {
-        
+    selectresult: function (val) {
+
         this.setData({
-            companyNo:val.detail.checkedNo
+            companyNo: val.detail.checkedNo
         })
         // var e = val.detail.item.value;
         // this.search_bid == e ? this.setData({
@@ -145,22 +151,29 @@ Page({
         //     search_bid: e
         // });
     },
-    click_search_done: function() {
-        if(!this.data.companyNo){
-            app.alert("提示", "请选中要绑定的单位") 
-            return ;
+    click_search_done: function () {
+        if (!this.data.companyNo) {
+            app.alert("提示", "请选中要绑定的单位")
+            return;
         }
-        let payload = {}
-        payload.companyNo = this.data.companyNo
-        payload.userNo=app.globalData.me.userNo
-        API.request('/user/bindingBatteryCompany',payload,'get',(res)=>{
-                if(res.code === 0){
-                    app.alert("提示","已申请绑定，等待单位管理员审核",(res)=>{
-                        wx.navigateTo({
-                            url: "/pages/index/index",})
-                    })
-                }
+        app.alert("警告", "确定后该账号将于原账号解除绑定", (result) => {
+            console.log(result)
+            if (result.confirm) {
+                let payload = {}
+                payload.companyNo = this.data.companyNo
+                payload.userNo = app.globalData.me.userNo
+                API.request('/user/bindingBatteryCompany', payload, 'put', (res) => {
+                    if (res.code === 0) {
+                        app.alert("提示", "已申请绑定，等待单位管理员审核", (res) => {
+                            wx.navigateTo({
+                                url: "/pages/index/index",
+                            })
+                        })
+                    }
+                })
+            }
         })
+
 
         // var t = this;
         // this.data.loading || (this.data.search_bid < 1 ? e.alert("提示", "请选中要绑定的单位") : this.check_subscription_message().then(function(e) {
@@ -173,74 +186,74 @@ Page({
         //     });
         // }));
     },
-    check_subscription_message: function() {
+    check_subscription_message: function () {
         var t = this;
-        return new Promise(function(e, a) {
+        return new Promise(function (e, a) {
             wx.getSetting({
                 withSubscriptions: !0,
-                success: function(n) {
+                success: function (n) {
                     n.subscriptionsSetting.mainSwitch && n.subscriptionsSetting.itemSettings && "accept" == n.subscriptionsSetting.itemSettings[t.data.wx_msg_bind_ret] ? e() : a("no");
                 }
             });
         });
     },
-    request_subscription_message: function() {
+    request_subscription_message: function () {
         var t = this;
-        return new Promise(function(e, a) {
+        return new Promise(function (e, a) {
             wx.requestSubscribeMessage({
-                tmplIds: [ t.data.wx_msg_bind_ret ],
-                success: function(n) {
+                tmplIds: [t.data.wx_msg_bind_ret],
+                success: function (n) {
                     "requestSubscribeMessage:ok" == n.errMsg && "accept" == n[t.data.wx_msg_bind_ret] ? e() : a();
                 }
             });
         });
     },
-    send_to_server: function() {
+    send_to_server: function () {
         var a = this;
         this.setData({
             loading: !0
         }), e.post("busi_bind", {
             bid: this.data.search_bid
-        }, function(n) {
-            (!e.globalData.me.bid || e.globalData.me.bid < 1) && e.setMe("bid", a.data.search_bid), 
-            e.toast("操作成功", "success"), setTimeout(function() {
-                console.log(t(a.data.eventChannel.emit)), a.data.eventChannel && "function" == typeof a.data.eventChannel.emit ? wx.navigateBack() : wx.redirectTo({
-                    url: "/pages/index/index"
-                });
-            }, 1e3);
-        }, function() {
+        }, function (n) {
+            (!e.globalData.me.bid || e.globalData.me.bid < 1) && e.setMe("bid", a.data.search_bid),
+                e.toast("操作成功", "success"), setTimeout(function () {
+                    console.log(t(a.data.eventChannel.emit)), a.data.eventChannel && "function" == typeof a.data.eventChannel.emit ? wx.navigateBack() : wx.redirectTo({
+                        url: "/pages/index/index"
+                    });
+                }, 1e3);
+        }, function () {
             a.setData({
                 loading: !1
             });
         });
     },
-    roleChange: function(t) {
+    roleChange: function (t) {
         this.setData({
-            role_idx: 1 * t.detail.value ,
+            role_idx: 1 * t.detail.value,
             companyType: 1 * t.detail.value
         });
     },
-    check_auth_for_location: function() {
-      
+    check_auth_for_location: function () {
+
         var t = this;
-        if(this.data.location_be_deny){
+        if (this.data.location_be_deny) {
             wx.openSetting({
-                success: function(e) {
+                success: function (e) {
                     e.authSetting["scope.userLocation"] && (t.setData({
                         location_be_deny: !1
                     }), t.startLocation());
                 }
             })
-        }else{
+        } else {
             wx.authorize({
                 scope: "scope.userLocation",
-                success: function() {
+                success: function () {
                     t.startLocation();
                 },
-                fail: function(a) {
-                    a.errMsg.includes("auth deny") ? e.alert("授权提示", "必须获取位置信息，才能创建单位。", function() {
+                fail: function (a) {
+                    a.errMsg.includes("auth deny") ? e.alert("授权提示", "必须获取位置信息，才能创建单位。", function () {
                         wx.openSetting({
-                            success: function(e) {
+                            success: function (e) {
                                 e.authSetting["scope.userLocation"] && (t.setData({
                                     location_be_deny: !1
                                 }), t.startLocation());
@@ -250,24 +263,24 @@ Page({
                 }
             });
         }
-         
+
     },
-    startLocation: function() {
+    startLocation: function () {
         var t = this;
         wx.getLocation({
             altitude: "true",
             isHighAccuracy: !0,
             highAccuracyExpireTime: 3e4,
             type: "gcj02",
-            complete: function() {
+            complete: function () {
                 t.setData({
                     btn_location_deny: !1
                 });
             },
-            fail: function(t) {
-                app.alert("失败", t.errMsg); 
+            fail: function (t) {
+                app.alert("失败", t.errMsg);
             },
-            success: function(e) {
+            success: function (e) {
                 t.setData({
                     lng: e.longitude,
                     lat: e.latitude,
@@ -277,16 +290,16 @@ Page({
             }
         });
     },
-    map_choose: function() {
+    map_choose: function () {
         var t = this;
         wx.navigateTo({
             url: "/pages/map/index",
             events: {
-                callback: function(e) {
+                callback: function (e) {
                     t.setData(e);
                 }
             },
-            success: function(e) {
+            success: function (e) {
                 e.eventChannel.emit("receive_location", {
                     lng: t.data.lng,
                     lat: t.data.lat
@@ -294,7 +307,7 @@ Page({
             }
         });
     },
-    get_address: function() {
+    get_address: function () {
         var a = this;
         wx.serviceMarket.invokeService({
             service: "wxc1c68623b7bdea7b",
@@ -302,10 +315,11 @@ Page({
             data: {
                 location: this.data.lat + "," + this.data.lng
             }
-        }).then(function(n) {
+        }).then(function (n) {
             if ("invokeService:ok" == n.errMsg) {
                 var i = "";
-                if ("string" == typeof n.data) i = JSON.parse(n.data); else {
+                if ("string" == typeof n.data) i = JSON.parse(n.data);
+                else {
                     if ("object" != t(n.data)) return void e.alert("接口错误", "地址解析接口错误：" + i.message);
                     i = n.data;
                 }
@@ -313,38 +327,38 @@ Page({
                     var s = {
                         address: i.result.address,
                         county: i.result.ad_info.adcode,
-                        companyAddress:i.result.address_component.street+i.result.address_component.street_number,
-                        companyAreaName:i.result.address_component.district,
-                        companyCityName:i.result.address_component.city
+                        companyAddress: i.result.address_component.street + i.result.address_component.street_number,
+                        companyAreaName: i.result.address_component.district,
+                        companyCityName: i.result.address_component.city
                     };
-                    i.result.address_reference && i.result.address_reference.town && (s.town = i.result.address_reference.town.id), 
-                    a.setData(s);
+                    i.result.address_reference && i.result.address_reference.town && (s.town = i.result.address_reference.town.id),
+                        a.setData(s);
                 } else e.alert("接口错误", "地址解析接口错误：" + i.message);
             } else e.alert("接口错误", "调用地址解析接口错误：" + n.errMsg);
-        }).catch(function(t) {
+        }).catch(function (t) {
             console.error("invokeService fail", t);
         });
     },
-    click_create_done: function() {
-       let payload={
-        companyType:this.data.companyType +1, // 因为选择的时候是从0开始的，后续优化处理
-        companyContactsName:this.data.companyContactsName,
-        companyName:this.data.companyName,
-        companyContactsCell:this.data.companyContactsCell,
-        companyAddress:this.data.companyAddress,
-        companyAreaName:this.data.companyAreaName,
-        companyCityName:this.data.companyCityName,
-        latitude:this.data.lat,
-        longitude:this.data.lng,
-        createdUserNo:app.globalData.me.userNo,
+    click_create_done: function () {
+        let payload = {
+            companyType: this.data.companyType + 1, // 因为选择的时候是从0开始的，后续优化处理
+            companyContactsName: this.data.companyContactsName,
+            companyName: this.data.companyName,
+            companyContactsCell: this.data.companyContactsCell,
+            companyAddress: this.data.companyAddress,
+            companyAreaName: this.data.companyAreaName,
+            companyCityName: this.data.companyCityName,
+            latitude: this.data.lat,
+            longitude: this.data.lng,
+            createdUserNo: app.globalData.me.userNo,
 
-       }
+        }
 
-        API.request('/company/createBatteryCompany',payload,'post',(res)=>{
-           if(res.code === 0){
-            app.toast("创建成功", "success")
-           }
-         
+        API.request('/company/createBatteryCompany', payload, 'post', (res) => {
+            if (res.code === 0) {
+                app.toast("创建成功", "success")
+            }
+
         })
 
 

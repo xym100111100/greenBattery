@@ -55,7 +55,7 @@ Page({
             console.log(res)
             if(res.code === 0){
                 res.data.map(item=>{
-                    item.out = item.recordAction ===1?true:false
+                    item.out = item.recordAction ===1?false:true
                 })
                 this.setData({
                     list:res.data

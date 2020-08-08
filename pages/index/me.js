@@ -18,7 +18,7 @@ Page({
         });
         let data  = {
             phone: app.globalData.me.cell,
-            nick: app.globalData.me.nick,
+            nick: app.globalData.me.username,
             type: app.globalData.me.type
         };
         1 == app.globalData.me.userType ? data.type = "单位用户" : data.type = "个人用户"

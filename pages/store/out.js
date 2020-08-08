@@ -56,8 +56,9 @@ Page({
     init: function () {
         API.request('/company/getBatteryCompanyByName', {}, 'get', (res) => {
             if (res.code === 0) {
+                let data = res.data.filter(item=>item.companyNo != app.globalData.me.companyNo )
                 this.setData({
-                    receivers: res.data
+                    receivers:data
                 })
             }
         })

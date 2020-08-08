@@ -77,7 +77,7 @@ Page({
             success: function(e) {
                 e.eventChannel.emit("receive", {
                     tid: a.data.trash[t].id,
-                    name: a.data.trash[t].name,
+                    name: a.data.trash[t].userName,
                     standingBookNo: a.data.trash[t].standingBookNo
                 });
             }

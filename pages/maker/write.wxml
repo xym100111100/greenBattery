@@ -1,6 +1,6 @@
 <view class="page">
     <view class="card">
-        <view class="card-hd">{{name}}</view>
+        <view class="card-hd">{{userName}}</view>
         <mp-cells extClass="my-cells">
             <mp-cell>
                 <view slot="title">记录日期</view>
@@ -13,10 +13,10 @@
             <mp-cell>
                 <view slot="title">记录动作</view>
                 <radio-group bindchange="actionChange" class="radio-group">
-                    <radio checked="{{true}}" class="radio" value="1">
+                    <radio checked="{{true}}" class="radio" value="0">
                         <text>产生</text>
                     </radio>
-                    <radio checked="{{false}}" class="radio" value="2" wx:if="{{id==2}}">
+                    <radio checked="{{false}}" class="radio" value="1" wx:if="{{id==2}}">
                         <text>自行利用</text>
                     </radio>
                 </radio-group>

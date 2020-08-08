@@ -217,7 +217,7 @@ Page({
                 loading: !0
             });
             var o = this.data.list1;
-            t.post("stock", {
+            app.post("stock", {
                 act: "trans_in",
                 tab: 1,
                 d1: this.data.date1,

@@ -39,7 +39,6 @@ App({
         wx.showModal({
             title: t,
             content: a,
-            showCancel: !1,
             success: function(t) {
                 "function" == typeof e && e(t);
             }

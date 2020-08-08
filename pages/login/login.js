@@ -61,6 +61,7 @@ Page({
         let that = this
         wx.getUserInfo({
             success: function(res) {
+                console.log(res)
               var userInfo = res.userInfo
               that.setData({
                 userInfo
@@ -118,18 +119,18 @@ Page({
         //     encryptedData:val.detail.encryptedData
         //   }
         // })
-        API.request('/loginByWechat', {  
+        API.request('/loginByWechat', {   
             openid:getUserOpenIdKey(),
             iv:val.detail.iv,
             encryptedData:val.detail.encryptedData,
-            nickName:userInfo.nickName
+            username:this.data.userInfo.nickName 
         }, 'get', (res) => {
            if(res.code === 0){
             // 设置用户信息
             app.globalData.me = res.data
             app.globalData.me.nick = res.data.userName
             setAdminUserNo(res.data.userNo)
-            setUserInfo(JSON.stringify(res.data))
+            setUserInfo(JSON.stringify(res.data)) 
 
             // 设置token
             setToken(res.data.token)
